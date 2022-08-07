@@ -11,7 +11,6 @@ public class WorldMapSceneLoader : MonoBehaviour
 
     private void Awake()
     {
-        DontDestroyOnLoad(this.gameObject);
         _sceneLoadCoroutineMap = new Dictionary<string, Coroutine>();
         _sceneShouldActivateMap = new Dictionary<string, bool>();
         _sceneShouldUnloadMap = new Dictionary<string, bool>();

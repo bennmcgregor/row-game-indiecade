@@ -1,14 +1,16 @@
 using UnityEngine;
+using Zenject;
 
 public class WorldMapSceneChangeEffector : MonoBehaviour
 {
     [SerializeField] private string _sceneName;
-
+    
     private WorldMapSceneLoader _sceneLoader;
 
-    private void Start()
+    [Inject]
+    public void Initialize(WorldMapSceneLoader sceneLoader)
     {
-        _sceneLoader = FindObjectOfType<WorldMapSceneLoader>();
+        _sceneLoader = sceneLoader;
     }
 
     protected void ActivateScene()

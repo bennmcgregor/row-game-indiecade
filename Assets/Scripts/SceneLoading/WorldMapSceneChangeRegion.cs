@@ -1,4 +1,5 @@
 using UnityEngine;
+using Zenject;
 
 public class WorldMapSceneChangeRegion : MonoBehaviour
 {
@@ -7,9 +8,10 @@ public class WorldMapSceneChangeRegion : MonoBehaviour
 
     private WorldMapSceneLoader _sceneLoader;
 
-    private void Start()
+    [Inject]
+    public void Initialize(WorldMapSceneLoader sceneLoader)
     {
-        _sceneLoader = FindObjectOfType<WorldMapSceneLoader>();
+        _sceneLoader = sceneLoader;
     }
 
     private void OnTriggerEnter2D(Collider2D other)
