@@ -5,21 +5,6 @@ using UnityEngine;
 
 public class AudioManager : MonoBehaviour
 {
-    // Singleton pattern
-    public static AudioManager Instance { get; private set; }
-    private void Awake()
-    {
-        if (Instance != null && Instance != this)
-        {
-            Destroy(this);
-        }
-        else
-        {
-            Instance = this;
-            DontDestroyOnLoad(this);
-        }
-    }
-
     // Consts
     const string resourcesPath = "Assets/Resources/";
     const string backgroundMusicPath = "BackgroundMusics/";
@@ -39,7 +24,7 @@ public class AudioManager : MonoBehaviour
             backgroundMusicPlayer.volume = _masterVolume * _backgroundMusicVolume;
         }
     }
-    
+
     public float SoundFXVolume
     {
         get => _soundFXVolume;
