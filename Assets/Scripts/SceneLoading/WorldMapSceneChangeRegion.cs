@@ -1,32 +1,35 @@
 using UnityEngine;
 using Zenject;
 
-public class WorldMapSceneChangeRegion : MonoBehaviour
+namespace IndieCade
 {
-    [SerializeField] private GameObject _player;
-    [SerializeField] private string _sceneName;
-
-    private WorldMapSceneLoader _sceneLoader;
-
-    [Inject]
-    public void Initialize(WorldMapSceneLoader sceneLoader)
+    public class WorldMapSceneChangeRegion : MonoBehaviour
     {
-        _sceneLoader = sceneLoader;
-    }
+        [SerializeField] private GameObject _player;
+        [SerializeField] private string _sceneName;
 
-    private void OnTriggerEnter2D(Collider2D other)
-    {
-        if (other.gameObject.name == _player.name)
+        private WorldMapSceneLoader _sceneLoader;
+
+        [Inject]
+        public void Initialize(WorldMapSceneLoader sceneLoader)
         {
-            _sceneLoader.LoadScene(_sceneName);
+            _sceneLoader = sceneLoader;
         }
-    }
 
-    private void OnTriggerExit2D(Collider2D other)
-    {
-        if (other.gameObject.name == _player.name)
+        private void OnTriggerEnter2D(Collider2D other)
         {
-            _sceneLoader.UnloadScene(_sceneName);
+            if (other.gameObject.name == _player.name)
+            {
+                _sceneLoader.LoadScene(_sceneName);
+            }
+        }
+
+        private void OnTriggerExit2D(Collider2D other)
+        {
+            if (other.gameObject.name == _player.name)
+            {
+                _sceneLoader.UnloadScene(_sceneName);
+            }
         }
     }
 }

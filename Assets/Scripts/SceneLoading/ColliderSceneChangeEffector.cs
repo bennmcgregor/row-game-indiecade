@@ -1,14 +1,17 @@
 using UnityEngine;
 
-public class ColliderSceneChangeEffector : WorldMapSceneChangeEffector
+namespace IndieCade
 {
-    [SerializeField] private GameObject _player;
-
-    private void OnTriggerEnter2D(Collider2D other)
+    public class ColliderSceneChangeEffector : WorldMapSceneChangeEffector
     {
-        if (other.gameObject.name == _player.name)
+        [SerializeField] private GameObject _player;
+
+        private void OnTriggerEnter2D(Collider2D other)
         {
-            ActivateScene();
+            if (other.gameObject.name == _player.name)
+            {
+                ActivateScene();
+            }
         }
     }
 }

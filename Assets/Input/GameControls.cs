@@ -314,6 +314,60 @@ public partial class @GameControls : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": ""Press(behavior=2)"",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""SpacebarTemp"",
+                    ""type"": ""Button"",
+                    ""id"": ""3b8fd26c-4afd-4656-b688-78b5541b72e8"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""RowingUp"",
+                    ""type"": ""Button"",
+                    ""id"": ""3a17a03a-5903-40b4-8d82-d34ae0d61cb3"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": ""Press(behavior=2)"",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""RowingDown"",
+                    ""type"": ""Button"",
+                    ""id"": ""26ccbf43-5356-4c41-b593-5a83c1b3ca74"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": ""Press(behavior=2)"",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""RowingRight"",
+                    ""type"": ""Button"",
+                    ""id"": ""e9cf459c-9836-4391-8495-bc023b7b02b0"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": ""Press(behavior=2)"",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""RowingLeft"",
+                    ""type"": ""Button"",
+                    ""id"": ""d91f3cdd-b196-4b89-a7a4-580ff1aeaca3"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": ""Press(behavior=2)"",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""RowingShift"",
+                    ""type"": ""Button"",
+                    ""id"": ""073e2230-1435-419c-89fb-3e2075ee0854"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": ""Press(behavior=2)"",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -404,6 +458,116 @@ public partial class @GameControls : IInputActionCollection2, IDisposable
                     ""action"": ""MovePlayerDown"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""3209bc55-45a6-43ba-ad65-21de2b17bf81"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SpacebarTemp"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""1ac8d94e-59b1-4b12-9c6d-4e87b0b97aeb"",
+                    ""path"": ""<Keyboard>/upArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""RowingUp"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""872f47a6-6083-4f15-bcc2-622823086566"",
+                    ""path"": ""<Keyboard>/w"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""RowingUp"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""53f1838e-c5b4-4ecd-b86b-02660a5f9440"",
+                    ""path"": ""<Keyboard>/downArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""RowingDown"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""4999ad02-9a14-4c22-8ee3-34e887a5ef1d"",
+                    ""path"": ""<Keyboard>/s"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""RowingDown"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""2f7d17ba-6800-4e61-88a2-6da935d96b98"",
+                    ""path"": ""<Keyboard>/rightArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""RowingRight"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""cbb730b4-f2f4-44a4-86ba-f5fdb93c17d6"",
+                    ""path"": ""<Keyboard>/d"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""RowingRight"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""9a9ff28e-3497-4d7d-b9c1-956f000bb8d4"",
+                    ""path"": ""<Keyboard>/leftArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""RowingLeft"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""5dbf8082-d822-47a8-8fca-eaa639bbdcd6"",
+                    ""path"": ""<Keyboard>/a"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""RowingLeft"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""4573c3b4-7d48-402b-81d2-7ae9ed8db07b"",
+                    ""path"": ""<Keyboard>/shift"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""RowingShift"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -428,6 +592,12 @@ public partial class @GameControls : IInputActionCollection2, IDisposable
         m_IndieCade_MovePlayerRight = m_IndieCade.FindAction("MovePlayerRight", throwIfNotFound: true);
         m_IndieCade_MovePlayerUp = m_IndieCade.FindAction("MovePlayerUp", throwIfNotFound: true);
         m_IndieCade_MovePlayerDown = m_IndieCade.FindAction("MovePlayerDown", throwIfNotFound: true);
+        m_IndieCade_SpacebarTemp = m_IndieCade.FindAction("SpacebarTemp", throwIfNotFound: true);
+        m_IndieCade_RowingUp = m_IndieCade.FindAction("RowingUp", throwIfNotFound: true);
+        m_IndieCade_RowingDown = m_IndieCade.FindAction("RowingDown", throwIfNotFound: true);
+        m_IndieCade_RowingRight = m_IndieCade.FindAction("RowingRight", throwIfNotFound: true);
+        m_IndieCade_RowingLeft = m_IndieCade.FindAction("RowingLeft", throwIfNotFound: true);
+        m_IndieCade_RowingShift = m_IndieCade.FindAction("RowingShift", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -596,6 +766,12 @@ public partial class @GameControls : IInputActionCollection2, IDisposable
     private readonly InputAction m_IndieCade_MovePlayerRight;
     private readonly InputAction m_IndieCade_MovePlayerUp;
     private readonly InputAction m_IndieCade_MovePlayerDown;
+    private readonly InputAction m_IndieCade_SpacebarTemp;
+    private readonly InputAction m_IndieCade_RowingUp;
+    private readonly InputAction m_IndieCade_RowingDown;
+    private readonly InputAction m_IndieCade_RowingRight;
+    private readonly InputAction m_IndieCade_RowingLeft;
+    private readonly InputAction m_IndieCade_RowingShift;
     public struct IndieCadeActions
     {
         private @GameControls m_Wrapper;
@@ -604,6 +780,12 @@ public partial class @GameControls : IInputActionCollection2, IDisposable
         public InputAction @MovePlayerRight => m_Wrapper.m_IndieCade_MovePlayerRight;
         public InputAction @MovePlayerUp => m_Wrapper.m_IndieCade_MovePlayerUp;
         public InputAction @MovePlayerDown => m_Wrapper.m_IndieCade_MovePlayerDown;
+        public InputAction @SpacebarTemp => m_Wrapper.m_IndieCade_SpacebarTemp;
+        public InputAction @RowingUp => m_Wrapper.m_IndieCade_RowingUp;
+        public InputAction @RowingDown => m_Wrapper.m_IndieCade_RowingDown;
+        public InputAction @RowingRight => m_Wrapper.m_IndieCade_RowingRight;
+        public InputAction @RowingLeft => m_Wrapper.m_IndieCade_RowingLeft;
+        public InputAction @RowingShift => m_Wrapper.m_IndieCade_RowingShift;
         public InputActionMap Get() { return m_Wrapper.m_IndieCade; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -625,6 +807,24 @@ public partial class @GameControls : IInputActionCollection2, IDisposable
                 @MovePlayerDown.started -= m_Wrapper.m_IndieCadeActionsCallbackInterface.OnMovePlayerDown;
                 @MovePlayerDown.performed -= m_Wrapper.m_IndieCadeActionsCallbackInterface.OnMovePlayerDown;
                 @MovePlayerDown.canceled -= m_Wrapper.m_IndieCadeActionsCallbackInterface.OnMovePlayerDown;
+                @SpacebarTemp.started -= m_Wrapper.m_IndieCadeActionsCallbackInterface.OnSpacebarTemp;
+                @SpacebarTemp.performed -= m_Wrapper.m_IndieCadeActionsCallbackInterface.OnSpacebarTemp;
+                @SpacebarTemp.canceled -= m_Wrapper.m_IndieCadeActionsCallbackInterface.OnSpacebarTemp;
+                @RowingUp.started -= m_Wrapper.m_IndieCadeActionsCallbackInterface.OnRowingUp;
+                @RowingUp.performed -= m_Wrapper.m_IndieCadeActionsCallbackInterface.OnRowingUp;
+                @RowingUp.canceled -= m_Wrapper.m_IndieCadeActionsCallbackInterface.OnRowingUp;
+                @RowingDown.started -= m_Wrapper.m_IndieCadeActionsCallbackInterface.OnRowingDown;
+                @RowingDown.performed -= m_Wrapper.m_IndieCadeActionsCallbackInterface.OnRowingDown;
+                @RowingDown.canceled -= m_Wrapper.m_IndieCadeActionsCallbackInterface.OnRowingDown;
+                @RowingRight.started -= m_Wrapper.m_IndieCadeActionsCallbackInterface.OnRowingRight;
+                @RowingRight.performed -= m_Wrapper.m_IndieCadeActionsCallbackInterface.OnRowingRight;
+                @RowingRight.canceled -= m_Wrapper.m_IndieCadeActionsCallbackInterface.OnRowingRight;
+                @RowingLeft.started -= m_Wrapper.m_IndieCadeActionsCallbackInterface.OnRowingLeft;
+                @RowingLeft.performed -= m_Wrapper.m_IndieCadeActionsCallbackInterface.OnRowingLeft;
+                @RowingLeft.canceled -= m_Wrapper.m_IndieCadeActionsCallbackInterface.OnRowingLeft;
+                @RowingShift.started -= m_Wrapper.m_IndieCadeActionsCallbackInterface.OnRowingShift;
+                @RowingShift.performed -= m_Wrapper.m_IndieCadeActionsCallbackInterface.OnRowingShift;
+                @RowingShift.canceled -= m_Wrapper.m_IndieCadeActionsCallbackInterface.OnRowingShift;
             }
             m_Wrapper.m_IndieCadeActionsCallbackInterface = instance;
             if (instance != null)
@@ -641,6 +841,24 @@ public partial class @GameControls : IInputActionCollection2, IDisposable
                 @MovePlayerDown.started += instance.OnMovePlayerDown;
                 @MovePlayerDown.performed += instance.OnMovePlayerDown;
                 @MovePlayerDown.canceled += instance.OnMovePlayerDown;
+                @SpacebarTemp.started += instance.OnSpacebarTemp;
+                @SpacebarTemp.performed += instance.OnSpacebarTemp;
+                @SpacebarTemp.canceled += instance.OnSpacebarTemp;
+                @RowingUp.started += instance.OnRowingUp;
+                @RowingUp.performed += instance.OnRowingUp;
+                @RowingUp.canceled += instance.OnRowingUp;
+                @RowingDown.started += instance.OnRowingDown;
+                @RowingDown.performed += instance.OnRowingDown;
+                @RowingDown.canceled += instance.OnRowingDown;
+                @RowingRight.started += instance.OnRowingRight;
+                @RowingRight.performed += instance.OnRowingRight;
+                @RowingRight.canceled += instance.OnRowingRight;
+                @RowingLeft.started += instance.OnRowingLeft;
+                @RowingLeft.performed += instance.OnRowingLeft;
+                @RowingLeft.canceled += instance.OnRowingLeft;
+                @RowingShift.started += instance.OnRowingShift;
+                @RowingShift.performed += instance.OnRowingShift;
+                @RowingShift.canceled += instance.OnRowingShift;
             }
         }
     }
@@ -664,5 +882,11 @@ public partial class @GameControls : IInputActionCollection2, IDisposable
         void OnMovePlayerRight(InputAction.CallbackContext context);
         void OnMovePlayerUp(InputAction.CallbackContext context);
         void OnMovePlayerDown(InputAction.CallbackContext context);
+        void OnSpacebarTemp(InputAction.CallbackContext context);
+        void OnRowingUp(InputAction.CallbackContext context);
+        void OnRowingDown(InputAction.CallbackContext context);
+        void OnRowingRight(InputAction.CallbackContext context);
+        void OnRowingLeft(InputAction.CallbackContext context);
+        void OnRowingShift(InputAction.CallbackContext context);
     }
 }

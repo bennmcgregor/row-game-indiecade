@@ -2,39 +2,42 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class IndieCadeMainMenu : MonoBehaviour
+namespace IndieCade
 {
-    [SerializeField] private AudioSource _audioSourceBgMusic;
-    [SerializeField] private AudioSource _audioSourceButton;
-    [SerializeField] private GameObject _credits;
-    [SerializeField] private GameObject _menu;
-
-    private void Awake()
+    public class IndieCadeMainMenu : MonoBehaviour
     {
-        StartCoroutine(AudioHelper.FadeIn(_audioSourceBgMusic, 5));
-    }
+        [SerializeField] private AudioSource _audioSourceBgMusic;
+        [SerializeField] private AudioSource _audioSourceButton;
+        [SerializeField] private GameObject _credits;
+        [SerializeField] private GameObject _menu;
 
-    private void StartFadeOut()
-    {
-        StartCoroutine(AudioHelper.FadeOut(_audioSourceBgMusic, 2));
-    }
+        private void Awake()
+        {
+            StartCoroutine(AudioHelper.FadeIn(_audioSourceBgMusic, 5));
+        }
 
-    public void PlayGame()
-    {
-        _audioSourceButton.Play();
-    }
+        private void StartFadeOut()
+        {
+            StartCoroutine(AudioHelper.FadeOut(_audioSourceBgMusic, 2));
+        }
 
-    public void OpenCredits()
-    {
-        _credits.SetActive(true);
-        _menu.SetActive(false);
-        _audioSourceButton.Play();
-    }
+        public void PlayGame()
+        {
+            _audioSourceButton.Play();
+        }
 
-    public void CloseCredits()
-    {
-        _menu.SetActive(true);
-        _credits.SetActive(false);
-        _audioSourceButton.Play();
+        public void OpenCredits()
+        {
+            _credits.SetActive(true);
+            _menu.SetActive(false);
+            _audioSourceButton.Play();
+        }
+
+        public void CloseCredits()
+        {
+            _menu.SetActive(true);
+            _credits.SetActive(false);
+            _audioSourceButton.Play();
+        }
     }
 }
