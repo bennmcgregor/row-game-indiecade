@@ -5,10 +5,6 @@ using UnityEngine;
 
 public class AudioManager : MonoBehaviour
 {
-    // Consts
-    const string resourcesPath = "Assets/Resources/";
-    const string backgroundMusicPath = "BackgroundMusics/";
-    const string soundFXPath = "SoundFX/";
 
     // Volume settings
     private float _backgroundMusicVolume = 1f;
@@ -64,8 +60,8 @@ public class AudioManager : MonoBehaviour
         soundFX = new Dictionary<string, AudioClip>();
         soundFXPlayer = gameObject.AddComponent<AudioSource>();
 
-        LoadSounds(backgroundMusicPath, backgroundMusics);
-        LoadSounds(soundFXPath, soundFX);
+        LoadSounds(PathnamesScriptableObject.backgroundMusicPath, backgroundMusics);
+        LoadSounds(PathnamesScriptableObject.soundFXPath, soundFX);
         InitVolumes();
     }
 
@@ -86,7 +82,7 @@ public class AudioManager : MonoBehaviour
 
     private void LoadSounds(string fpath, Dictionary<string, AudioClip> soundDict)
     {
-        DirectoryInfo dir = new DirectoryInfo(resourcesPath + fpath);
+        DirectoryInfo dir = new DirectoryInfo(PathnamesScriptableObject.resourcesPath + fpath);
         FileInfo[] info = dir.GetFiles("*.mp3");
         foreach (FileInfo f in info)
         {
