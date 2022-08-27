@@ -619,6 +619,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: WalkingPlayer
       objectReference: {fileID: 0}
+    - target: {fileID: 818311391520027594, guid: 8ee5c7b91d80c4174a440b5eae1ad738,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 818311391520027595, guid: 8ee5c7b91d80c4174a440b5eae1ad738,
         type: 3}
       propertyPath: _moveSpeed

@@ -12,13 +12,9 @@ namespace IndieCade
 
         public void Process()
         {
-            if (_context.CurrentTransition == GlobalDirectionStateMachineTransition.CLOCKWISE)
+            if (_context.CurrentTransition == GlobalDirectionStateMachineTransition.SPIN)
             {
-                _context.CurrentState = GlobalDirectionState.SOUTH;
-            }
-            else
-            {
-                _context.CurrentState = GlobalDirectionState.NORTH;
+                _context.CurrentState = GlobalDirectionState.WEST;
             }
         }
     }

@@ -12,14 +12,13 @@ namespace IndieCade
         // current state
         public GlobalDirectionState CurrentState => _context.CurrentState;
 
-        public GlobalDirectionStateMachine(GlobalDirectionState initialState)
+        public GlobalDirectionStateMachine()
         {
-            _context.CurrentState = initialState;
+            _context = new GlobalDirectionStateMachineContext(GlobalDirectionState.ENTRY);
             _stateProcessors = new Dictionary<GlobalDirectionState, IStateProcessor>
             {
-                { GlobalDirectionState.NORTH, new NorthGlobalDirectionStateProcessor(_context) },
+                { GlobalDirectionState.ENTRY, new EntryGlobalDirectionStateProcessor(_context) },
                 { GlobalDirectionState.EAST, new EastGlobalDirectionStateProcessor(_context) },
-                { GlobalDirectionState.SOUTH, new SouthGlobalDirectionStateProcessor(_context) },
                 { GlobalDirectionState.WEST, new WestGlobalDirectionStateProcessor(_context) }
             };
         }

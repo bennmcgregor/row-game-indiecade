@@ -11,15 +11,13 @@ namespace IndieCade
 
         public InputState CurrentState => _context.CurrentState;
 
-        public InputStateMachine(InputState initialState)
+        public InputStateMachine()
         {
-            _context = new InputStateMachineContext
-            {
-                CurrentState = initialState
-            };
+            _context = new InputStateMachineContext(InputState.ENTRY);
 
             _stateProcessors = new Dictionary<InputState, IStateProcessor>
             {
+                { InputState.ENTRY, new EntryInputStateProcessor(_context) },
                 { InputState.DOWN, new DownInputStateProcessor(_context) },
                 { InputState.HOLD, new HoldInputStateProcessor(_context) },
                 { InputState.UP, new UpInputStateProcessor(_context) },
@@ -29,8 +27,7 @@ namespace IndieCade
 
         public void Transition(InputStateMachineTransition transition)
         {
-            // Note: transitions happen when input is triggered and
-            // when the rowing state machine finishes processing state (state doesn't have to change)
+            // Transitions happen when input is triggered and when state machine finishes processing state
             _context.CurrentTransition = transition;
             ProcessState();
         }

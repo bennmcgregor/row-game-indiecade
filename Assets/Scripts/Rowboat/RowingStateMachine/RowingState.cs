@@ -3,14 +3,12 @@ namespace IndieCade
 {
     public enum RowingState
     {
-        SPIN_CW,
-        SPIN_CCW,
+        ENTRY,
+        SPIN,
         STOP,
         FORWARDS_RECOV,
         FORWARDS_DRIVE,
         BACKWARDS_RECOV,
-        BACKWARDS_DRIVE,
-        SWITCH_LANE_PORT,
-        SWITCH_LANE_STAR
+        BACKWARDS_DRIVE
     }
 }

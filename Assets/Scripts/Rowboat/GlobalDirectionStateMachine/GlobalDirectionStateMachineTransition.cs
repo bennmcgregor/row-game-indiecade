@@ -3,7 +3,7 @@ namespace IndieCade
 {
     public enum GlobalDirectionStateMachineTransition
     {
-        CLOCKWISE,
-        COUNTERCLOCKWISE
+        ENTRY,
+        SPIN
     }
 }

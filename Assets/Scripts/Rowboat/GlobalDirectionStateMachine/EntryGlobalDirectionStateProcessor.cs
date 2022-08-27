@@ -1,18 +1,18 @@
 ﻿using System;
 namespace IndieCade
 {
-    public class WestGlobalDirectionStateProcessor : IStateProcessor
+    public class EntryGlobalDirectionStateProcessor : IStateProcessor
     {
         private GlobalDirectionStateMachineContext _context;
 
-        public WestGlobalDirectionStateProcessor(GlobalDirectionStateMachineContext context)
+        public EntryGlobalDirectionStateProcessor(GlobalDirectionStateMachineContext context)
         {
             _context = context;
         }
 
         public void Process()
         {
-            if (_context.CurrentTransition == GlobalDirectionStateMachineTransition.SPIN)
+            if (_context.CurrentTransition == GlobalDirectionStateMachineTransition.ENTRY)
             {
                 _context.CurrentState = GlobalDirectionState.EAST;
             }

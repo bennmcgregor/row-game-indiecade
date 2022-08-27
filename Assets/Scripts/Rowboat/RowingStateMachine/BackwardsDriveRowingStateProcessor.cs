@@ -3,14 +3,14 @@ using Zenject;
 
 namespace IndieCade
 {
-    public class ForwardsDriveRowingStateProcessor : RowingStateProcessor
+    public class BackwardsDriveRowingStateProcessor : RowingStateProcessor
     {
         private RowboatPhysicsController _rowboatPhysics;
         private RowboatMaps _rowboatMaps;
         private GlobalDirectionStateMachine _globalDirectionStateMachine;
         private bool _hasSwitchedLane = false;
 
-        public ForwardsDriveRowingStateProcessor(RowingStateMachineContext context, RowboatPlayerInputs rowboatPlayerInputs, RowboatPhysicsController rowboatPhysics, RowboatMaps rowboatMaps, GlobalDirectionStateMachine globalDirectionStateMachine)
+        public BackwardsDriveRowingStateProcessor(RowingStateMachineContext context, RowboatPlayerInputs rowboatPlayerInputs, RowboatPhysicsController rowboatPhysics, RowboatMaps rowboatMaps, GlobalDirectionStateMachine globalDirectionStateMachine)
             : base(context, rowboatPlayerInputs)
         {
             _rowboatPhysics = rowboatPhysics;
@@ -22,14 +22,14 @@ namespace IndieCade
         {
             if (_context.CurrentTransition == RowingStateMachineTransition.FINISH_DRIVE)
             {
-                SetCurrentState(RowingState.FORWARDS_RECOV);
+                SetCurrentState(RowingState.BACKWARDS_RECOV);
 
                 _rowboatPhysics.StopDrive();
-                _rowboatPhysics.StartRecovery(true);
+                _rowboatPhysics.StartRecovery(false);
 
                 _hasSwitchedLane = false;
             }
-            else if (_context.CurrentTransition == RowingStateMachineTransition.STERN_DOWN)
+            else if (_context.CurrentTransition == RowingStateMachineTransition.BOW_DOWN)
             {
                 SetCurrentState(RowingState.STOP);
 

@@ -3,8 +3,7 @@ namespace IndieCade
 {
     public enum GlobalDirectionState
     {
-        NORTH,
-        SOUTH,
+        ENTRY,
         EAST,
         WEST
     }

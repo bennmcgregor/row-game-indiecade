@@ -4,20 +4,26 @@ namespace IndieCade
 {
     public class RowingStateMachineContext
     {
+        private RowingState _currentState;
+
+        public RowingStateMachineContext(RowingState currentState)
+        {
+            _currentState = currentState;
+        }
+
         public RowingState CurrentState
         {
             get
             {
-                return CurrentState;
+                return _currentState;
             }
             set
             {
-                PreviousState = CurrentState;
-                CurrentState = value;
+                PreviousState = _currentState;
+                _currentState = value;
             }
         }
         public RowingStateMachineTransition CurrentTransition;
         public RowingState PreviousState { get; private set; }
-        public Vector3 BoatVelocity;
     }
 }

@@ -3,6 +3,7 @@ namespace IndieCade
 {
     public enum RowingStateMachineTransition
     {
+        ENTRY,
         BOW_NONE,
         BOW_DOWN,
         BOW_HOLD,
@@ -23,6 +24,8 @@ namespace IndieCade
         SHIFT_DOWN,
         SHIFT_HOLD,
         SHIFT_UP,
-        FINISH
+        FINISH_DRIVE,
+        FINISH_SWITCH_LANE,
+        FINISH_SPIN
     }
 }

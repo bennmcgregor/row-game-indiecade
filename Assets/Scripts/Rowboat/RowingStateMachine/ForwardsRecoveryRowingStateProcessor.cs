@@ -3,33 +3,30 @@ using Zenject;
 
 namespace IndieCade
 {
-    public class ForwardsRecoveryRowingStateProcessor : IStateProcessor
+    public class ForwardsRecoveryRowingStateProcessor : RowingStateProcessor
     {
-        private RowingStateMachineContext _context;
         private RowboatPhysicsController _rowboatPhysics;
 
-        public ForwardsRecoveryRowingStateProcessor(RowingStateMachineContext context)
-        {
-            _context = context;
-        }
-
-        [Inject]
-        public void Initialize(RowboatPhysicsController rowboatPhysics)
+        public ForwardsRecoveryRowingStateProcessor(RowingStateMachineContext context, RowboatPlayerInputs rowboatPlayerInputs, RowboatPhysicsController rowboatPhysics) : base(context, rowboatPlayerInputs)
         {
             _rowboatPhysics = rowboatPhysics;
         }
 
-        public void Process()
+        protected override void ProcessInternal()
         {
             if (_context.CurrentTransition == RowingStateMachineTransition.BOW_DOWN)
             {
-                _context.CurrentState = RowingState.FORWARDS_DRIVE;
-                // TODO: begin drive physics (coroutine can trigger state transition??)
+                SetCurrentState(RowingState.FORWARDS_DRIVE);
+                _rowboatPhysics.StopRecovery();
+                _rowboatPhysics.StartDrive(true);
+
             }
             else if (_context.CurrentTransition == RowingStateMachineTransition.STERN_DOWN)
             {
-                // TODO: uncomment this when implementing STOP
-                //_context.CurrentState = RowingState.STOP;
+                SetCurrentState(RowingState.STOP);
+
+                _rowboatPhysics.StopRecovery();
+                _rowboatPhysics.StartStopBoat();
             }
         }
     }
