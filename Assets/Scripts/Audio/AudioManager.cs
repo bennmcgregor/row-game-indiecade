@@ -3,100 +3,102 @@ using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 
-public class AudioManager : MonoBehaviour
+namespace IndieCade
 {
-
-    // Volume settings
-    private float _backgroundMusicVolume = 1f;
-    private float _soundFXVolume = 1f;
-    private float _masterVolume = 1f;
-
-    public float BackgroundMusicVolume
+    public class AudioManager : MonoBehaviour
     {
-        get => _backgroundMusicVolume;
-        set
+
+        // Volume settings
+        private float _backgroundMusicVolume = 1f;
+        private float _soundFXVolume = 1f;
+        private float _masterVolume = 1f;
+
+        public float BackgroundMusicVolume
         {
-            _backgroundMusicVolume = value;
-            backgroundMusicPlayer.volume = _masterVolume * _backgroundMusicVolume;
+            get => _backgroundMusicVolume;
+            set
+            {
+                _backgroundMusicVolume = value;
+                backgroundMusicPlayer.volume = _masterVolume * _backgroundMusicVolume;
+            }
         }
-    }
 
-    public float SoundFXVolume
-    {
-        get => _soundFXVolume;
-        set
+        public float SoundFXVolume
         {
-            _soundFXVolume = value;
-            soundFXPlayer.volume = _masterVolume * _soundFXVolume;
+            get => _soundFXVolume;
+            set
+            {
+                _soundFXVolume = value;
+                soundFXPlayer.volume = _masterVolume * _soundFXVolume;
+            }
         }
-    }
 
-    public float MasterVolume
-    {
-        get => _masterVolume;
-        set
+        public float MasterVolume
         {
-            _masterVolume = value;
-            soundFXPlayer.volume = _masterVolume * _soundFXVolume;
-            backgroundMusicPlayer.volume = _masterVolume * _backgroundMusicVolume;
+            get => _masterVolume;
+            set
+            {
+                _masterVolume = value;
+                soundFXPlayer.volume = _masterVolume * _soundFXVolume;
+                backgroundMusicPlayer.volume = _masterVolume * _backgroundMusicVolume;
+            }
         }
-    }
 
-    // Sound assets
-    public Dictionary<string, AudioClip> backgroundMusics;
-    public Dictionary<string, AudioClip> soundFX;
+        // Sound assets
+        public Dictionary<string, AudioClip> backgroundMusics;
+        public Dictionary<string, AudioClip> soundFX;
 
 
-    // Audio players
-    public BackgroundMusicPlayer backgroundMusicPlayer;
-    public AudioSource soundFXPlayer;
+        // Audio players
+        public BackgroundMusicPlayer backgroundMusicPlayer;
+        public AudioSource soundFXPlayer;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        backgroundMusics = new Dictionary<string, AudioClip>();
-        backgroundMusicPlayer = gameObject.AddComponent<BackgroundMusicPlayer>();
-
-        soundFX = new Dictionary<string, AudioClip>();
-        soundFXPlayer = gameObject.AddComponent<AudioSource>();
-
-        LoadSounds(PathnamesScriptableObject.backgroundMusicPath, backgroundMusics);
-        LoadSounds(PathnamesScriptableObject.soundFXPath, soundFX);
-        InitVolumes();
-    }
-
-    // Public methods
-    public void ChangeBackgroundMusic(string musicKey)
-    {
-        /// Change the background music to the background music with filename "musicKey" (without file extension)
-        backgroundMusicPlayer.newSoundtrack(backgroundMusics[musicKey]);
-    }
-
-    public void PlaySoundEffect(string soundFXKey)
-    {
-        /// Play a sound effect with filename "soundFXKey" (without file extension)
-        soundFXPlayer.PlayOneShot(soundFX[soundFXKey]);
-    }
-
-    // Private methods
-
-    private void LoadSounds(string fpath, Dictionary<string, AudioClip> soundDict)
-    {
-        DirectoryInfo dir = new DirectoryInfo(PathnamesScriptableObject.resourcesPath + fpath);
-        FileInfo[] info = dir.GetFiles("*.mp3");
-        foreach (FileInfo f in info)
+        // Start is called before the first frame update
+        void Start()
         {
-            string baseName = f.Name.Split(".")[0];
-            soundDict.Add(baseName, Resources.Load<AudioClip>(fpath + baseName));
-        }
-    }
+            backgroundMusics = new Dictionary<string, AudioClip>();
+            backgroundMusicPlayer = gameObject.AddComponent<BackgroundMusicPlayer>();
 
-    private void InitVolumes()
-    {
-        // TODO: Change to be equal to settings in options
-        BackgroundMusicVolume = 1f;
-        SoundFXVolume = 1f;
-        MasterVolume = 1f;
+            soundFX = new Dictionary<string, AudioClip>();
+            soundFXPlayer = gameObject.AddComponent<AudioSource>();
+
+            LoadSounds(PathnamesScriptableObject.backgroundMusicPath, backgroundMusics);
+            LoadSounds(PathnamesScriptableObject.soundFXPath, soundFX);
+            InitVolumes();
+        }
+
+        // Public methods
+        public void ChangeBackgroundMusic(string musicKey)
+        {
+            /// Change the background music to the background music with filename "musicKey" (without file extension)
+            backgroundMusicPlayer.newSoundtrack(backgroundMusics[musicKey]);
+        }
+
+        public void PlaySoundEffect(string soundFXKey)
+        {
+            /// Play a sound effect with filename "soundFXKey" (without file extension)
+            soundFXPlayer.PlayOneShot(soundFX[soundFXKey]);
+        }
+
+        // Private methods
+
+        private void LoadSounds(string fpath, Dictionary<string, AudioClip> soundDict)
+        {
+            DirectoryInfo dir = new DirectoryInfo(PathnamesScriptableObject.resourcesPath + fpath);
+            FileInfo[] info = dir.GetFiles("*.mp3");
+            foreach (FileInfo f in info)
+            {
+                string baseName = f.Name.Split(".")[0];
+                soundDict.Add(baseName, Resources.Load<AudioClip>(fpath + baseName));
+            }
+        }
+
+        private void InitVolumes()
+        {
+            // TODO: Change to be equal to settings in options
+            BackgroundMusicVolume = 1f;
+            SoundFXVolume = 1f;
+            MasterVolume = 1f;
+        }
     }
 }
-

@@ -316,7 +316,7 @@ public partial class @GameControls : IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""SpacebarTemp"",
+                    ""name"": ""Interact"",
                     ""type"": ""Button"",
                     ""id"": ""3b8fd26c-4afd-4656-b688-78b5541b72e8"",
                     ""expectedControlType"": ""Button"",
@@ -466,7 +466,7 @@ public partial class @GameControls : IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""SpacebarTemp"",
+                    ""action"": ""Interact"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -592,7 +592,7 @@ public partial class @GameControls : IInputActionCollection2, IDisposable
         m_IndieCade_MovePlayerRight = m_IndieCade.FindAction("MovePlayerRight", throwIfNotFound: true);
         m_IndieCade_MovePlayerUp = m_IndieCade.FindAction("MovePlayerUp", throwIfNotFound: true);
         m_IndieCade_MovePlayerDown = m_IndieCade.FindAction("MovePlayerDown", throwIfNotFound: true);
-        m_IndieCade_SpacebarTemp = m_IndieCade.FindAction("SpacebarTemp", throwIfNotFound: true);
+        m_IndieCade_Interact = m_IndieCade.FindAction("Interact", throwIfNotFound: true);
         m_IndieCade_RowingUp = m_IndieCade.FindAction("RowingUp", throwIfNotFound: true);
         m_IndieCade_RowingDown = m_IndieCade.FindAction("RowingDown", throwIfNotFound: true);
         m_IndieCade_RowingRight = m_IndieCade.FindAction("RowingRight", throwIfNotFound: true);
@@ -766,7 +766,7 @@ public partial class @GameControls : IInputActionCollection2, IDisposable
     private readonly InputAction m_IndieCade_MovePlayerRight;
     private readonly InputAction m_IndieCade_MovePlayerUp;
     private readonly InputAction m_IndieCade_MovePlayerDown;
-    private readonly InputAction m_IndieCade_SpacebarTemp;
+    private readonly InputAction m_IndieCade_Interact;
     private readonly InputAction m_IndieCade_RowingUp;
     private readonly InputAction m_IndieCade_RowingDown;
     private readonly InputAction m_IndieCade_RowingRight;
@@ -780,7 +780,7 @@ public partial class @GameControls : IInputActionCollection2, IDisposable
         public InputAction @MovePlayerRight => m_Wrapper.m_IndieCade_MovePlayerRight;
         public InputAction @MovePlayerUp => m_Wrapper.m_IndieCade_MovePlayerUp;
         public InputAction @MovePlayerDown => m_Wrapper.m_IndieCade_MovePlayerDown;
-        public InputAction @SpacebarTemp => m_Wrapper.m_IndieCade_SpacebarTemp;
+        public InputAction @Interact => m_Wrapper.m_IndieCade_Interact;
         public InputAction @RowingUp => m_Wrapper.m_IndieCade_RowingUp;
         public InputAction @RowingDown => m_Wrapper.m_IndieCade_RowingDown;
         public InputAction @RowingRight => m_Wrapper.m_IndieCade_RowingRight;
@@ -807,9 +807,9 @@ public partial class @GameControls : IInputActionCollection2, IDisposable
                 @MovePlayerDown.started -= m_Wrapper.m_IndieCadeActionsCallbackInterface.OnMovePlayerDown;
                 @MovePlayerDown.performed -= m_Wrapper.m_IndieCadeActionsCallbackInterface.OnMovePlayerDown;
                 @MovePlayerDown.canceled -= m_Wrapper.m_IndieCadeActionsCallbackInterface.OnMovePlayerDown;
-                @SpacebarTemp.started -= m_Wrapper.m_IndieCadeActionsCallbackInterface.OnSpacebarTemp;
-                @SpacebarTemp.performed -= m_Wrapper.m_IndieCadeActionsCallbackInterface.OnSpacebarTemp;
-                @SpacebarTemp.canceled -= m_Wrapper.m_IndieCadeActionsCallbackInterface.OnSpacebarTemp;
+                @Interact.started -= m_Wrapper.m_IndieCadeActionsCallbackInterface.OnInteract;
+                @Interact.performed -= m_Wrapper.m_IndieCadeActionsCallbackInterface.OnInteract;
+                @Interact.canceled -= m_Wrapper.m_IndieCadeActionsCallbackInterface.OnInteract;
                 @RowingUp.started -= m_Wrapper.m_IndieCadeActionsCallbackInterface.OnRowingUp;
                 @RowingUp.performed -= m_Wrapper.m_IndieCadeActionsCallbackInterface.OnRowingUp;
                 @RowingUp.canceled -= m_Wrapper.m_IndieCadeActionsCallbackInterface.OnRowingUp;
@@ -841,9 +841,9 @@ public partial class @GameControls : IInputActionCollection2, IDisposable
                 @MovePlayerDown.started += instance.OnMovePlayerDown;
                 @MovePlayerDown.performed += instance.OnMovePlayerDown;
                 @MovePlayerDown.canceled += instance.OnMovePlayerDown;
-                @SpacebarTemp.started += instance.OnSpacebarTemp;
-                @SpacebarTemp.performed += instance.OnSpacebarTemp;
-                @SpacebarTemp.canceled += instance.OnSpacebarTemp;
+                @Interact.started += instance.OnInteract;
+                @Interact.performed += instance.OnInteract;
+                @Interact.canceled += instance.OnInteract;
                 @RowingUp.started += instance.OnRowingUp;
                 @RowingUp.performed += instance.OnRowingUp;
                 @RowingUp.canceled += instance.OnRowingUp;
@@ -882,7 +882,7 @@ public partial class @GameControls : IInputActionCollection2, IDisposable
         void OnMovePlayerRight(InputAction.CallbackContext context);
         void OnMovePlayerUp(InputAction.CallbackContext context);
         void OnMovePlayerDown(InputAction.CallbackContext context);
-        void OnSpacebarTemp(InputAction.CallbackContext context);
+        void OnInteract(InputAction.CallbackContext context);
         void OnRowingUp(InputAction.CallbackContext context);
         void OnRowingDown(InputAction.CallbackContext context);
         void OnRowingRight(InputAction.CallbackContext context);
