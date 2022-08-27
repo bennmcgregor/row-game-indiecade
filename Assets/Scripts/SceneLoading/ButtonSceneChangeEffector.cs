@@ -1,9 +1,12 @@
 using UnityEngine;
 
-public class ButtonSceneChangeEffector : WorldMapSceneChangeEffector
+namespace IndieCade
 {
-    public void OnClick()
+    public class ButtonSceneChangeEffector : WorldMapSceneChangeEffector
     {
-        ActivateScene();
+        public void OnClick()
+        {
+            ActivateScene();
+        }
     }
 }

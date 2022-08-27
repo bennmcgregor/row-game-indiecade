@@ -2,11 +2,14 @@ using Zenject;
 using UnityEngine;
 using System.Collections;
 
-public class ProjectContextInstaller : MonoInstaller
+namespace IndieCade
 {
-    public override void InstallBindings()
+    public class ProjectContextInstaller : MonoInstaller
     {
-        Container.Bind<WorldMapSceneLoader>().FromNewComponentOnNewGameObject().AsSingle();
-        Container.Bind<AudioManager>().FromNewComponentOnNewGameObject().AsSingle();
+        public override void InstallBindings()
+        {
+            Container.Bind<WorldMapSceneLoader>().FromNewComponentOnNewGameObject().AsSingle();
+            Container.Bind<AudioManager>().FromNewComponentOnNewGameObject().AsSingle();
+        }
     }
 }

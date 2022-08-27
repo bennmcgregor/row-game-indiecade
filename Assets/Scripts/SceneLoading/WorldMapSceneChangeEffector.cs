@@ -1,20 +1,23 @@
 using UnityEngine;
 using Zenject;
 
-public class WorldMapSceneChangeEffector : MonoBehaviour
+namespace IndieCade
 {
-    [SerializeField] private string _sceneName;
-    
-    private WorldMapSceneLoader _sceneLoader;
-
-    [Inject]
-    public void Initialize(WorldMapSceneLoader sceneLoader)
+    public class WorldMapSceneChangeEffector : MonoBehaviour
     {
-        _sceneLoader = sceneLoader;
-    }
+        [SerializeField] private string _sceneName;
 
-    protected void ActivateScene()
-    {
-        _sceneLoader.ActivateScene(_sceneName);
+        private WorldMapSceneLoader _sceneLoader;
+
+        [Inject]
+        public void Initialize(WorldMapSceneLoader sceneLoader)
+        {
+            _sceneLoader = sceneLoader;
+        }
+
+        protected void ActivateScene()
+        {
+            _sceneLoader.ActivateScene(_sceneName);
+        }
     }
 }

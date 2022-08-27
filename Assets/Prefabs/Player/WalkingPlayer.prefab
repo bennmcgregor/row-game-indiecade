@@ -146,8 +146,6 @@ GameObject:
   m_Component:
   - component: {fileID: 818311391520027592}
   - component: {fileID: 818311391520027595}
-  - component: {fileID: 818311391520027606}
-  - component: {fileID: 818311391520027593}
   - component: {fileID: 1680516301375716056}
   - component: {fileID: 4428157851827958899}
   m_Layer: 0
@@ -194,50 +192,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8
   _animator: {fileID: 2080879543253566671}
---- !u!114 &818311391520027606
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 818311391520027594}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Actions: {fileID: -944628639613478452, guid: f2af7acc68b294626ae6e0ac5798aef7,
-    type: 3}
-  m_NotificationBehavior: 1
-  m_UIInputModule: {fileID: 0}
-  m_DeviceLostEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_DeviceRegainedEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_ControlsChangedEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_ActionEvents: []
-  m_NeverAutoSwitchControlSchemes: 0
-  m_DefaultControlScheme: 
-  m_DefaultActionMap: IndieCade
-  m_SplitScreenIndex: -1
-  m_Camera: {fileID: 0}
---- !u!114 &818311391520027593
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 818311391520027594}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c89b195ce688e4e0da4b251719af9ac6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _characterControl: {fileID: 818311391520027595}
 --- !u!61 &1680516301375716056
 BoxCollider2D:
   m_ObjectHideFlags: 0
