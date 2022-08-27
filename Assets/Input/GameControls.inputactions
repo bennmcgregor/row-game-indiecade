@@ -294,7 +294,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "SpacebarTemp",
+                    "name": "Interact",
                     "type": "Button",
                     "id": "3b8fd26c-4afd-4656-b688-78b5541b72e8",
                     "expectedControlType": "Button",
@@ -444,7 +444,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "SpacebarTemp",
+                    "action": "Interact",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
