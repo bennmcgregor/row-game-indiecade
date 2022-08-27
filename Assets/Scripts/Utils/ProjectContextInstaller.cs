@@ -1,4 +1,4 @@
-﻿using Zenject;
+using Zenject;
 using UnityEngine;
 using System.Collections;
 
@@ -9,6 +9,7 @@ namespace IndieCade
         public override void InstallBindings()
         {
             Container.Bind<WorldMapSceneLoader>().FromNewComponentOnNewGameObject().AsSingle();
+            Container.Bind<AudioManager>().FromNewComponentOnNewGameObject().AsSingle();
         }
     }
 }
