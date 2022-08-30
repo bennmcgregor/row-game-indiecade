@@ -9,6 +9,7 @@ namespace IndieCade
     {
         [SerializeField] private RowboatPhysicsController _physicsController;
         [SerializeField] private RowboatAnimator _rowboatAnimator;
+        [SerializeField] private RowboatPhysicsParametersProvider _rowboatPhysicsParametersProvider;
 
         public override void InstallBindings()
         {
@@ -19,6 +20,7 @@ namespace IndieCade
             Container.Bind<GlobalDirectionStateMachine>().FromNew().AsSingle();
             Container.Bind<RowboatPlayerInputs>().FromNew().AsSingle();
             Container.Bind<RowboatMaps>().FromNew().AsSingle();
+            Container.BindInstance(_rowboatPhysicsParametersProvider).AsSingle();
         }
     }
 }

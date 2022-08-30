@@ -491,6 +491,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _physicsController: {fileID: 8182153329612407097}
   _rowboatAnimator: {fileID: 8182153328916393784}
+  _rowboatPhysicsParametersProvider: {fileID: 8182153329612407098}
 --- !u!1001 &1499558659
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -957,7 +958,7 @@ PrefabInstance:
     - target: {fileID: 6986955186894464977, guid: c2fd6d2d5026b4bd78ad3099c6a885a4,
         type: 3}
       propertyPath: _inputState
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6986955186894464977, guid: c2fd6d2d5026b4bd78ad3099c6a885a4,
         type: 3}
@@ -1021,5 +1022,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 458b11401a2b34aa2a6529d0f7027024, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &8182153329612407098 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 761396265184205561, guid: 2651f9d7949a84d80b61ba215ac4fff4,
+    type: 3}
+  m_PrefabInstance: {fileID: 4132603977301033940}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: faedbc95bf9eb47bf8f3383a75c4eb0e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
