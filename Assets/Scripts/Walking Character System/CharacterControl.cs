@@ -41,6 +41,12 @@ namespace IndieCade
             _stateMachine.DownAction();
         }
 
+        public void SpawnAtPosition(PlayerSpawnPoint playerSpawnPoint)
+        {
+            playerSpawnPoint.SetPlayerPositionAndRotation(_movePoint.transform);
+            playerSpawnPoint.SetPlayerPositionAndRotation(transform);
+        }
+
         private void Update()
         {
             MoveToNewPosition();

@@ -80,6 +80,15 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Testing/IndieCadeMainMenuScene.unity
     guid: 47b64ecc4acc443e6ad80fac3a3adfd9
+  - enabled: 1
+    path: Assets/Scenes/TMR/TMRTownOutside.unity
+    guid: c62d797da868548249efdea1d4398df7
+  - enabled: 1
+    path: Assets/Scenes/TMR/BoathouseInside.unity
+    guid: 8dec10d57cb5c4fbe9e7cad7b8871b0d
+  - enabled: 1
+    path: Assets/Scenes/TMR/MioHouseInside.unity
+    guid: 993820b5dea054441b50427477baad44
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: de05a8ebf954d4b55870ef2878c6d424,
       type: 2}

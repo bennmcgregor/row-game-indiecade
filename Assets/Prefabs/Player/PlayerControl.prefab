@@ -47,6 +47,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _characterControl: {fileID: 0}
   _rowingControl: {fileID: 0}
+  _objectInteractionControl: {fileID: 0}
+  _inputState: 1
 --- !u!114 &6986955186894464978
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -5,15 +5,16 @@ namespace IndieCade
 {
     public class WorldMapSceneChangeRegion : MonoBehaviour
     {
-        [SerializeField] private GameObject _player;
-        [SerializeField] private string _sceneName;
+        [SerializeField] private GameSceneName _sceneName;
 
         private WorldMapSceneLoader _sceneLoader;
+        private GameObject _player;
 
         [Inject]
-        public void Initialize(WorldMapSceneLoader sceneLoader)
+        public void Initialize(WorldMapSceneLoader sceneLoader, GameObject player)
         {
             _sceneLoader = sceneLoader;
+            _player = player;
         }
 
         private void OnTriggerEnter2D(Collider2D other)

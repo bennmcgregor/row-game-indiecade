@@ -19,13 +19,9 @@ MonoBehaviour:
   MaxVelClamp: 20
   WaitBeforeSwitchLaneTime: 0.1
   MaxSwitchLaneTime: 1
-  MinBoatDriveForce: 3
-  MaxBoatDriveForce: 6
-  MinBoatStopForce: 1
-  MaxBoatStopForce: 5
-  MinMinRecoverySpeed: 0.01
-  MaxMinRecoverySpeed: 0.03
-  MinSwitchLaneSpeed: 5
-  MaxSwitchLaneSpeed: 10
-  MinSpinAnimationTimeSeconds: 0.5
-  MaxSpinAnimationTimeSeconds: 1
+  BoatForwardsDriveForce: 5
+  BoatBackwardsDriveForce: 2
+  BoatStopForce: 1
+  MinRecoverySpeed: 0.01
+  SwitchLaneSpeed: 5
+  SpinAnimationTimeSeconds: 1
