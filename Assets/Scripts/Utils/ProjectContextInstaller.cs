@@ -10,6 +10,8 @@ namespace IndieCade
         {
             Container.Bind<WorldMapSceneLoader>().FromNewComponentOnNewGameObject().AsSingle();
             Container.Bind<AudioManager>().FromNewComponentOnNewGameObject().AsSingle();
+            Container.Bind<SceneInitializationDataIndex>().FromNew().AsSingle();
+            Container.Bind<GameSceneState>().FromNew().AsSingle();
         }
     }
 }

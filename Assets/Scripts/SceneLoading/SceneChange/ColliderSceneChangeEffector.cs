@@ -1,10 +1,17 @@
 using UnityEngine;
+using Zenject;
 
 namespace IndieCade
 {
     public class ColliderSceneChangeEffector : WorldMapSceneChangeEffector
     {
-        [SerializeField] private GameObject _player;
+        private GameObject _player;
+
+        [Inject]
+        public void Initialize(GameObject player)
+        {
+            _player = player;
+        }
 
         private void OnTriggerEnter2D(Collider2D other)
         {

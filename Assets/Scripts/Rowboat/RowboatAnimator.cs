@@ -16,19 +16,20 @@ namespace IndieCade
         [SerializeField] private Sprite[] _westRecoverySequence = default;
         [SerializeField] private Sprite[] _spinSequence = default;
         [SerializeField] private SpriteRenderer _spriteRenderer;
-        [SerializeField] private float _spinAnimationTimeSeconds = 1f;
 
         private RowboatSlideState _slideState;
         private RowingStateMachine _rowingStateMachine;
         private GlobalDirectionStateMachine _directionStateMachine;
+        private RowboatPhysicsParametersProvider _rowboatPhysicsParametersProvider;
         private Coroutine _spinCoroutine;
 
         [Inject]
-        public void Initialize(RowboatSlideState slideState, RowingStateMachine rowingStateMachine, GlobalDirectionStateMachine globalDirectionStateMachine)
+        public void Initialize(RowboatSlideState slideState, RowingStateMachine rowingStateMachine, GlobalDirectionStateMachine globalDirectionStateMachine, RowboatPhysicsParametersProvider rowboatPhysicsParametersProvider)
         {
             _slideState = slideState;
             _rowingStateMachine = rowingStateMachine;
             _directionStateMachine = globalDirectionStateMachine;
+            _rowboatPhysicsParametersProvider = rowboatPhysicsParametersProvider;
         }
 
         private void Update()
@@ -98,7 +99,7 @@ namespace IndieCade
         private IEnumerator SpinCoroutine()
         {
             // calculate the framerate based on length of spin animation
-            float framerateSeconds = _spinAnimationTimeSeconds / _spinSequence.Length;
+            float framerateSeconds = _rowboatPhysicsParametersProvider.SpinAnimationTimeSeconds / _spinSequence.Length;
 
             foreach (var sprite in _spinSequence)
             {

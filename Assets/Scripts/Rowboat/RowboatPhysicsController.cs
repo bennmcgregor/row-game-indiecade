@@ -9,26 +9,16 @@ namespace IndieCade
     public class RowboatPhysicsController : MonoBehaviour
     {
         // TODO: add this to a common scriptableobject that is injected
-        private float _kSlideEndThreshold = .05f;
 
         public Action OnDriveFinished;
         public Action OnSwitchLaneFinished;
 
-        [SerializeField] private float _stopSpeedThreshold = 0.01f;
-        [SerializeField] private float _canTransitionFromStopSpeedThreshold = 1f;
-        [SerializeField] private float _sliderDriveSpeed = 0.05f;
-        [SerializeField] private float _boatDriveForce = 5f;
-        [SerializeField] private float _boatStopForce = 10f;
-        [SerializeField] private float _maxVelClamp = 20f;
-        [SerializeField] private float _minRecoverySpeed = 0.01f;
-        [SerializeField] private float _waitBeforeSwitchLaneTime = 0.1f;
-        [SerializeField] private float _maxSwitchLaneTime = 0.9f;
-        [SerializeField] private float _switchLaneSpeed = 5f;
         [SerializeField] private Rigidbody2D _boatRigidbody;
         [SerializeField] private LayerMask _verticalMovementMask;
 
         private RowboatSlideState _slideState;
         private GlobalDirectionStateMachine _globalDirectionStateMachine;
+        private RowboatPhysicsParametersProvider _rowboatPhysicsParametersProvider;
 
         private Coroutine _driveCoroutine;
         private Coroutine _recoveryCoroutine;
@@ -38,10 +28,11 @@ namespace IndieCade
         private float _boatTorque = 0f;
 
         [Inject]
-        public void Initialize(RowboatSlideState slideState, GlobalDirectionStateMachine globalDirectionStateMachine)
+        public void Initialize(RowboatSlideState slideState, GlobalDirectionStateMachine globalDirectionStateMachine, RowboatPhysicsParametersProvider rowboatPhysicsParametersProvider)
         {
             _slideState = slideState;
             _globalDirectionStateMachine = globalDirectionStateMachine;
+            _rowboatPhysicsParametersProvider = rowboatPhysicsParametersProvider;
         }
 
         private void FixedUpdate()
@@ -71,8 +62,9 @@ namespace IndieCade
         {
             while (!IsAtFinish(forwards))
             {
-                _slideState.AddValue(-1 * _sliderDriveSpeed * _directionMultiplier);
-                _boatForce = GetForceDirectionVectorFromBoatDirection() * _directionMultiplier * _boatDriveForce;
+                _slideState.AddValue(-1 * _rowboatPhysicsParametersProvider.SliderDriveSpeed * _directionMultiplier);
+                float driveForce = forwards ? _rowboatPhysicsParametersProvider.BoatForwardsDriveForce : _rowboatPhysicsParametersProvider.BoatBackwardsDriveForce;
+                _boatForce = GetForceDirectionVectorFromBoatDirection() * _directionMultiplier * driveForce;
                 _boatTorque = 0;
                 yield return new WaitForFixedUpdate();
             }
@@ -104,8 +96,8 @@ namespace IndieCade
             {
                 // slider value is proportional to the speed of the boat
                 float boatVel = GetBoatVelocityFromBoatDirection();
-                float slideVal = (.1f / _maxVelClamp) * Mathf.Clamp(Mathf.Abs(boatVel), 0.01f, _maxVelClamp);
-                _slideState.AddValue((slideVal > _minRecoverySpeed ? slideVal : _minRecoverySpeed) * _directionMultiplier);
+                float slideVal = (.1f / _rowboatPhysicsParametersProvider.MaxVelClamp) * Mathf.Clamp(Mathf.Abs(boatVel), 0.01f, _rowboatPhysicsParametersProvider.MaxVelClamp);
+                _slideState.AddValue((slideVal > _rowboatPhysicsParametersProvider.MinRecoverySpeed ? slideVal : _rowboatPhysicsParametersProvider.MinRecoverySpeed) * _directionMultiplier);
 
                 _boatForce = Vector2.zero;
                 _boatTorque = 0;
@@ -135,13 +127,13 @@ namespace IndieCade
 
         private IEnumerator StopBoatCoroutine()
         {
-            while (!IsStopped(_stopSpeedThreshold))
+            while (!IsStopped(_rowboatPhysicsParametersProvider.StopSpeedThreshold))
             {
                 float boatVel = GetBoatVelocityFromBoatDirection();
-                float slideVal = (.1f / _maxVelClamp) * Mathf.Clamp(Mathf.Abs(boatVel), 0.01f, _maxVelClamp);
+                float slideVal = (.1f / _rowboatPhysicsParametersProvider.MaxVelClamp) * Mathf.Clamp(Mathf.Abs(boatVel), 0.01f, _rowboatPhysicsParametersProvider.MaxVelClamp);
                 _slideState.AddValue(slideVal * _directionMultiplier);
 
-                _boatForce = -(_boatRigidbody.mass * _boatRigidbody.velocity) * _boatStopForce;
+                _boatForce = -(_boatRigidbody.mass * _boatRigidbody.velocity) * _rowboatPhysicsParametersProvider.BoatStopForce;
                 _boatTorque = 0;
                 yield return new WaitForFixedUpdate();
             }
@@ -170,21 +162,21 @@ namespace IndieCade
             if (!Physics2D.OverlapCircle(targetPosition, .2f, _verticalMovementMask))
             {
                 float timer = 0;
-                while (timer < _waitBeforeSwitchLaneTime)
+                while (timer < _rowboatPhysicsParametersProvider.WaitBeforeSwitchLaneTime)
                 {
                     timer += Time.fixedDeltaTime;
                     yield return new WaitForFixedUpdate();
                 }
 
                 timer = 0;
-                while (Math.Abs(transform.position.y - targetPosition.y) > 0f && timer < _maxSwitchLaneTime)
+                while (Math.Abs(transform.position.y - targetPosition.y) > 0f && timer < _rowboatPhysicsParametersProvider.MaxSwitchLaneTime)
                 {
                     timer += Time.fixedDeltaTime;
                     Vector3 newYPos = new Vector3(transform.position.x, targetPosition.y, transform.position.z);
                     transform.position = Vector3.MoveTowards(
                         transform.position,
                         newYPos,
-                        _switchLaneSpeed * Time.fixedDeltaTime
+                        _rowboatPhysicsParametersProvider.SwitchLaneSpeed * Time.fixedDeltaTime
                     );
                     yield return new WaitForFixedUpdate();
                 }
@@ -199,7 +191,7 @@ namespace IndieCade
             {
                 return IsAtCatch(true);
             }
-            return _slideState.Value <= _kSlideEndThreshold;
+            return _slideState.Value <= _rowboatPhysicsParametersProvider.SlideEndThreshold;
         }
 
         private bool IsAtCatch(bool forwards)
@@ -208,7 +200,7 @@ namespace IndieCade
             {
                 return IsAtFinish(true);
             }
-            return _slideState.Value >= 1 - _kSlideEndThreshold;
+            return _slideState.Value >= 1 - _rowboatPhysicsParametersProvider.SlideEndThreshold;
         }
 
         private bool IsStopped(float threshold)
@@ -218,7 +210,7 @@ namespace IndieCade
 
         public bool CanTransitionFromStopped()
         {
-            return IsStopped(_canTransitionFromStopSpeedThreshold);
+            return IsStopped(_rowboatPhysicsParametersProvider.CanTransitionFromStopSpeedThreshold);
         }
 
         private Vector2 GetForceDirectionVectorFromBoatDirection()

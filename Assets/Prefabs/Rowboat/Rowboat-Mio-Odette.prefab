@@ -127,7 +127,6 @@ MonoBehaviour:
   _westRecoverySequence: []
   _spinSequence: []
   _spriteRenderer: {fileID: 5248149826284186849}
-  _spinAnimationTimeSeconds: 1
 --- !u!1 &5248149826755524819
 GameObject:
   m_ObjectHideFlags: 0
@@ -225,6 +224,7 @@ GameObject:
   - component: {fileID: 5248149826980725479}
   - component: {fileID: 5248149826980725484}
   - component: {fileID: 5248149826980725485}
+  - component: {fileID: 761396265184205561}
   m_Layer: 0
   m_Name: Rowboat-Mio-Odette
   m_TagString: Untagged
@@ -320,17 +320,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 458b11401a2b34aa2a6529d0f7027024, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _stopSpeedThreshold: 0.01
-  _canTransitionFromStopSpeedThreshold: 1
-  _sliderDriveSpeed: 0.05
-  _boatDriveForce: 5
-  _boatStopForce: 1
-  _maxVelClamp: 20
-  _minRecoverySpeed: 0.01
-  _waitBeforeSwitchLaneTime: 0.1
-  _maxSwitchLaneTime: 1
-  _switchLaneSpeed: 5
   _boatRigidbody: {fileID: 5248149826980725476}
   _verticalMovementMask:
     serializedVersion: 2
     m_Bits: 8
+--- !u!114 &761396265184205561
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5248149826980725465}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: faedbc95bf9eb47bf8f3383a75c4eb0e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _rowboatPhysicsParameters: {fileID: 11400000, guid: 2a5a7bb1254d34d75a74e7260b5b58e7,
+    type: 2}
