@@ -8,6 +8,7 @@ namespace IndieCade
         [SerializeField] private RowingControl _rowingControl;
         [SerializeField] private ObjectInteractionControl _objectInteractionControl;
         [SerializeField] private PlayerControlInputState _inputState = PlayerControlInputState.WALKING_INTERACTING;
+        [SerializeField] private ItemStorage _itemStorage;
 
         public void OnMovePlayerLeft()
         {
@@ -87,6 +88,11 @@ namespace IndieCade
             {
                 _objectInteractionControl.Interact();
             }
+        }
+
+        public void OnToggleInventory()
+        {
+            _itemStorage.ToggleDisplay();
         }
     }
 

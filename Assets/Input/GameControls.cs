@@ -368,6 +368,15 @@ public partial class @GameControls : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": ""Press(behavior=2)"",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ToggleInventory"",
+                    ""type"": ""Button"",
+                    ""id"": ""dee6d932-35a4-4366-a4f8-c8452e0fa411"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": ""Press"",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -568,6 +577,28 @@ public partial class @GameControls : IInputActionCollection2, IDisposable
                     ""action"": ""RowingShift"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""55ea28bf-26b0-487e-b1aa-d0b2f2326989"",
+                    ""path"": ""<Keyboard>/tab"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ToggleInventory"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""009c043e-0d10-4702-bdc9-58d38f7e1165"",
+                    ""path"": ""<Keyboard>/i"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ToggleInventory"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -598,6 +629,7 @@ public partial class @GameControls : IInputActionCollection2, IDisposable
         m_IndieCade_RowingRight = m_IndieCade.FindAction("RowingRight", throwIfNotFound: true);
         m_IndieCade_RowingLeft = m_IndieCade.FindAction("RowingLeft", throwIfNotFound: true);
         m_IndieCade_RowingShift = m_IndieCade.FindAction("RowingShift", throwIfNotFound: true);
+        m_IndieCade_ToggleInventory = m_IndieCade.FindAction("ToggleInventory", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -772,6 +804,7 @@ public partial class @GameControls : IInputActionCollection2, IDisposable
     private readonly InputAction m_IndieCade_RowingRight;
     private readonly InputAction m_IndieCade_RowingLeft;
     private readonly InputAction m_IndieCade_RowingShift;
+    private readonly InputAction m_IndieCade_ToggleInventory;
     public struct IndieCadeActions
     {
         private @GameControls m_Wrapper;
@@ -786,6 +819,7 @@ public partial class @GameControls : IInputActionCollection2, IDisposable
         public InputAction @RowingRight => m_Wrapper.m_IndieCade_RowingRight;
         public InputAction @RowingLeft => m_Wrapper.m_IndieCade_RowingLeft;
         public InputAction @RowingShift => m_Wrapper.m_IndieCade_RowingShift;
+        public InputAction @ToggleInventory => m_Wrapper.m_IndieCade_ToggleInventory;
         public InputActionMap Get() { return m_Wrapper.m_IndieCade; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -825,6 +859,9 @@ public partial class @GameControls : IInputActionCollection2, IDisposable
                 @RowingShift.started -= m_Wrapper.m_IndieCadeActionsCallbackInterface.OnRowingShift;
                 @RowingShift.performed -= m_Wrapper.m_IndieCadeActionsCallbackInterface.OnRowingShift;
                 @RowingShift.canceled -= m_Wrapper.m_IndieCadeActionsCallbackInterface.OnRowingShift;
+                @ToggleInventory.started -= m_Wrapper.m_IndieCadeActionsCallbackInterface.OnToggleInventory;
+                @ToggleInventory.performed -= m_Wrapper.m_IndieCadeActionsCallbackInterface.OnToggleInventory;
+                @ToggleInventory.canceled -= m_Wrapper.m_IndieCadeActionsCallbackInterface.OnToggleInventory;
             }
             m_Wrapper.m_IndieCadeActionsCallbackInterface = instance;
             if (instance != null)
@@ -859,6 +896,9 @@ public partial class @GameControls : IInputActionCollection2, IDisposable
                 @RowingShift.started += instance.OnRowingShift;
                 @RowingShift.performed += instance.OnRowingShift;
                 @RowingShift.canceled += instance.OnRowingShift;
+                @ToggleInventory.started += instance.OnToggleInventory;
+                @ToggleInventory.performed += instance.OnToggleInventory;
+                @ToggleInventory.canceled += instance.OnToggleInventory;
             }
         }
     }
@@ -888,5 +928,6 @@ public partial class @GameControls : IInputActionCollection2, IDisposable
         void OnRowingRight(InputAction.CallbackContext context);
         void OnRowingLeft(InputAction.CallbackContext context);
         void OnRowingShift(InputAction.CallbackContext context);
+        void OnToggleInventory(InputAction.CallbackContext context);
     }
 }
