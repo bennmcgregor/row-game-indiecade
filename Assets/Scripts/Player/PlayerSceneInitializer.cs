@@ -5,11 +5,11 @@ using Zenject;
 
 namespace IndieCade
 {
-    public class PlayerSceneInitializer : GameObjectSceneInitializer
+    public class PlayerSceneInitializer : GameInitializationStateListener
     {
         [SerializeField] private CharacterControl _characterControl;
 
-        protected override void ExecuteInternal(SceneInitializationData sceneInitializationData)
+        protected override void InitializeScene(SceneInitializationData sceneInitializationData)
         {
             PlayerSpawnPoint playerSpawnPoint = sceneInitializationData.PlayerSpawnPoint;
             if (playerSpawnPoint != null)

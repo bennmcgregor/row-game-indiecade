@@ -22,20 +22,26 @@ namespace IndieCade
 
         //use this method to start a new soundtrack, with a reference to the AudioClip that you want to use
         //    such as:        newSoundtrack((AudioClip)Resources.Load("Audio/soundtracks/track01"));
-        public void newSoundtrack(AudioClip clip)
+        public void newSoundtrack(AudioClip clip, bool loop = true)
         {
             int nextSource = !activeMusicSource ? 0 : 1;
             int currentSource = activeMusicSource ? 0 : 1;
 
             //If the clip is already being played on the current audio source, we will end now and prevent the transition
             if (clip == aud[currentSource].clip)
+            {
                 return;
+            }
+                
 
             //If a transition is already happening, we stop it here to prevent our new Coroutine from competing
             if (musicTransition != null)
                 StopCoroutine(musicTransition);
 
+            Debug.Log($"Playing {clip}");
+
             aud[nextSource].clip = clip;
+            aud[nextSource].loop = loop;
             aud[nextSource].Play();
 
             musicTransition = transition(20); //20 is the equivalent to 2 seconds (More than 3 seconds begins to overlap for a bit too long)

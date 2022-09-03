@@ -10,9 +10,14 @@ namespace IndieCade
         {
             return sceneName switch
             {
-                GameSceneName.BOATHOUSE_INSIDE => "BoathouseInside",
-                GameSceneName.MIO_HOUSE_INSIDE => "MioHouseInside",
-                GameSceneName.TMR_TOWN_OUTSIDE => "TMRTownOutside",
+                // TODO: uncomment when implementing full version
+                //GameSceneName.BOATHOUSE_INSIDE => "BoathouseInside",
+                //GameSceneName.MIO_HOUSE_INSIDE => "MioHouseInside",
+                //GameSceneName.TMR_TOWN_OUTSIDE => "TMRTownOutside",
+                GameSceneName.RESERVOIR_FINAL_CANAL => "ReservoirFinalCanal",
+                GameSceneName.INTERROGATION_ROOM => "InterrogationRoom",
+                GameSceneName.TEASER_CUTSCENE => "TeaserCutscene",
+                GameSceneName.DOWNSTREAM_SETTLEMENT => "DownstreamSettlement",
                 _ => throw new NotImplementedException()
             };
         }

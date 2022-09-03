@@ -14,11 +14,7 @@ namespace IndieCade
         public SceneInitializationDataIndex(GameSceneState gameSceneState)
         {
             _gameSceneState = gameSceneState;
-            _index = new Dictionary<GameSceneName, SceneInitializationData>();
-            foreach (GameSceneName sceneName in Enum.GetValues(typeof(GameSceneName)))
-            {
-                _index[sceneName] = new SceneInitializationData(sceneName);
-            }
+            _index = InitialSceneData.GetInitialTeaserSceneData();
         }
 
         public SceneInitializationData GetDataFromCurrentScene()

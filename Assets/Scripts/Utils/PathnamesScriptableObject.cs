@@ -4,7 +4,7 @@ using UnityEngine;
 public class PathnamesScriptableObject : ScriptableObject
 {
     // Consts
-    public const string resourcesPath = "Assets/Resources";
+    public const string resourcesPath = "Assets/Audio/Resources/";
     public const string backgroundMusicPath = "BackgroundMusics/";
     public const string soundFXPath = "SoundFX/";
 }

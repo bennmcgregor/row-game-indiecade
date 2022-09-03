@@ -19,7 +19,7 @@ namespace IndieCade
             set
             {
                 _backgroundMusicVolume = value;
-                backgroundMusicPlayer.volume = _masterVolume * _backgroundMusicVolume;
+                _backgroundMusicPlayer.volume = _masterVolume * _backgroundMusicVolume;
             }
         }
 
@@ -29,7 +29,7 @@ namespace IndieCade
             set
             {
                 _soundFXVolume = value;
-                soundFXPlayer.volume = _masterVolume * _soundFXVolume;
+                _soundFXPlayer.volume = _masterVolume * _soundFXVolume;
             }
         }
 
@@ -39,45 +39,43 @@ namespace IndieCade
             set
             {
                 _masterVolume = value;
-                soundFXPlayer.volume = _masterVolume * _soundFXVolume;
-                backgroundMusicPlayer.volume = _masterVolume * _backgroundMusicVolume;
+                _soundFXPlayer.volume = _masterVolume * _soundFXVolume;
+                _backgroundMusicPlayer.volume = _masterVolume * _backgroundMusicVolume;
             }
         }
 
         // Sound assets
-        public Dictionary<string, AudioClip> backgroundMusics;
-        public Dictionary<string, AudioClip> soundFX;
-
+        private Dictionary<string, AudioClip> _backgroundMusics;
+        private Dictionary<string, AudioClip> _soundFX;
 
         // Audio players
-        public BackgroundMusicPlayer backgroundMusicPlayer;
-        public AudioSource soundFXPlayer;
+        public BackgroundMusicPlayer _backgroundMusicPlayer;
+        public AudioSource _soundFXPlayer;
 
         // Start is called before the first frame update
         void Start()
         {
-            backgroundMusics = new Dictionary<string, AudioClip>();
-            backgroundMusicPlayer = gameObject.AddComponent<BackgroundMusicPlayer>();
+            _backgroundMusics = new Dictionary<string, AudioClip>();
+            _backgroundMusicPlayer = gameObject.AddComponent<BackgroundMusicPlayer>();
 
-            soundFX = new Dictionary<string, AudioClip>();
-            soundFXPlayer = gameObject.AddComponent<AudioSource>();
+            _soundFX = new Dictionary<string, AudioClip>();
+            _soundFXPlayer = gameObject.AddComponent<AudioSource>();
 
-            LoadSounds(PathnamesScriptableObject.backgroundMusicPath, backgroundMusics);
-            LoadSounds(PathnamesScriptableObject.soundFXPath, soundFX);
+            LoadSounds(PathnamesScriptableObject.backgroundMusicPath, _backgroundMusics);
+            LoadSounds(PathnamesScriptableObject.soundFXPath, _soundFX);
             InitVolumes();
         }
 
         // Public methods
         public void ChangeBackgroundMusic(string musicKey)
         {
-            /// Change the background music to the background music with filename "musicKey" (without file extension)
-            backgroundMusicPlayer.newSoundtrack(backgroundMusics[musicKey]);
+            _backgroundMusicPlayer.newSoundtrack(_backgroundMusics[musicKey]);
         }
 
         public void PlaySoundEffect(string soundFXKey)
         {
             /// Play a sound effect with filename "soundFXKey" (without file extension)
-            soundFXPlayer.PlayOneShot(soundFX[soundFXKey]);
+            _soundFXPlayer.PlayOneShot(_soundFX[soundFXKey]);
         }
 
         // Private methods
