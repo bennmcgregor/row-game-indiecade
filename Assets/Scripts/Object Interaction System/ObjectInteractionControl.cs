@@ -5,10 +5,14 @@ namespace IndieCade
 {
     public class ObjectInteractionControl : MonoBehaviour
     {
+        public bool interacting;
+        public void Start()
+        {
+            interacting = false;
+        }
         public void Interact()
         {
-            // TODO: implement interaction logic
-            Debug.Log("Hello World");
+            interacting = !interacting;
         }
     }
 }
