@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Zenject;
 
 namespace IndieCade
 {
@@ -12,14 +13,15 @@ namespace IndieCade
         public QuestStateMachineContext Context => _context;
         public Quest CurrentQuest => _stateQuestMap[_context.CurrentState];
 
-        public QuestStateMachine()
+        [Inject]
+        public QuestStateMachine(GameQuests gameQuests)
         {
             _context = new QuestStateMachineContext(QuestState.ENTRY);
 
-            _stateProcessors = GameQuests.GetTeaserQuestStateProcessors(_context);
+            _stateProcessors = gameQuests.GetTeaserQuestStateProcessors(_context);
 
             // TODO: initialize _stateQuestMap
-            _stateQuestMap = GameQuests.GetTeaserQuests();
+            _stateQuestMap = gameQuests.GetTeaserQuests();
         }
 
         public void Transition(QuestStateMachineTransition transition)
