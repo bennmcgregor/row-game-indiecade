@@ -1,7 +1,6 @@
 ﻿using System;
 using UnityEngine;
 using Zenject;
-using UnityEngine.SceneManagement;
 
 namespace IndieCade
 {
