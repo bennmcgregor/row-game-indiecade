@@ -14,5 +14,6 @@ namespace IndieCade
         public GameSceneName SceneName;
 
         public PlayerSpawnPoint PlayerSpawnPoint;
+        public string BackgroundMusicFilename;
     }
 }

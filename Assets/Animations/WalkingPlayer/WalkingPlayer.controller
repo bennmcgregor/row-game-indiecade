@@ -35,11 +35,11 @@ AnimatorStateTransition:
   m_PrefabAsset: {fileID: 0}
   m_Name: 
   m_Conditions:
-  - m_ConditionMode: 6
-    m_ConditionEvent: CharacterWalkingState
+  - m_ConditionMode: 2
+    m_ConditionEvent: IsMovingX
     m_EventTreshold: 4
   - m_ConditionMode: 2
-    m_ConditionEvent: IsMoving
+    m_ConditionEvent: IsMovingY
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 4597785249617847998}
@@ -63,9 +63,12 @@ AnimatorStateTransition:
   m_PrefabAsset: {fileID: 0}
   m_Name: 
   m_Conditions:
-  - m_ConditionMode: 6
-    m_ConditionEvent: CharacterWalkingState
-    m_EventTreshold: 2
+  - m_ConditionMode: 3
+    m_ConditionEvent: CharacterYVelocity
+    m_EventTreshold: 0.05
+  - m_ConditionMode: 2
+    m_ConditionEvent: IsMovingX
+    m_EventTreshold: -0.05
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -8988629238122866338}
   m_Solo: 0
@@ -88,9 +91,12 @@ AnimatorStateTransition:
   m_PrefabAsset: {fileID: 0}
   m_Name: 
   m_Conditions:
-  - m_ConditionMode: 6
-    m_ConditionEvent: CharacterWalkingState
-    m_EventTreshold: 1
+  - m_ConditionMode: 4
+    m_ConditionEvent: CharacterXVelocity
+    m_EventTreshold: -0.05
+  - m_ConditionMode: 2
+    m_ConditionEvent: IsMovingY
+    m_EventTreshold: 0.05
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 178883748221699824}
   m_Solo: 0
@@ -139,11 +145,11 @@ AnimatorStateTransition:
   m_PrefabAsset: {fileID: 0}
   m_Name: 
   m_Conditions:
-  - m_ConditionMode: 6
-    m_ConditionEvent: CharacterWalkingState
+  - m_ConditionMode: 2
+    m_ConditionEvent: IsMovingX
     m_EventTreshold: 4
   - m_ConditionMode: 2
-    m_ConditionEvent: IsMoving
+    m_ConditionEvent: IsMovingY
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 5488266833731804520}
@@ -167,9 +173,12 @@ AnimatorStateTransition:
   m_PrefabAsset: {fileID: 0}
   m_Name: 
   m_Conditions:
-  - m_ConditionMode: 6
-    m_ConditionEvent: CharacterWalkingState
-    m_EventTreshold: 3
+  - m_ConditionMode: 4
+    m_ConditionEvent: CharacterYVelocity
+    m_EventTreshold: -0.05
+  - m_ConditionMode: 2
+    m_ConditionEvent: IsMovingX
+    m_EventTreshold: -0.05
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 4060498125144131024}
   m_Solo: 0
@@ -192,9 +201,12 @@ AnimatorStateTransition:
   m_PrefabAsset: {fileID: 0}
   m_Name: 
   m_Conditions:
-  - m_ConditionMode: 6
-    m_ConditionEvent: CharacterWalkingState
-    m_EventTreshold: 0
+  - m_ConditionMode: 3
+    m_ConditionEvent: CharacterXVelocity
+    m_EventTreshold: 0.05
+  - m_ConditionMode: 2
+    m_ConditionEvent: IsMovingY
+    m_EventTreshold: 0.05
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 3028451099800819583}
   m_Solo: 0
@@ -218,13 +230,25 @@ AnimatorController:
   m_Name: WalkingPlayer
   serializedVersion: 5
   m_AnimatorParameters:
-  - m_Name: CharacterWalkingState
-    m_Type: 3
+  - m_Name: CharacterXVelocity
+    m_Type: 1
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
     m_Controller: {fileID: 0}
-  - m_Name: IsMoving
+  - m_Name: CharacterYVelocity
+    m_Type: 1
+    m_DefaultFloat: 0
+    m_DefaultInt: 0
+    m_DefaultBool: 0
+    m_Controller: {fileID: 0}
+  - m_Name: IsMovingX
+    m_Type: 4
+    m_DefaultFloat: 0
+    m_DefaultInt: 0
+    m_DefaultBool: 0
+    m_Controller: {fileID: 0}
+  - m_Name: IsMovingY
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
@@ -358,11 +382,11 @@ AnimatorStateTransition:
   m_PrefabAsset: {fileID: 0}
   m_Name: 
   m_Conditions:
-  - m_ConditionMode: 6
-    m_ConditionEvent: CharacterWalkingState
+  - m_ConditionMode: 2
+    m_ConditionEvent: IsMovingX
     m_EventTreshold: 4
   - m_ConditionMode: 2
-    m_ConditionEvent: IsMoving
+    m_ConditionEvent: IsMovingY
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -1673601965525766607}
@@ -485,11 +509,11 @@ AnimatorStateTransition:
   m_PrefabAsset: {fileID: 0}
   m_Name: 
   m_Conditions:
-  - m_ConditionMode: 6
-    m_ConditionEvent: CharacterWalkingState
+  - m_ConditionMode: 2
+    m_ConditionEvent: IsMovingX
     m_EventTreshold: 4
   - m_ConditionMode: 2
-    m_ConditionEvent: IsMoving
+    m_ConditionEvent: IsMovingY
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 6666481691045768048}

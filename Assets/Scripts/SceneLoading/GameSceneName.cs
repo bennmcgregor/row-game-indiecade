@@ -3,8 +3,13 @@ namespace IndieCade
 {
     public enum GameSceneName
     {
-        BOATHOUSE_INSIDE,
-        MIO_HOUSE_INSIDE,
-        TMR_TOWN_OUTSIDE
+        // TODO: uncomment when implementing full version
+        //BOATHOUSE_INSIDE,
+        //MIO_HOUSE_INSIDE,
+        //TMR_TOWN_OUTSIDE
+        RESERVOIR_FINAL_CANAL,
+        INTERROGATION_ROOM,
+        TEASER_CUTSCENE,
+        DOWNSTREAM_SETTLEMENT
     }
 }

@@ -7,18 +7,18 @@ namespace IndieCade
     public class CharacterControl : MonoBehaviour
     {
         [SerializeField] private float _moveSpeed = 5f;
-        [SerializeField] private float _movementThreshold = .05f;
-        [SerializeField] private float _colliderOverlapThreshold = .2f;
-        [SerializeField] private Transform _movePoint;
-        [SerializeField] private LayerMask _colliderMask;
+        [SerializeField] private float _moveSpeedThreshold = 0.05f;
+        [SerializeField] private Rigidbody2D _rigidbody2D;
         [SerializeField] private Animator _animator;
 
         private CharacterWalkingStateMachine _stateMachine;
+        private Vector2 _trackVelocity;
+        private Vector2 _lastPos;
 
         private void Awake()
         {
-            _movePoint.parent = null;
             _stateMachine = new CharacterWalkingStateMachine(CharacterWalkingState.STOPPED);
+            _lastPos = _rigidbody2D.position;
         }
 
         public void MoveRight()
@@ -43,55 +43,53 @@ namespace IndieCade
 
         public void SpawnAtPosition(PlayerSpawnPoint playerSpawnPoint)
         {
-            playerSpawnPoint.SetPlayerPositionAndRotation(_movePoint.transform);
             playerSpawnPoint.SetPlayerPositionAndRotation(transform);
         }
 
-        private void Update()
+        private void FixedUpdate()
         {
-            MoveToNewPosition();
-
+            Vector3 newPos = transform.position;
             switch (_stateMachine.CurrentState)
             {
                 case CharacterWalkingState.RIGHT:
-                    UpdateMovePoint(new Vector3(1f, 0f, 0f));
-                    _animator.SetInteger("CharacterWalkingState", (int)CharacterWalkingState.RIGHT);
+                    newPos += new Vector3(0.01f, 0f, 0f) * _moveSpeed;
                     break;
                 case CharacterWalkingState.LEFT:
-                    UpdateMovePoint(new Vector3(-1f, 0f, 0f));
-                    _animator.SetInteger("CharacterWalkingState", (int)CharacterWalkingState.LEFT);
+                    newPos += new Vector3(-0.01f, 0f, 0f) * _moveSpeed;
                     break;
                 case CharacterWalkingState.UP:
-                    UpdateMovePoint(new Vector3(0f, 1f, 0f));
-                    _animator.SetInteger("CharacterWalkingState", (int)CharacterWalkingState.UP);
+                    newPos += new Vector3(0f, 0.01f, 0f) * _moveSpeed;
                     break;
                 case CharacterWalkingState.DOWN:
-                    UpdateMovePoint(new Vector3(0f, -1f, 0f));
-                    _animator.SetInteger("CharacterWalkingState", (int)CharacterWalkingState.DOWN);
+                    newPos += new Vector3(0f, -0.01f, 0f) * _moveSpeed;
                     break;
                 default:
-                    _animator.SetInteger("CharacterWalkingState", (int)CharacterWalkingState.STOPPED);
                     break;
             }
-        }
 
-        private void MoveToNewPosition()
-        {
-            Vector3 newPos = Vector3.MoveTowards(transform.position, _movePoint.position, _moveSpeed * Time.deltaTime);
-            _animator.SetBool("IsMoving", Vector3.Distance(transform.position, _movePoint.position) > _movementThreshold);
-            transform.position = newPos;
-        }
+            _trackVelocity = (_rigidbody2D.position - _lastPos) / Time.fixedDeltaTime;
+            _lastPos = _rigidbody2D.position;
 
-        private void UpdateMovePoint(Vector3 update)
-        {
-            if (Vector3.Distance(transform.position, _movePoint.position) <= _movementThreshold)
+            _animator.SetFloat("CharacterXVelocity", _trackVelocity.x);
+            _animator.SetFloat("CharacterYVelocity", _trackVelocity.y);
+            if (Mathf.Abs(_trackVelocity.x) < _moveSpeedThreshold)
             {
-                Vector3 newPos = _movePoint.position + update;
-                if (!Physics2D.OverlapCircle(newPos, _colliderOverlapThreshold, _colliderMask))
-                {
-                    _movePoint.position = newPos;
-                }
+                _animator.SetBool("IsMovingX", false);
+            } else
+            {
+                _animator.SetBool("IsMovingX", true);
             }
+
+            if (Mathf.Abs(_trackVelocity.y) < _moveSpeedThreshold)
+            {
+                _animator.SetBool("IsMovingY", false);
+            }
+            else
+            {
+                _animator.SetBool("IsMovingY", true);
+            }
+
+            _rigidbody2D.MovePosition(newPos);
         }
     }
 }
