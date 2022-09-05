@@ -1,0 +1,16 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2fec8e8bd9b52408ba6cece7a22d89c3, type: 3}
+  m_Name: YarnProjects
+  m_EditorClassIdentifier: 
+  TestProject: {fileID: 7545569452688597077, guid: 73880157e643143c3ac3d3b25d888ce2,
+    type: 3}

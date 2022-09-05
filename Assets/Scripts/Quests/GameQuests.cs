@@ -3,9 +3,16 @@ using System.Collections.Generic;
 
 namespace IndieCade
 {
-    public static class GameQuests
+    public class GameQuests
     {
-        public static Dictionary<QuestState, QuestStateProcessor> GetQuestStateProcessors(QuestStateMachineContext context)
+        private DialogueYarnProjectScriptableObject _dialogueYarnProjectScriptableObject;
+
+        public GameQuests(DialogueYarnProjectScriptableObject dialogueYarnProjectScriptableObject)
+        {
+            _dialogueYarnProjectScriptableObject = dialogueYarnProjectScriptableObject;
+        }
+
+        public Dictionary<QuestState, QuestStateProcessor> GetQuestStateProcessors(QuestStateMachineContext context)
         {
             return new Dictionary<QuestState, QuestStateProcessor>
             {
@@ -28,7 +35,7 @@ namespace IndieCade
             };
         }
 
-        public static Dictionary<QuestState, QuestStateProcessor> GetTeaserQuestStateProcessors(QuestStateMachineContext context)
+        public Dictionary<QuestState, QuestStateProcessor> GetTeaserQuestStateProcessors(QuestStateMachineContext context)
         {
             return new Dictionary<QuestState, QuestStateProcessor>
             {
@@ -46,7 +53,7 @@ namespace IndieCade
             };
         }
 
-        public static Dictionary<QuestState, Quest> GetQuests()
+        public Dictionary<QuestState, Quest> GetQuests()
         {
             // TODO: Introduction
 
@@ -79,7 +86,7 @@ namespace IndieCade
             };
         }
 
-        public static Dictionary<QuestState, Quest> GetTeaserQuests()
+        public Dictionary<QuestState, Quest> GetTeaserQuests()
         {
             // Teaser
             ChallengeStateMachineFactory teaserFactory = new ChallengeStateMachineFactory();
@@ -112,8 +119,8 @@ namespace IndieCade
                 new Dictionary<ChallengeStateMachineTransition, string>{}
             );
 
-            // TODO: update Challenges initialization
             ChallengeInitializationData teaserStealWaterData = new ChallengeInitializationData(ChallengeConsts.TeaserStealWater);
+            teaserStealWaterData.StartChallengeWithDialogue(_dialogueYarnProjectScriptableObject.TestProject, "1A", PlayerControlInputState.ROWING);
 
             ChallengeInitializationData teaserEscapeCanalData = new ChallengeInitializationData(ChallengeConsts.TeaserEscapeCanal);
             teaserEscapeCanalData.BackgroundMusicFilename = "gameplay_loop_music";
