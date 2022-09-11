@@ -20,19 +20,12 @@ namespace IndieCade
 
         private void Start()
         {
-            _questStateMachine.Context.OnQuestUpdated += UpdateQuestAndChallengeState;
-            _questStateMachine.Transition(QuestStateMachineTransition.ENTRY);
+            _questStateMachine.Context.OnQuestUpdated += UpdateQuestState;
         }
 
         public void CompleteCurrentQuest()
         {
             _questStateMachine.Transition(QuestStateMachineTransition.NEXT_QUEST);
-        }
-
-        private void UpdateQuestAndChallengeState()
-        {
-            UpdateQuestState();
-            _questStateMachine.CurrentQuest.UpdateChallengeState();
         }
 
         private void UpdateQuestState()

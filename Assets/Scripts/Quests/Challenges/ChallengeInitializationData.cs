@@ -20,18 +20,22 @@ namespace IndieCade
         private PlayerControlInputState _onDialogueCompleteInputState;
 
         public bool BeginWithDialogue => _beginWithDialogue;
-        public YarnProject DialogueYarnProject => _dialogueYarnProject;
         public string BeginningDialogueNodeName => _beginningDialogueNodeName;
         public PlayerControlInputState OnDialogueCompleteInputState => _onDialogueCompleteInputState;
 
-        public void StartChallengeWithDialogue(YarnProject yarnProject, string nodeName, PlayerControlInputState onDialogueCompleteInputState)
+        public void StartChallengeWithDialogue(string nodeName, PlayerControlInputState onDialogueCompleteInputState)
         {
             _beginWithDialogue = true;
-            _dialogueYarnProject = yarnProject;
             _beginningDialogueNodeName = nodeName;
             _onDialogueCompleteInputState = onDialogueCompleteInputState;
         }
 
         public string BackgroundMusicFilename;
+
+        public bool HasStealthGameplay = false;
+
+        public bool RestartSceneOnFailure = false;
+
+        public Nullable<GameSceneName> ShouldChangeSceneName = null;
     }
 }

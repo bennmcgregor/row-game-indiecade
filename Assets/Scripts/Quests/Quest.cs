@@ -34,6 +34,7 @@ namespace IndieCade
 
         public void UpdateChallengeState()
         {
+            UnityEngine.Debug.Log($"Updated Challenge to {CurrentChallenge.StateName}");
             OnChallengeUpdate?.Invoke(CurrentChallenge);
         }
     }

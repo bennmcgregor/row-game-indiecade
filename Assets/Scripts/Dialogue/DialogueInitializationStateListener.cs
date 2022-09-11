@@ -13,7 +13,6 @@ namespace IndieCade
             if (challengeInitializationData.BeginWithDialogue)
             {
                 _dialogueControl.BeginWithDialogue(
-                    challengeInitializationData.DialogueYarnProject,
                     challengeInitializationData.BeginningDialogueNodeName,
                     challengeInitializationData.OnDialogueCompleteInputState
                 );

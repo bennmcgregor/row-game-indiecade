@@ -5,26 +5,21 @@ namespace IndieCade
 {
     public class GameQuests
     {
-        private DialogueYarnProjectScriptableObject _dialogueYarnProjectScriptableObject;
-
-        public GameQuests(DialogueYarnProjectScriptableObject dialogueYarnProjectScriptableObject)
+        public QuestStateMachineContext GetQuestStateMachineContext()
         {
-            _dialogueYarnProjectScriptableObject = dialogueYarnProjectScriptableObject;
+            return new QuestStateMachineContext(QuestState.ACT_1_PRE_QUEST_1);
+        }
+
+        public QuestStateMachineContext GetTeaserQuestStateMachineContext()
+        {
+            return new QuestStateMachineContext(QuestState.TEASER);
         }
 
         public Dictionary<QuestState, QuestStateProcessor> GetQuestStateProcessors(QuestStateMachineContext context)
         {
             return new Dictionary<QuestState, QuestStateProcessor>
             {
-                // TODO: fix entry transition
                 // TODO: add other state processors
-                {
-                    QuestState.ENTRY,
-                    new QuestStateProcessor(context, QuestState.ENTRY, new Dictionary<QuestStateMachineTransition, QuestState>
-                    {
-                        { QuestStateMachineTransition.ENTRY, QuestState.ACT_1_PRE_QUEST_1 }
-                    })
-                },
                 {
                     QuestState.ACT_1_PRE_QUEST_1,
                     new QuestStateProcessor(context, QuestState.ACT_1_PRE_QUEST_1, new Dictionary<QuestStateMachineTransition, QuestState>
@@ -39,13 +34,6 @@ namespace IndieCade
         {
             return new Dictionary<QuestState, QuestStateProcessor>
             {
-                {
-                    QuestState.ENTRY,
-                    new QuestStateProcessor(context, QuestState.ENTRY, new Dictionary<QuestStateMachineTransition, QuestState>
-                    {
-                        { QuestStateMachineTransition.ENTRY, QuestState.TEASER }
-                    })
-                },
                 {
                     QuestState.TEASER,
                     new QuestStateProcessor(context, QuestState.TEASER, new Dictionary<QuestStateMachineTransition, QuestState>{})
@@ -90,6 +78,11 @@ namespace IndieCade
         {
             // Teaser
             ChallengeStateMachineFactory teaserFactory = new ChallengeStateMachineFactory();
+            teaserFactory.RegisterNewState(ChallengeConsts.TeaserTutorial,
+                new Dictionary<ChallengeStateMachineTransition, string>
+                {
+                    { ChallengeStateMachineTransition.COMPLETED, ChallengeConsts.TeaserStealWater }
+                });
             teaserFactory.RegisterNewState(ChallengeConsts.TeaserStealWater,
                 new Dictionary<ChallengeStateMachineTransition, string>
                 {
@@ -119,18 +112,28 @@ namespace IndieCade
                 new Dictionary<ChallengeStateMachineTransition, string>{}
             );
 
+            ChallengeInitializationData teaserTutorial = new ChallengeInitializationData(ChallengeConsts.TeaserTutorial);
+            teaserTutorial.StartChallengeWithDialogue("Tutorial1", PlayerControlInputState.ROWING);
+
             ChallengeInitializationData teaserStealWaterData = new ChallengeInitializationData(ChallengeConsts.TeaserStealWater);
-            teaserStealWaterData.StartChallengeWithDialogue(_dialogueYarnProjectScriptableObject.TestProject, "1A", PlayerControlInputState.ROWING);
 
             ChallengeInitializationData teaserEscapeCanalData = new ChallengeInitializationData(ChallengeConsts.TeaserEscapeCanal);
-            teaserEscapeCanalData.BackgroundMusicFilename = "gameplay_loop_music";
+            teaserEscapeCanalData.BackgroundMusicFilename = "westlake-night-chase";
+            teaserEscapeCanalData.ShouldChangeSceneName = GameSceneName.INTERROGATION_ROOM;
+            teaserEscapeCanalData.StartChallengeWithDialogue("EscapeCanalChallenge1", PlayerControlInputState.ROWING);
 
             ChallengeInitializationData teaserInterrogationData = new ChallengeInitializationData(ChallengeConsts.TeaserInterrogation);
+            teaserInterrogationData.ShouldChangeSceneName = GameSceneName.TEASER_CUTSCENE;
+            teaserInterrogationData.StartChallengeWithDialogue("InterrogationChallenge1", PlayerControlInputState.ROWING);
+
             ChallengeInitializationData teaserCutsceneData = new ChallengeInitializationData(ChallengeConsts.TeaserCutscene);
+            teaserCutsceneData.ShouldChangeSceneName = GameSceneName.DOWNSTREAM_SETTLEMENT;
+
             ChallengeInitializationData teaserStrandedOnIslandData = new ChallengeInitializationData(ChallengeConsts.TeaserStrandedOnIsland);
 
             List<ChallengeInitializationData> teaserChallenges = new List<ChallengeInitializationData>
             {
+                teaserTutorial,
                 teaserStealWaterData,
                 teaserEscapeCanalData,
                 teaserInterrogationData,
@@ -138,7 +141,7 @@ namespace IndieCade
                 teaserStrandedOnIslandData
             };
 
-            ChallengeStateMachine teaserSM = teaserFactory.Make(ChallengeConsts.TeaserStealWater, teaserChallenges);
+            ChallengeStateMachine teaserSM = teaserFactory.Make(ChallengeConsts.TeaserTutorial, teaserChallenges);
 
             QuestInitializationData teaserInitData = new QuestInitializationData(QuestState.TEASER);
             Quest teaser = new Quest(QuestState.TEASER, teaserSM, teaserInitData);

@@ -16,11 +16,8 @@ namespace IndieCade
         [Inject]
         public QuestStateMachine(GameQuests gameQuests)
         {
-            _context = new QuestStateMachineContext(QuestState.ENTRY);
-
+            _context = gameQuests.GetTeaserQuestStateMachineContext();
             _stateProcessors = gameQuests.GetTeaserQuestStateProcessors(_context);
-
-            // TODO: initialize _stateQuestMap
             _stateQuestMap = gameQuests.GetTeaserQuests();
         }
 

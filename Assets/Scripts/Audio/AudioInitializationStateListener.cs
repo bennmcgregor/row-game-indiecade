@@ -21,6 +21,11 @@ namespace IndieCade
             }
         }
 
+        protected override void SaveScene(SceneInitializationData sceneInitializationData)
+        {
+            sceneInitializationData.BackgroundMusicFilename = _audioManager.CurrentBackgroundMusic;
+        }
+
         protected override void InitializeChallenge(ChallengeInitializationData challengeInitializationData)
         {
             if (challengeInitializationData.BackgroundMusicFilename != null)

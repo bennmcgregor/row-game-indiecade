@@ -12,7 +12,7 @@ namespace IndieCade
 
         public void Process()
         {
-            if (_context.CurrentTransition == InputStateMachineTransition.ON_KEY)
+            if (_context.CurrentTransition == InputStateMachineTransition.ON_PRESS)
             {
                 _context.CurrentState = InputState.DOWN;
             }

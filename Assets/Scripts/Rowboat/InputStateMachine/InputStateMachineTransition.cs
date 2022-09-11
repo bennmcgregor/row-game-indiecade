@@ -4,7 +4,8 @@ namespace IndieCade
     public enum InputStateMachineTransition
     {
         ENTRY,
-        ON_KEY,
+        ON_PRESS,
+        ON_RELEASE,
         ON_STATE_PROCESSED
     }
 }

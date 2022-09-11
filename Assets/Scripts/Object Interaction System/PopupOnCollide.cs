@@ -5,22 +5,21 @@ using UnityEngine;
 public class PopupOnCollide : MonoBehaviour
 {
     // Text box will have text logic (i.e. press button to go to next text, make choices), this component just activates it
-    GameObject textBox;
+    [SerializeField] private GameObject _textBox;
 
     // Start is called before the first frame update
     void Start()
     {
-        textBox = transform.Find("Text Box").gameObject;
-        textBox.SetActive(false);
+        _textBox.SetActive(false);
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerEnter2D(Collider2D _)
     {
-        textBox.SetActive(true);
+        _textBox.SetActive(true);
     }
 
-    private void OnTriggerExit2D(Collider2D collision)
+    private void OnTriggerExit2D(Collider2D _)
     {
-        textBox.SetActive(false);
+        _textBox.SetActive(false);
     }
 }

@@ -12,6 +12,7 @@ namespace IndieCade
         private PlayerInputManager _playerInputManager;
         private bool _revertToPrevInputStateOnDialogueCompleted = true;
         private PlayerControlInputState _onDialogueCompletedInputState;
+        private bool _hasPlayedDialogue = false;
 
         [Inject]
         public void Initialize(PlayerInputManager playerInputManager)
@@ -30,13 +31,24 @@ namespace IndieCade
             }
         }
 
-        public void BeginWithDialogue(YarnProject yarnProject, string nodeName, PlayerControlInputState onDialogueCompletedInputState)
+        public void BeginWithDialogue(string nodeName, PlayerControlInputState onDialogueCompletedInputState)
+        {
+            StartDialogue(nodeName);
+            SetOnDialogueCompletedInputState(onDialogueCompletedInputState);
+        }
+
+        public void StartDialogue(string nodeName)
         {
             _playerInputManager.SetInputState(PlayerControlInputState.DIALOGUE);
-            _dialogueRunner.yarnProject = yarnProject;
-            _dialogueRunner.startNode = nodeName;
-            _dialogueRunner.startAutomatically = true;
-            SetOnDialogueCompletedInputState(onDialogueCompletedInputState);
+            if (_hasPlayedDialogue)
+            {
+                _dialogueRunner.StartDialogue(nodeName);
+            } else
+            {
+                _dialogueRunner.startNode = nodeName;
+                _dialogueRunner.startAutomatically = true;
+                _hasPlayedDialogue = true;
+            }
         }
 
         private void SetOnDialogueCompletedInputState(PlayerControlInputState inputState)

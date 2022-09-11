@@ -32,7 +32,6 @@ namespace IndieCade
             {
                 return;
             }
-                
 
             //If a transition is already happening, we stop it here to prevent our new Coroutine from competing
             if (musicTransition != null)

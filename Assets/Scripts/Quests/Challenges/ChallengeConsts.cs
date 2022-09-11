@@ -8,6 +8,7 @@ namespace IndieCade
         public static string Act1PreQuest1SpeakWithOdette = "SpeakWithOdette";
 
         // TODO: include tutorial?
+        public static string TeaserTutorial = "Tutorial";
         public static string TeaserStealWater = "StealWater";
         public static string TeaserEscapeCanal = "EscapeCanal";
         public static string TeaserInterrogation = "Interrogation";

@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace IndieCade
@@ -8,7 +9,7 @@ namespace IndieCade
         [SerializeField] private RowingControl _rowingControl;
         [SerializeField] private ObjectInteractionControl _objectInteractionControl;
         [SerializeField] private DialogueControl _dialogueControl;
-        [SerializeField] private PlayerControlInputState _inputState = PlayerControlInputState.WALKING_INTERACTING;
+        [SerializeField] private PlayerControlInputState _inputState = PlayerControlInputState.WALKING;
 
         private PlayerControlInputState _prevInputState;
 
@@ -21,7 +22,7 @@ namespace IndieCade
 
         public void OnMovePlayerLeft()
         {
-            if (_inputState == PlayerControlInputState.WALKING_INTERACTING)
+            if (_inputState == PlayerControlInputState.WALKING)
             {
                 _characterControl.MoveLeft();
             }
@@ -29,7 +30,7 @@ namespace IndieCade
 
         public void OnMovePlayerRight()
         {
-            if (_inputState == PlayerControlInputState.WALKING_INTERACTING)
+            if (_inputState == PlayerControlInputState.WALKING)
             {
                 _characterControl.MoveRight();
             }
@@ -37,7 +38,7 @@ namespace IndieCade
 
         public void OnMovePlayerUp()
         {
-            if (_inputState == PlayerControlInputState.WALKING_INTERACTING)
+            if (_inputState == PlayerControlInputState.WALKING)
             {
                 _characterControl.MoveUp();
             }
@@ -45,7 +46,7 @@ namespace IndieCade
 
         public void OnMovePlayerDown()
         {
-            if (_inputState == PlayerControlInputState.WALKING_INTERACTING)
+            if (_inputState == PlayerControlInputState.WALKING)
             {
                 _characterControl.MoveDown();
             }
@@ -53,63 +54,65 @@ namespace IndieCade
 
         public void OnRowingUp()
         {
-            if (_inputState == PlayerControlInputState.ROWING)
-            {
+            //if (_inputState == PlayerControlInputState.ROWING)
+            //{
                 _rowingControl.RowUp();
-            }
+            //}
         }
 
         public void OnRowingDown()
         {
-            if (_inputState == PlayerControlInputState.ROWING)
-            {
+            //if (_inputState == PlayerControlInputState.ROWING)
+            //{
                 _rowingControl.RowDown();
-            }
+            //}
         }
 
         public void OnRowingLeft()
         {
-            if (_inputState == PlayerControlInputState.ROWING)
-            {
+            //if (_inputState == PlayerControlInputState.ROWING)
+            //{
                 _rowingControl.RowLeft();
-            }
+            //}
         }
 
         public void OnRowingRight()
         {
-            if (_inputState == PlayerControlInputState.ROWING)
-            {
+            //if (_inputState == PlayerControlInputState.ROWING)
+            //{
                 _rowingControl.RowRight();
-            }
+            //}
         }
 
         public void OnRowingShift()
         {
-            if (_inputState == PlayerControlInputState.ROWING)
-            {
+            //if (_inputState == PlayerControlInputState.ROWING)
+            //{
                 _rowingControl.RowShift();
-            }
+            //}
         }
 
         public void OnInteract()
         {
-            if (_inputState == PlayerControlInputState.WALKING_INTERACTING)
-            {
-                _objectInteractionControl.Interact();
-            }
+            _objectInteractionControl.Interact();
         }
 
         public void SetInputState(PlayerControlInputState inputState)
         {
             _prevInputState = _inputState;
             _inputState = inputState;
+            if (inputState == PlayerControlInputState.ROWING)
+            {
+                _rowingControl.Enable();
+            } else
+            {
+                _rowingControl.Disable();
+            }
         }
 
         public void RevertToPrevInputState()
         {
-            PlayerControlInputState prev = _inputState;
-            _inputState = _prevInputState;
-            _prevInputState = prev;
+            SetInputState(_prevInputState);
         }
     }
 
