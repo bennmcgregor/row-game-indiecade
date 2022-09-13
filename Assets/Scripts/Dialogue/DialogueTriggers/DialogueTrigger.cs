@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 using Zenject;
 
 namespace IndieCade
@@ -15,10 +15,20 @@ namespace IndieCade
             _dialogueControl = dialogueControl;
         }
 
-        private void OnTriggerEnter2D(Collider2D _)
+        protected void StartDialogueAndDestroyTrigger()
+        {
+            StartDialogue();
+            Destroy(gameObject);
+        }
+
+        protected void StartDialogue()
         {
             _dialogueControl.StartDialogue(_nodeName);
-            Destroy(gameObject);
+        }
+
+        protected void StopDialogue()
+        {
+            _dialogueControl.StopDialogue();
         }
     }
 }

@@ -17,7 +17,7 @@ namespace IndieCade
             interrogationRoomData.BackgroundMusicFilename = "westlake-interrogation";
 
             SceneInitializationData teaserCutsceneData = new SceneInitializationData(GameSceneName.TEASER_CUTSCENE);
-            teaserCutsceneData.BackgroundMusicFilename = "gameplay_loop_music_2";
+            teaserCutsceneData.BackgroundMusicFilename = "silence";
 
             SceneInitializationData downstreamSettlementData = new SceneInitializationData(GameSceneName.DOWNSTREAM_SETTLEMENT);
             downstreamSettlementData.BackgroundMusicFilename = "downstream-settlement-day";

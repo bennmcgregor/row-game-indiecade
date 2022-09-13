@@ -4,9 +4,9 @@ using Zenject;
 
 namespace IndieCade
 {
-    public class StealthRunner : MonoBehaviour, IToggleable
+    public class StealthRunner : MonoBehaviour, IActivateable
     {
-        public Action OnCaughtInSpotlight;
+        public Action OnLivesUpdated;
         public Action OnFailedStealthRun;
 
         [SerializeField] private int _catchesBeforeFailure = 3;
@@ -18,9 +18,12 @@ namespace IndieCade
 
         private void Awake()
         {
-            _catchCount = _catchesBeforeFailure;
-
             OnFailedStealthRun += FailChallenge;
+        }
+
+        private void Start()
+        {
+            UpdateCatchCount(_catchesBeforeFailure);
         }
 
         [Inject]
@@ -31,8 +34,7 @@ namespace IndieCade
 
         public void CaughtInSpotlight()
         {
-            _catchCount--;
-            OnCaughtInSpotlight?.Invoke();
+            UpdateCatchCount(_catchCount - 1);
 
             if (_catchCount == 0)
             {
@@ -44,6 +46,7 @@ namespace IndieCade
         {
             // TODO: freeze rowboat inputs for a time duration (before failing the quest)
             _questRunner.CurrentQuest.FailCurrentChallenge();
+            UpdateCatchCount(_catchesBeforeFailure);
         }
 
         public void Activate()
@@ -54,6 +57,17 @@ namespace IndieCade
         public void Deactivate()
         {
             gameObject.SetActive(false);
+        }
+
+        public void ResetCatchCount()
+        {
+            UpdateCatchCount(_catchesBeforeFailure);
+        }
+
+        private void UpdateCatchCount(int catchCount)
+        {
+            _catchCount = catchCount;
+            OnLivesUpdated?.Invoke();
         }
     }
 }

@@ -15,7 +15,6 @@ namespace IndieCade
         }
 
         private bool _beginWithDialogue = false;
-        private YarnProject _dialogueYarnProject;
         private string _beginningDialogueNodeName;
         private PlayerControlInputState _onDialogueCompleteInputState;
 
@@ -36,6 +35,24 @@ namespace IndieCade
 
         public bool RestartSceneOnFailure = false;
 
-        public Nullable<GameSceneName> ShouldChangeSceneName = null;
+        private bool _shouldChangeSceneOnFailure = false;
+        private bool _shouldChangeSceneOnComplete = false;
+        private GameSceneName _sceneChangeName;
+
+        public bool ShouldChangeSceneOnFailure => _shouldChangeSceneOnFailure;
+        public bool ShouldChangeSceneOnComplete => _shouldChangeSceneOnComplete;
+        public GameSceneName SceneChangeName => _sceneChangeName;
+
+        public void ChangeSceneOnChallengeFailure(GameSceneName sceneChangeName)
+        {
+            _sceneChangeName = sceneChangeName;
+            _shouldChangeSceneOnFailure = true;
+        }
+
+        public void ChangeSceneOnChallengeComplete(GameSceneName sceneChangeName)
+        {
+            _sceneChangeName = sceneChangeName;
+            _shouldChangeSceneOnComplete = true;
+        }
     }
 }

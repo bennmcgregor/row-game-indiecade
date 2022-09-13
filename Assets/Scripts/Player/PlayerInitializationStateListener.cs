@@ -4,7 +4,7 @@ using Zenject;
 
 namespace IndieCade
 {
-    public class PlayerInitializationStateListener : GameInitializationStateListener
+    public class PlayerInitializationStateListener : GameStateListener
     {
         private GameObject _playerGameObject;
 
@@ -24,7 +24,7 @@ namespace IndieCade
             }
         }
 
-        protected override void SaveScene(SceneInitializationData sceneInitializationData)
+        protected override void SaveSceneOnChallengeUpdated(SceneInitializationData sceneInitializationData)
         {
             sceneInitializationData.PlayerSpawnPosition = _playerGameObject.transform.position;
             sceneInitializationData.PlayerSpawnRotation = _playerGameObject.transform.rotation;

@@ -19,8 +19,7 @@ namespace IndieCade
 
         private void Awake()
         {
-            _stealthRunner.OnCaughtInSpotlight += UpdateLives;
-            UpdateLives();
+            _stealthRunner.OnLivesUpdated += UpdateLives;
         }
 
         private void UpdateLives()

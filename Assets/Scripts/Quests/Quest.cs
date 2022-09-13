@@ -3,7 +3,9 @@ namespace IndieCade
 {
     public class Quest
     {
-        public Action<ChallengeInitializationData> OnChallengeUpdate;
+        public Action<ChallengeInitializationData> OnChallengeUpdated;
+        public Action OnChallengeFailed;
+        public Action OnChallengeCompleted;
 
         private QuestState _questState;
         private ChallengeStateMachine _challengeStateMachine;
@@ -24,18 +26,20 @@ namespace IndieCade
 
         public void CompleteCurrentChallenge()
         {
+            OnChallengeCompleted?.Invoke();
             _challengeStateMachine.Transition(ChallengeStateMachineTransition.COMPLETED);
         }
 
         public void FailCurrentChallenge()
         {
+            OnChallengeFailed?.Invoke();
             _challengeStateMachine.Transition(ChallengeStateMachineTransition.FAILED);
         }
 
         public void UpdateChallengeState()
         {
             UnityEngine.Debug.Log($"Updated Challenge to {CurrentChallenge.StateName}");
-            OnChallengeUpdate?.Invoke(CurrentChallenge);
+            OnChallengeUpdated?.Invoke(CurrentChallenge);
         }
     }
 }

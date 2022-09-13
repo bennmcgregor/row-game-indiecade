@@ -5,7 +5,7 @@ using Zenject;
 
 namespace IndieCade
 {
-    public class GameInitializationStateListener : MonoBehaviour
+    public class GameStateListener : MonoBehaviour
     {
         protected SceneInitializationDataIndex _sceneInitializationDataIndex;
         protected QuestRunner _questRunner;
@@ -23,7 +23,9 @@ namespace IndieCade
         private void Awake()
         {
             _questRunner.OnQuestUpdate += OnQuestUpdate;
-            _questRunner.CurrentQuest.OnChallengeUpdate += OnChallengeUpdate;
+            _questRunner.CurrentQuest.OnChallengeUpdated += OnChallengeUpdated;
+            _questRunner.CurrentQuest.OnChallengeFailed += OnChallengeFailed;
+            _questRunner.CurrentQuest.OnChallengeCompleted += OnChallengeCompleted;
 
             _playedQuests = new List<QuestState>();
             _playedChallenges = new List<string>();
@@ -41,7 +43,7 @@ namespace IndieCade
         private void OnSceneEnter()
         {
             InitializeScene(_sceneInitializationDataIndex.GetDataFromCurrentScene());
-            SaveScene(_sceneInitializationDataIndex.GetDataFromCurrentScene());
+            SaveSceneOnSceneEnter(_sceneInitializationDataIndex.GetDataFromCurrentScene());
             InitializeQuest(_questRunner.CurrentQuest.QuestInitializationData);
             InitializeChallenge(_questRunner.CurrentQuest.CurrentChallenge);
         }
@@ -56,14 +58,14 @@ namespace IndieCade
                 _playedQuests.Add(newQuest.QuestState);
             }
 
-            SaveScene(_sceneInitializationDataIndex.GetDataFromCurrentScene());
+            SaveSceneOnQuestUpdated(_sceneInitializationDataIndex.GetDataFromCurrentScene());
             InitializeQuest(newQuest.QuestInitializationData);
             InitializeChallenge(newQuest.CurrentChallenge);
 
-            newQuest.OnChallengeUpdate += OnChallengeUpdate;
+            newQuest.OnChallengeUpdated += OnChallengeUpdated;
         }
 
-        private void OnChallengeUpdate(ChallengeInitializationData newChallengeData)
+        private void OnChallengeUpdated(ChallengeInitializationData newChallengeData)
         {
             if (_playedChallenges.Contains(newChallengeData.StateName))
             {
@@ -74,15 +76,19 @@ namespace IndieCade
                 _playedChallenges.Add(newChallengeData.StateName);
             }
 
-            SaveScene(_sceneInitializationDataIndex.GetDataFromCurrentScene());
+            SaveSceneOnChallengeUpdated(_sceneInitializationDataIndex.GetDataFromCurrentScene());
             InitializeChallenge(newChallengeData);
 
-            _questRunner.CurrentQuest.OnChallengeUpdate += OnChallengeUpdate;
+            _questRunner.CurrentQuest.OnChallengeUpdated += OnChallengeUpdated;
         }
 
-        protected virtual void SaveScene(SceneInitializationData sceneInitializationData) { }
+        protected virtual void SaveSceneOnSceneEnter(SceneInitializationData sceneInitializationData) { }
+        protected virtual void SaveSceneOnQuestUpdated(SceneInitializationData sceneInitializationData) { }
+        protected virtual void SaveSceneOnChallengeUpdated(SceneInitializationData sceneInitializationData) { }
         protected virtual void InitializeScene(SceneInitializationData sceneInitializationData) { }
         protected virtual void InitializeQuest(QuestInitializationData questInitializationData) { }
         protected virtual void InitializeChallenge(ChallengeInitializationData challengeInitializationData) { }
+        protected virtual void OnChallengeCompleted() { }
+        protected virtual void OnChallengeFailed() { }
     }
 }

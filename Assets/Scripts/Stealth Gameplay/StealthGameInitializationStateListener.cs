@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace IndieCade
 {
-    public class StealthGameInitializationStateListener : GameInitializationStateListener
+    public class StealthGameInitializationStateListener : GameStateListener
     {
         [SerializeField] private StealthRunnerUI _stealthRunnerUI;
         [SerializeField] private StealthRunner _stealthRunner;
@@ -13,6 +13,7 @@ namespace IndieCade
             if (challengeInitializationData.HasStealthGameplay)
             {
                 _stealthRunner.Activate();
+                _stealthRunner.ResetCatchCount();
                 _stealthRunnerUI.Activate();
             }
             else

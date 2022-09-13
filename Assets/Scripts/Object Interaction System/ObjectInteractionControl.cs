@@ -6,19 +6,14 @@ namespace IndieCade
 {
     public class ObjectInteractionControl : MonoBehaviour
     {
+        public Action<PlayerControlInputState> OnPlayerControlInputStateUpdated;
+        public Action OnPlayerControlInputStateReverted;
         public Action OnStartInteraction;
         public Action OnEndInteraction;
 
         private PressReleaseStateMachine _pressReleaseStateMachine;
-        private PlayerInputManager _playerInputManager;
 
         public bool HoldingInteractKey => _pressReleaseStateMachine.CurrentState == PressReleaseState.HOLD;
-
-        [Inject]
-        public void Initialize(PlayerInputManager playerInputManager)
-        {
-            _playerInputManager = playerInputManager;
-        }
 
         private void Start()
         {
@@ -41,12 +36,12 @@ namespace IndieCade
         // TODO: Turn the player input state into a state machine and issue transitions instead of just setting values
         public void UpdateInputState(PlayerControlInputState playerControlInputState)
         {
-            _playerInputManager.SetInputState(playerControlInputState);
+            OnPlayerControlInputStateUpdated?.Invoke(playerControlInputState);
         }
 
         public void RevertInputState()
         {
-            _playerInputManager.RevertToPrevInputState();
+            OnPlayerControlInputStateReverted?.Invoke();
         }
     }
 }

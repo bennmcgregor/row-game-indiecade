@@ -18,6 +18,18 @@ namespace IndieCade
         private void Awake()
         {
             _prevInputState = _inputState;
+
+            if (_objectInteractionControl != null)
+            {
+                _objectInteractionControl.OnPlayerControlInputStateUpdated += SetInputState;
+                _objectInteractionControl.OnPlayerControlInputStateReverted += RevertToPrevInputState;
+            }
+
+            if (_dialogueControl != null)
+            {
+                _dialogueControl.OnPlayerControlInputStateUpdated += SetInputState;
+                _dialogueControl.OnPlayerControlInputStateReverted += RevertToPrevInputState;
+            }
         }
 
         public void OnMovePlayerLeft()
@@ -54,47 +66,50 @@ namespace IndieCade
 
         public void OnRowingUp()
         {
-            //if (_inputState == PlayerControlInputState.ROWING)
-            //{
+            if (_rowingControl != null)
+            {
                 _rowingControl.RowUp();
-            //}
+            }
         }
 
         public void OnRowingDown()
         {
-            //if (_inputState == PlayerControlInputState.ROWING)
-            //{
+            if (_rowingControl != null)
+            {
                 _rowingControl.RowDown();
-            //}
+            }
         }
 
         public void OnRowingLeft()
         {
-            //if (_inputState == PlayerControlInputState.ROWING)
-            //{
+            if (_rowingControl != null)
+            {
                 _rowingControl.RowLeft();
-            //}
+            }
         }
 
         public void OnRowingRight()
         {
-            //if (_inputState == PlayerControlInputState.ROWING)
-            //{
+            if (_rowingControl != null)
+            {
                 _rowingControl.RowRight();
-            //}
+            }
         }
 
         public void OnRowingShift()
         {
-            //if (_inputState == PlayerControlInputState.ROWING)
-            //{
+            if (_rowingControl != null)
+            {
                 _rowingControl.RowShift();
-            //}
+            }
         }
 
         public void OnInteract()
         {
-            _objectInteractionControl.Interact();
+            if (_inputState != PlayerControlInputState.DIALOGUE)
+            {
+                _objectInteractionControl.Interact();
+            }
         }
 
         public void SetInputState(PlayerControlInputState inputState)
@@ -103,10 +118,16 @@ namespace IndieCade
             _inputState = inputState;
             if (inputState == PlayerControlInputState.ROWING)
             {
-                _rowingControl.Enable();
+                if (_rowingControl != null)
+                {
+                    _rowingControl.Enable();
+                }
             } else
             {
-                _rowingControl.Disable();
+                if (_rowingControl != null)
+                {
+                    _rowingControl.Disable();
+                }
             }
         }
 

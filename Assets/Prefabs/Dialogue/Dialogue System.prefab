@@ -124,6 +124,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _dialogueRunner: {fileID: 3679829594546220704}
+  _lineView: {fileID: 6574482590417793404}
 --- !u!1 &4449220549958951625
 GameObject:
   m_ObjectHideFlags: 0

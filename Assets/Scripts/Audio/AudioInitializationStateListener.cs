@@ -3,7 +3,7 @@ using Zenject;
 
 namespace IndieCade
 {
-    public class AudioInitializationStateListener : GameInitializationStateListener
+    public class AudioInitializationStateListener : GameStateListener
     {
         private AudioManager _audioManager;
 
@@ -19,11 +19,6 @@ namespace IndieCade
             {
                 _audioManager.ChangeBackgroundMusic(sceneInitializationData.BackgroundMusicFilename);
             }
-        }
-
-        protected override void SaveScene(SceneInitializationData sceneInitializationData)
-        {
-            sceneInitializationData.BackgroundMusicFilename = _audioManager.CurrentBackgroundMusic;
         }
 
         protected override void InitializeChallenge(ChallengeInitializationData challengeInitializationData)

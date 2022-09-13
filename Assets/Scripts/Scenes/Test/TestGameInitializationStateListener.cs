@@ -2,14 +2,14 @@
 
 namespace IndieCade
 {
-    public class TestGameInitializationStateListener : GameInitializationStateListener
+    public class TestGameInitializationStateListener : GameStateListener
     {
         protected override void InitializeScene(SceneInitializationData sceneInitializationData)
         {
             UnityEngine.Debug.Log($"InitializeScene {sceneInitializationData.SceneName}");
         }
 
-        protected override void SaveScene(SceneInitializationData sceneInitializationData)
+        protected override void SaveSceneOnChallengeUpdated(SceneInitializationData sceneInitializationData)
         {
             UnityEngine.Debug.Log($"SaveScene {sceneInitializationData.SceneName}");
         }

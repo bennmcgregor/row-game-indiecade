@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace IndieCade
 {
-    public class StealthRunnerUI : MonoBehaviour, IToggleable
+    public class StealthRunnerUI : MonoBehaviour, IActivateable
     {
         public void Activate()
         {

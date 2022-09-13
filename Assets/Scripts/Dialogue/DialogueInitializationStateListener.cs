@@ -4,7 +4,7 @@ using Zenject;
 
 namespace IndieCade
 {
-    public class DialogueInitializationStateListener : GameInitializationStateListener
+    public class DialogueInitializationStateListener : GameStateListener
     {
         [SerializeField] private DialogueControl _dialogueControl;
 

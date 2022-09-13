@@ -116,18 +116,20 @@ namespace IndieCade
             teaserTutorial.StartChallengeWithDialogue("Tutorial1", PlayerControlInputState.ROWING);
 
             ChallengeInitializationData teaserStealWaterData = new ChallengeInitializationData(ChallengeConsts.TeaserStealWater);
+            teaserStealWaterData.HasStealthGameplay = true;
 
             ChallengeInitializationData teaserEscapeCanalData = new ChallengeInitializationData(ChallengeConsts.TeaserEscapeCanal);
+            teaserEscapeCanalData.HasStealthGameplay = true;
             teaserEscapeCanalData.BackgroundMusicFilename = "westlake-night-chase";
-            teaserEscapeCanalData.ShouldChangeSceneName = GameSceneName.INTERROGATION_ROOM;
+            teaserEscapeCanalData.ChangeSceneOnChallengeFailure(GameSceneName.INTERROGATION_ROOM);
             teaserEscapeCanalData.StartChallengeWithDialogue("EscapeCanalChallenge1", PlayerControlInputState.ROWING);
 
             ChallengeInitializationData teaserInterrogationData = new ChallengeInitializationData(ChallengeConsts.TeaserInterrogation);
-            teaserInterrogationData.ShouldChangeSceneName = GameSceneName.TEASER_CUTSCENE;
+            teaserInterrogationData.ChangeSceneOnChallengeComplete(GameSceneName.TEASER_CUTSCENE);
             teaserInterrogationData.StartChallengeWithDialogue("InterrogationChallenge1", PlayerControlInputState.ROWING);
 
             ChallengeInitializationData teaserCutsceneData = new ChallengeInitializationData(ChallengeConsts.TeaserCutscene);
-            teaserCutsceneData.ShouldChangeSceneName = GameSceneName.DOWNSTREAM_SETTLEMENT;
+            teaserCutsceneData.ChangeSceneOnChallengeComplete(GameSceneName.DOWNSTREAM_SETTLEMENT);
 
             ChallengeInitializationData teaserStrandedOnIslandData = new ChallengeInitializationData(ChallengeConsts.TeaserStrandedOnIsland);
 

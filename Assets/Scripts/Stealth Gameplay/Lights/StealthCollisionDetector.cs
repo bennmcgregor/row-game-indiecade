@@ -5,27 +5,24 @@ using Zenject;
 
 namespace IndieCade
 {
-    public class Spotlight : MonoBehaviour
+    public class StealthCollisionDetector : MonoBehaviour
     {
+        public Action OnCaught;
+
         [SerializeField] private float _inSpotlightDelayTimeSeconds = 0.2f;
-        [SerializeField] private float _rechargeAfterCollisionTimeSeconds = 0.5f;
 
         private GameObject _player;
-        private StealthRunner _stealthRunner;
-
         private Coroutine _collisionCoroutine;
-        private bool _recharging = false;
 
         [Inject]
-        public void Initialize(GameObject player, StealthRunner stealthRunner)
+        public void Initialize(GameObject player)
         {
             _player = player;
-            _stealthRunner = stealthRunner;
         }
 
         private void OnTriggerEnter2D(Collider2D other)
         {
-            if (other.gameObject.name == _player.name && !_recharging)
+            if (other.gameObject.name == _player.name)
             {
                 _collisionCoroutine = StartCoroutine(ProcessCollision());
             }
@@ -43,15 +40,7 @@ namespace IndieCade
         private IEnumerator ProcessCollision()
         {
             yield return new WaitForSeconds(_inSpotlightDelayTimeSeconds);
-            _stealthRunner.CaughtInSpotlight();
-            StartCoroutine(RechargeAfterCollision());
-        }
-
-        private IEnumerator RechargeAfterCollision()
-        {
-            _recharging = true;
-            yield return new WaitForSeconds(_rechargeAfterCollisionTimeSeconds);
-            _recharging = false;
+            OnCaught?.Invoke();
         }
     }
 }
