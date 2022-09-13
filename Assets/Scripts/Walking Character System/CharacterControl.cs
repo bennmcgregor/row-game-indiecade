@@ -41,11 +41,6 @@ namespace IndieCade
             _stateMachine.DownAction();
         }
 
-        public void SpawnAtPosition(PlayerSpawnPoint playerSpawnPoint)
-        {
-            playerSpawnPoint.SetPlayerPositionAndRotation(transform);
-        }
-
         private void FixedUpdate()
         {
             Vector3 newPos = transform.position;

@@ -6,13 +6,9 @@ namespace IndieCade
 {
     public class QuestInstaller : MonoInstaller
     {
-        [SerializeField] private DialogueYarnProjectScriptableObject _dialogueYarnProjectScriptableObject;
-
         public override void InstallBindings()
         {
-            GameQuests gameQuests = new GameQuests(_dialogueYarnProjectScriptableObject);
-
-            Container.BindInstance(gameQuests).AsSingle();
+            Container.Bind<GameQuests>().FromNew().AsSingle();
             Container.Bind<QuestRunner>().FromNewComponentOnNewGameObject().AsSingle();
             Container.Bind<QuestStateMachine>().FromNew().AsSingle();
         }

@@ -11,16 +11,16 @@ namespace IndieCade
 
             // TODO: change to appropriate soundtrack
             SceneInitializationData reservoirFinalCanalData = new SceneInitializationData(GameSceneName.RESERVOIR_FINAL_CANAL);
-            reservoirFinalCanalData.BackgroundMusicFilename = "gameplay_loop_music_2";
+            reservoirFinalCanalData.BackgroundMusicFilename = "westlake-night";
 
             SceneInitializationData interrogationRoomData = new SceneInitializationData(GameSceneName.INTERROGATION_ROOM);
-            interrogationRoomData.BackgroundMusicFilename = "gameplay_loop_music_2";
+            interrogationRoomData.BackgroundMusicFilename = "westlake-interrogation";
 
             SceneInitializationData teaserCutsceneData = new SceneInitializationData(GameSceneName.TEASER_CUTSCENE);
-            teaserCutsceneData.BackgroundMusicFilename = "gameplay_loop_music_2";
+            teaserCutsceneData.BackgroundMusicFilename = "silence";
 
             SceneInitializationData downstreamSettlementData = new SceneInitializationData(GameSceneName.DOWNSTREAM_SETTLEMENT);
-            downstreamSettlementData.BackgroundMusicFilename = "gameplay_loop_music_2";
+            downstreamSettlementData.BackgroundMusicFilename = "downstream-settlement-day";
 
             List<SceneInitializationData> sceneData = new List<SceneInitializationData>
             {

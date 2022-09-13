@@ -7,7 +7,6 @@ namespace IndieCade
 {
     public class AudioManager : MonoBehaviour
     {
-
         // Volume settings
         private float _backgroundMusicVolume = 1f;
         private float _soundFXVolume = 1f;
@@ -49,8 +48,13 @@ namespace IndieCade
         private Dictionary<string, AudioClip> _soundFX;
 
         // Audio players
-        public BackgroundMusicPlayer _backgroundMusicPlayer;
-        public AudioSource _soundFXPlayer;
+        private BackgroundMusicPlayer _backgroundMusicPlayer;
+        private AudioSource _soundFXPlayer;
+
+        // Save data
+        private string _currentBackgroundMusic;
+
+        public string CurrentBackgroundMusic => _currentBackgroundMusic;
 
         // Start is called before the first frame update
         void Start()
@@ -69,6 +73,7 @@ namespace IndieCade
         // Public methods
         public void ChangeBackgroundMusic(string musicKey)
         {
+            _currentBackgroundMusic = musicKey;
             _backgroundMusicPlayer.newSoundtrack(_backgroundMusics[musicKey]);
         }
 

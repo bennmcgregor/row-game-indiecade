@@ -1,12 +1,23 @@
 using UnityEngine;
+using Zenject;
 
 namespace IndieCade
 {
-    public class ButtonSceneChangeEffector : WorldMapSceneChangeEffector
+    public class ButtonSceneChangeEffector : MonoBehaviour
     {
+        [SerializeField] private GameSceneName _sceneName;
+
+        private WorldMapSceneChangeEffector _sceneChangeEffector;
+
+        [Inject]
+        public void Initialize(WorldMapSceneChangeEffector worldMapSceneChangeEffector)
+        {
+            _sceneChangeEffector = worldMapSceneChangeEffector;
+        }
+
         public void OnClick()
         {
-            ActivateScene();
+            _sceneChangeEffector.ActivateScene(_sceneName);
         }
     }
 }

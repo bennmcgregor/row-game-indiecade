@@ -4,7 +4,9 @@ namespace IndieCade
     public enum PlayerControlInputState
     {
         ROWING,
-        WALKING_INTERACTING,
-        DIALOGUE
+        WALKING,
+        DIALOGUE,
+        INTERACTING,
+        NONE
     }
 }

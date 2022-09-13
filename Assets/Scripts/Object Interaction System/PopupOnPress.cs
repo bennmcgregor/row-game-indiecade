@@ -23,7 +23,7 @@ public class PopupOnPress : MonoBehaviour
         textBox = transform.Find("Text Box").gameObject;
         textBox.SetActive(false);
 
-        objectInteractionControl = GetComponent<ObjectInteractable>().objectInteractionControl;
+        objectInteractionControl = GetComponent<ObjectInteractable>().ObjectInteractionControl;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -48,7 +48,7 @@ public class PopupOnPress : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (objectInteractionControl.interacting && colliding)
+        if (objectInteractionControl.HoldingInteractKey && colliding)
         {
             pressButtonToInteract.SetActive(false);
             textBox.SetActive(true);

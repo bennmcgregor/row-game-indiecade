@@ -1,21 +1,33 @@
 ﻿using System;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using Zenject;
 
 namespace IndieCade
 {
-    public class PlayerInitializationStateListener : GameInitializationStateListener
+    public class PlayerInitializationStateListener : GameStateListener
     {
-        [SerializeField] private CharacterControl _characterControl;
+        private GameObject _playerGameObject;
+
+        [Inject]
+        public void Initialize(GameObject player)
+        {
+            _playerGameObject = player;
+        }
 
         protected override void InitializeScene(SceneInitializationData sceneInitializationData)
         {
-            PlayerSpawnPoint playerSpawnPoint = sceneInitializationData.PlayerSpawnPoint;
-            if (playerSpawnPoint != null)
+            if (sceneInitializationData.PlayerSpawnPosition != null && sceneInitializationData.PlayerSpawnRotation != null)
             {
-                _characterControl.SpawnAtPosition(playerSpawnPoint);
+                Vector3 playerSpawnPosition = (Vector3) sceneInitializationData.PlayerSpawnPosition;
+                Quaternion playerSpawnRotation = (Quaternion) sceneInitializationData.PlayerSpawnRotation;
+                _playerGameObject.transform.SetPositionAndRotation(playerSpawnPosition, playerSpawnRotation);
             }
+        }
+
+        protected override void SaveSceneOnChallengeUpdated(SceneInitializationData sceneInitializationData)
+        {
+            sceneInitializationData.PlayerSpawnPosition = _playerGameObject.transform.position;
+            sceneInitializationData.PlayerSpawnRotation = _playerGameObject.transform.rotation;
         }
     }
 }

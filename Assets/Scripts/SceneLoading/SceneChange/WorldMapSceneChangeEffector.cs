@@ -1,31 +1,25 @@
 using UnityEngine;
 using Zenject;
-using UnityEngine.SceneManagement;
 
 namespace IndieCade
 {
     public class WorldMapSceneChangeEffector : MonoBehaviour
     {
-        [SerializeField] private GameSceneName _sceneName;
-        [SerializeField] private PlayerSpawnPoint _newPlayerSpawnPoint = null;
-
         private WorldMapSceneLoader _sceneLoader;
-        private SceneInitializationDataIndex _sceneInitializationDataIndex;
         private GameSceneState _gameSceneState;
 
         [Inject]
-        public void Initialize(WorldMapSceneLoader sceneLoader, SceneInitializationDataIndex sceneInitializationDataIndex, GameSceneState gameSceneState)
+        public void Initialize(WorldMapSceneLoader sceneLoader, GameSceneState gameSceneState)
         {
             _sceneLoader = sceneLoader;
-            _sceneInitializationDataIndex = sceneInitializationDataIndex;
             _gameSceneState = gameSceneState;
         }
 
-        protected void ActivateScene()
+        public void ActivateScene(GameSceneName sceneName)
         {
-            _gameSceneState.UpdateCurrentScene(_sceneName);
-            _sceneInitializationDataIndex.GetData(_sceneName).PlayerSpawnPoint = _newPlayerSpawnPoint;
-            _sceneLoader.ActivateScene(_sceneName);
+            _gameSceneState.UpdateCurrentScene(sceneName);
+            // TODO: add OnSceneExit invocation
+            _sceneLoader.ActivateScene(sceneName);
         }
     }
 }

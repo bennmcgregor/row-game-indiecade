@@ -3,7 +3,6 @@ namespace IndieCade
 {
     public enum QuestState
     {
-        ENTRY,
         INTRODUCTION,
         ACT_1_PRE_QUEST_1,
         ACT_1_QUEST_1,

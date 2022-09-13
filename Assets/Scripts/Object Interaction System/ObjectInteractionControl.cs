@@ -6,18 +6,42 @@ namespace IndieCade
 {
     public class ObjectInteractionControl : MonoBehaviour
     {
-        public bool interacting;
+        public Action<PlayerControlInputState> OnPlayerControlInputStateUpdated;
+        public Action OnPlayerControlInputStateReverted;
+        public Action OnStartInteraction;
+        public Action OnEndInteraction;
 
-        public void Start()
+        private PressReleaseStateMachine _pressReleaseStateMachine;
+
+        public bool HoldingInteractKey => _pressReleaseStateMachine.CurrentState == PressReleaseState.HOLD;
+
+        private void Start()
         {
-            interacting = false;
+            _pressReleaseStateMachine = new PressReleaseStateMachine();
         }
 
         public void Interact()
         {
-            interacting = !interacting;
+            _pressReleaseStateMachine.Transition(PressReleaseStateMachineTransition.ON_KEY);
+
+            if (HoldingInteractKey)
+            {
+                OnStartInteraction?.Invoke();
+            } else
+            {
+                OnEndInteraction?.Invoke();
+            }
         }
 
-        // TODO: Add code for switching PlayerControlInputState of PlayerInputManager depending on interaction
+        // TODO: Turn the player input state into a state machine and issue transitions instead of just setting values
+        public void UpdateInputState(PlayerControlInputState playerControlInputState)
+        {
+            OnPlayerControlInputStateUpdated?.Invoke(playerControlInputState);
+        }
+
+        public void RevertInputState()
+        {
+            OnPlayerControlInputStateReverted?.Invoke();
+        }
     }
 }

@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 6986955186894464976}
   - component: {fileID: 6986955186894464977}
   - component: {fileID: 6986955186894464978}
+  - component: {fileID: 1387848009401672197}
   m_Layer: 0
   m_Name: PlayerControl
   m_TagString: Untagged
@@ -48,6 +49,7 @@ MonoBehaviour:
   _characterControl: {fileID: 0}
   _rowingControl: {fileID: 0}
   _objectInteractionControl: {fileID: 0}
+  _dialogueControl: {fileID: 0}
   _inputState: 1
 --- !u!114 &6986955186894464978
 MonoBehaviour:
@@ -80,3 +82,15 @@ MonoBehaviour:
   m_DefaultActionMap: IndieCade
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
+--- !u!114 &1387848009401672197
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6986955186894464979}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d2a60ca1954f34a88bacba38abab783d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

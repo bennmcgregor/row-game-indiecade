@@ -65,7 +65,7 @@ AnimatorStateTransition:
   m_Conditions:
   - m_ConditionMode: 3
     m_ConditionEvent: CharacterYVelocity
-    m_EventTreshold: 0.05
+    m_EventTreshold: 0.5
   - m_ConditionMode: 2
     m_ConditionEvent: IsMovingX
     m_EventTreshold: -0.05
@@ -93,7 +93,7 @@ AnimatorStateTransition:
   m_Conditions:
   - m_ConditionMode: 4
     m_ConditionEvent: CharacterXVelocity
-    m_EventTreshold: -0.05
+    m_EventTreshold: -0.5
   - m_ConditionMode: 2
     m_ConditionEvent: IsMovingY
     m_EventTreshold: 0.05
@@ -175,7 +175,7 @@ AnimatorStateTransition:
   m_Conditions:
   - m_ConditionMode: 4
     m_ConditionEvent: CharacterYVelocity
-    m_EventTreshold: -0.05
+    m_EventTreshold: -0.5
   - m_ConditionMode: 2
     m_ConditionEvent: IsMovingX
     m_EventTreshold: -0.05
@@ -203,7 +203,7 @@ AnimatorStateTransition:
   m_Conditions:
   - m_ConditionMode: 3
     m_ConditionEvent: CharacterXVelocity
-    m_EventTreshold: 0.05
+    m_EventTreshold: 0.5
   - m_ConditionMode: 2
     m_ConditionEvent: IsMovingY
     m_EventTreshold: 0.05
@@ -235,25 +235,25 @@ AnimatorController:
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: CharacterYVelocity
     m_Type: 1
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: IsMovingX
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: IsMovingY
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   m_AnimatorLayers:
   - serializedVersion: 5
     m_Name: Base Layer

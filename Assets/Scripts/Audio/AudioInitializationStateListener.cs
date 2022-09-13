@@ -3,7 +3,7 @@ using Zenject;
 
 namespace IndieCade
 {
-    public class AudioInitializationStateListener : GameInitializationStateListener
+    public class AudioInitializationStateListener : GameStateListener
     {
         private AudioManager _audioManager;
 
