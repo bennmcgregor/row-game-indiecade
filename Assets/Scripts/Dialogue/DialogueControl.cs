@@ -6,26 +6,39 @@ using Zenject;
 
 namespace IndieCade
 {
-    public class DialogueControl : MonoBehaviour
+    public class DialogueControl : CommandRegistrar
     {
         public Action<PlayerControlInputState> OnPlayerControlInputStateUpdated;
         public Action OnPlayerControlInputStateReverted;
 
-        [SerializeField] private DialogueRunner _dialogueRunner;
-        [SerializeField] private LineView _lineView;
+        [SerializeField] private DialogueViewBase _dialogueLineView;
 
         private bool _revertToPrevInputStateOnDialogueCompleted = true;
         private PlayerControlInputState _onDialogueCompletedInputState;
+        private bool _enabledInput = false;
+
+        protected override void RegisterCommand()
+        {
+            _dialogueRunner.AddCommandHandler(
+                "enable_input",
+                EnableInput
+            );
+        }
 
         public void OnDialogueComplete()
         {
-            if (_revertToPrevInputStateOnDialogueCompleted)
+            if (!_enabledInput)
             {
-                OnPlayerControlInputStateReverted?.Invoke();
-            } else
-            {
-                OnPlayerControlInputStateUpdated?.Invoke(_onDialogueCompletedInputState);
+                if (_revertToPrevInputStateOnDialogueCompleted)
+                {
+                    OnPlayerControlInputStateReverted?.Invoke();
+                }
+                else
+                {
+                    OnPlayerControlInputStateUpdated?.Invoke(_onDialogueCompletedInputState);
+                }
             }
+            _enabledInput = false;
         }
 
         public void BeginWithDialogue(string nodeName, PlayerControlInputState onDialogueCompletedInputState)
@@ -42,14 +55,23 @@ namespace IndieCade
         private IEnumerator WaitToStartDialogue(string nodeName)
         {
             yield return new WaitUntil(() => _dialogueRunner.NodeExists(nodeName));
-            OnPlayerControlInputStateUpdated?.Invoke(PlayerControlInputState.DIALOGUE);
-            StopDialogue();
+            if (!_enabledInput)
+            {
+                OnPlayerControlInputStateUpdated?.Invoke(PlayerControlInputState.DIALOGUE);
+            }
+            CancelDialogue();
             _dialogueRunner.StartDialogue(nodeName);
         }
 
         public void StopDialogue()
         {
-            _lineView.OnContinueClicked();
+            CancelDialogue();
+            _enabledInput = false;
+        }
+
+        private void CancelDialogue()
+        {
+            _dialogueLineView.UserRequestedViewAdvancement();
             _dialogueRunner.Stop();
         }
 
@@ -59,6 +81,14 @@ namespace IndieCade
             _onDialogueCompletedInputState = inputState;
         }
 
-        // TODO: add actions for keyboard control of dialogue
+        // this should usually be called after WaitToStartDialogue
+        private void EnableInput()
+        {
+            if (!_enabledInput)
+            {
+                OnPlayerControlInputStateReverted?.Invoke();
+                _enabledInput = true;
+            }
+        }
     }
 }

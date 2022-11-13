@@ -42,6 +42,8 @@ GameObject:
   m_Component:
   - component: {fileID: 8260177082652802990}
   - component: {fileID: 8260177082652802993}
+  - component: {fileID: 9177806349281678745}
+  - component: {fileID: 6777111072049475471}
   m_Layer: 0
   m_Name: CanalGate
   m_TagString: Untagged
@@ -80,6 +82,33 @@ MonoBehaviour:
   _openGateDisplacement: -6
   _moveSpeed: 0.1
   _gateObj: {fileID: 8260177082564250908}
+--- !u!114 &9177806349281678745
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8260177082652802992}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81687eec6de9945f39c2310de74fa0ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _gate: {fileID: 8260177082652802993}
+  _gateSoundFX: {fileID: 6777111072049475471}
+--- !u!114 &6777111072049475471
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8260177082652802992}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 161b0c6c6facd4ac483031301d3cdb1d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _soundEffectKey: gate-open
 --- !u!1 &8260177083020016067
 GameObject:
   m_ObjectHideFlags: 0

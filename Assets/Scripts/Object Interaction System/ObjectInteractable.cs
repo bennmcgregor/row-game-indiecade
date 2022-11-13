@@ -10,11 +10,11 @@ namespace IndieCade
         public Action OnStartInteracting;
         public Action OnEndInteracting;
 
-        protected ObjectInteractionControl _objectInteractionControl;
+        [SerializeField] private List<InteractionValidator> _validators;
 
         public ObjectInteractionControl ObjectInteractionControl => _objectInteractionControl;
 
-        protected List<IInteractionValidator> _validators;
+        protected ObjectInteractionControl _objectInteractionControl;
         private bool _currentlyInteracting = false;
 
         [Inject]
@@ -25,13 +25,9 @@ namespace IndieCade
 
         private void Start()
         {
-            _validators = new List<IInteractionValidator>();
-            InitializeValidators();
             _objectInteractionControl.OnStartInteraction += OnStartInteraction;
             _objectInteractionControl.OnEndInteraction += OnEndInteraction;
         }
-
-        protected virtual void InitializeValidators() { }
 
         private bool ValidateInteraction()
         {

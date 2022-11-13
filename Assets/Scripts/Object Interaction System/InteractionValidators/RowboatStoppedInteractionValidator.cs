@@ -4,7 +4,7 @@ using Zenject;
 
 namespace IndieCade
 {
-    public class RowboatStoppedInteractionValidator : MonoBehaviour, IInteractionValidator
+    public class RowboatStoppedInteractionValidator : InteractionValidator
     {
         private RowboatPhysicsController _rowboatPhysicsController;
 
@@ -14,7 +14,7 @@ namespace IndieCade
             _rowboatPhysicsController = rowboatPhysicsController;
         }
 
-        public bool Validate()
+        public override bool Validate()
         {
             return _rowboatPhysicsController.CanTransitionFromStopped();
         }

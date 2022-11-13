@@ -27,7 +27,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 704639017647587648}
   m_LocalRotation: {x: 0.24970773, y: 0.3290808, z: -0.6615482, w: 0.6258641}
-  m_LocalPosition: {x: -14.42, y: 4.86, z: -4.05}
+  m_LocalPosition: {x: 0, y: -4.16, z: -4.05}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -58,6 +58,7 @@ MonoBehaviour:
   m_LightCookieSprite: {fileID: 0}
   m_DeprecatedPointLightCookieSprite: {fileID: 0}
   m_LightOrder: 0
+  m_AlphaBlendOnOverlap: 0
   m_OverlapOperation: 0
   m_NormalMapDistance: 3
   m_NormalMapQuality: 2
@@ -153,6 +154,7 @@ GameObject:
   - component: {fileID: 704639018000445237}
   - component: {fileID: 704639018000445236}
   - component: {fileID: 704639018000445239}
+  - component: {fileID: 5399853066965076098}
   m_Layer: 0
   m_Name: FlashingLight
   m_TagString: Untagged
@@ -191,8 +193,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _lightStateController: {fileID: 704639018000445236}
-  _onTimeSeconds: 1
-  _offTimeSeconds: 1.5
+  _normalOnTimeSeconds: 1
+  _normalOffTimeSeconds: 1.5
+  _chaseOnTimeSeconds: 2
+  _chaseOffTimeSeconds: 0.75
 --- !u!114 &704639018000445236
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -228,6 +232,20 @@ MonoBehaviour:
   - {fileID: 704639017647587663}
   _lightStateController: {fileID: 704639018000445236}
   _lightMotionController: {fileID: 704639018000445237}
+  _alarmSoundEffect: {fileID: 5399853066965076098}
+--- !u!114 &5399853066965076098
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 704639018000445238}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 40cda6678b5584f82816114dfafc64f5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _soundEffectKey: searchlight-catch-alarm
 --- !u!1 &704639018171130032
 GameObject:
   m_ObjectHideFlags: 0
@@ -254,7 +272,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 704639018171130032}
   m_LocalRotation: {x: 0.23443675, y: 0.26137823, z: -0.6251893, w: 0.697036}
-  m_LocalPosition: {x: -14.5, y: 9.02, z: 0.05}
+  m_LocalPosition: {x: 0, y: 0, z: 0.05}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -285,6 +303,7 @@ MonoBehaviour:
   m_LightCookieSprite: {fileID: 0}
   m_DeprecatedPointLightCookieSprite: {fileID: 0}
   m_LightOrder: 0
+  m_AlphaBlendOnOverlap: 0
   m_OverlapOperation: 1
   m_NormalMapDistance: 3
   m_NormalMapQuality: 2
@@ -381,7 +400,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 704639019095750453}
   m_LocalRotation: {x: 0.20180412, y: 0.29088625, z: -0.62264127, w: 0.69783825}
-  m_LocalPosition: {x: -14.43, y: 9.02, z: 0.05}
+  m_LocalPosition: {x: 0, y: 0, z: 0.05}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -412,6 +431,7 @@ MonoBehaviour:
   m_LightCookieSprite: {fileID: 0}
   m_DeprecatedPointLightCookieSprite: {fileID: 0}
   m_LightOrder: 0
+  m_AlphaBlendOnOverlap: 0
   m_OverlapOperation: 0
   m_NormalMapDistance: 3
   m_NormalMapQuality: 2

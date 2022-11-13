@@ -5,7 +5,7 @@ using Zenject;
 
 namespace IndieCade
 {
-    public class StealthCollisionDetector : MonoBehaviour
+    public class StealthCollisionDetector : MonoBehaviour, IEnableable
     {
         public Action OnCaught;
 
@@ -13,6 +13,7 @@ namespace IndieCade
 
         private GameObject _player;
         private Coroutine _collisionCoroutine;
+        private bool _enabled = true;
 
         [Inject]
         public void Initialize(GameObject player)
@@ -20,9 +21,19 @@ namespace IndieCade
             _player = player;
         }
 
+        public void Disable()
+        {
+            _enabled = false;
+        }
+
+        public void Enable()
+        {
+            _enabled = true;
+        }
+
         private void OnTriggerEnter2D(Collider2D other)
         {
-            if (other.gameObject.name == _player.name)
+            if (other.gameObject.name == _player.name && _enabled)
             {
                 _collisionCoroutine = StartCoroutine(ProcessCollision());
             }

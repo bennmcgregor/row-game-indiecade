@@ -20,7 +20,7 @@ namespace IndieCade
             _questRunner = questRunner;
         }
 
-        private void Awake()
+        protected virtual void Awake()
         {
             _questRunner.OnQuestUpdate += OnQuestUpdate;
             _questRunner.CurrentQuest.OnChallengeUpdated += OnChallengeUpdated;

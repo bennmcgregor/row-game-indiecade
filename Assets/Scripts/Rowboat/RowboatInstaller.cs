@@ -5,11 +5,12 @@ using System.Collections.Generic;
 
 namespace IndieCade
 {
-    public class RowboatInstaller : MonoInstaller
+    public class RowboatInstaller : MonoInstaller 
     {
         [SerializeField] private RowboatPhysicsController _physicsController;
         [SerializeField] private RowboatAnimator _rowboatAnimator;
         [SerializeField] private RowboatPhysicsParametersProvider _rowboatPhysicsParametersProvider;
+        [SerializeField] private RowboatPlayerInputs _rowboatPlayerInputs;
 
         public override void InstallBindings()
         {
@@ -18,7 +19,7 @@ namespace IndieCade
             Container.BindInstance(_rowboatAnimator).AsSingle();
             Container.Bind<RowboatSlideState>().FromNew().AsSingle().WithArguments(0f);
             Container.Bind<GlobalDirectionStateMachine>().FromNew().AsSingle();
-            Container.Bind<RowboatPlayerInputs>().FromNew().AsSingle();
+            Container.BindInstance(_rowboatPlayerInputs).AsSingle();
             Container.Bind<RowboatMaps>().FromNew().AsSingle();
             Container.BindInstance(_rowboatPhysicsParametersProvider).AsSingle();
         }

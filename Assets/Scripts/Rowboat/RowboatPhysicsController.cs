@@ -8,10 +8,10 @@ namespace IndieCade
 {
     public class RowboatPhysicsController : MonoBehaviour
     {
-        // TODO: add this to a common scriptableobject that is injected
-
         public Action OnDriveFinished;
-        public Action OnSwitchLaneFinished;
+        private Action OnSwitchLaneFinished;
+        public Action PlayCatchSoundEffect;
+        public Action PlayFinishSoundEffect;
 
         [SerializeField] private Rigidbody2D _boatRigidbody;
         [SerializeField] private LayerMask _verticalMovementMask;
@@ -26,6 +26,8 @@ namespace IndieCade
         private float _directionMultiplier;
         private Vector2 _boatForce = Vector2.zero;
         private float _boatTorque = 0f;
+        private float _rudderDrag = 0f;
+        private bool _isSwitchingLanes = false;
 
         [Inject]
         public void Initialize(RowboatSlideState slideState, GlobalDirectionStateMachine globalDirectionStateMachine, RowboatPhysicsParametersProvider rowboatPhysicsParametersProvider)
@@ -40,6 +42,13 @@ namespace IndieCade
             // apply a force to the boat
             _boatRigidbody.AddForce(_boatForce);
             _boatRigidbody.AddTorque(_boatTorque);
+
+            _boatRigidbody.drag = _rowboatPhysicsParametersProvider.BaseDragFactor + _rudderDrag +
+                _rowboatPhysicsParametersProvider.DragVelocityScalingFactor *
+                Mathf.Abs(_boatRigidbody.velocity.x);
+
+            // reset the _rudderDrag after it has been applied
+            _rudderDrag = 0f;
         }
 
         public void StartDrive(bool forwards)
@@ -60,6 +69,8 @@ namespace IndieCade
 
         private IEnumerator DriveCoroutine(bool forwards)
         {
+            PlayCatchSoundEffect?.Invoke();
+
             while (!IsAtFinish(forwards))
             {
                 _slideState.AddValue(-1 * _rowboatPhysicsParametersProvider.SliderDriveSpeed * _directionMultiplier);
@@ -92,6 +103,8 @@ namespace IndieCade
 
         private IEnumerator RecoveryCoroutine(bool forwards)
         {
+            PlayFinishSoundEffect?.Invoke();
+
             while (!IsAtCatch(forwards))
             {
                 // slider value is proportional to the speed of the boat
@@ -122,11 +135,15 @@ namespace IndieCade
             if (_stopCoroutine != null)
             {
                 StopCoroutine(_stopCoroutine);
+                _boatForce = Vector2.zero;
+                _boatTorque = 0f;
             }
         }
 
         private IEnumerator StopBoatCoroutine()
         {
+            // TODO: find a way to play catch sound if you're putting oar in the water
+
             while (!IsStopped(_rowboatPhysicsParametersProvider.StopSpeedThreshold))
             {
                 float boatVel = GetBoatVelocityFromBoatDirection();
@@ -148,42 +165,74 @@ namespace IndieCade
 
         public void StartSwitchLane(bool star)
         {
-            StartCoroutine(SwitchLaneCoroutine(star));
+            if (!_isSwitchingLanes)
+            {
+                StartCoroutine(SwitchLaneCoroutine(star));
+            }
         }
 
-        private IEnumerator SwitchLaneCoroutine(bool star)
+        public IEnumerator SwitchLaneCoroutine(bool star)
         {
+            _isSwitchingLanes = true;
             _boatForce = Vector2.zero;
             _boatTorque = 0;
 
+            // only move if exactly one key is being pressed
             Vector3 directionMultiplier = GetPerpendicularForceDirectionVectorFromBoatDirection(star);
             Vector3 targetPosition = directionMultiplier + transform.position;
+            float speed = _rowboatPhysicsParametersProvider.SwitchLaneSpeedMultiplier * Math.Abs(_boatRigidbody.velocity.x) * Time.fixedDeltaTime;
 
-            if (!Physics2D.OverlapCircle(targetPosition, .2f, _verticalMovementMask))
+            if (!Physics2D.OverlapCircle(targetPosition, .2f, _verticalMovementMask) &&
+                Math.Abs(transform.position.y - targetPosition.y) > 0f)
             {
-                float timer = 0;
-                while (timer < _rowboatPhysicsParametersProvider.WaitBeforeSwitchLaneTime)
-                {
-                    timer += Time.fixedDeltaTime;
-                    yield return new WaitForFixedUpdate();
-                }
+                Vector3 newYPos = new Vector3(transform.position.x, targetPosition.y, transform.position.z);
+                transform.position = Vector3.MoveTowards(
+                    transform.position,
+                    newYPos,
+                    speed
+                );
 
-                timer = 0;
-                while (Math.Abs(transform.position.y - targetPosition.y) > 0f && timer < _rowboatPhysicsParametersProvider.MaxSwitchLaneTime)
-                {
-                    timer += Time.fixedDeltaTime;
-                    Vector3 newYPos = new Vector3(transform.position.x, targetPosition.y, transform.position.z);
-                    transform.position = Vector3.MoveTowards(
-                        transform.position,
-                        newYPos,
-                        _rowboatPhysicsParametersProvider.SwitchLaneSpeed * Time.fixedDeltaTime
-                    );
-                    yield return new WaitForFixedUpdate();
-                }
+                _rudderDrag = _rowboatPhysicsParametersProvider.BaseSwitchLaneSpeedDragFactor;
+                yield return new WaitForFixedUpdate();
             }
 
-            OnSwitchLaneFinished?.Invoke();
+            _isSwitchingLanes = false;
         }
+
+        // TODO(rudder): delete this
+        //private IEnumerator SwitchLaneCoroutine(bool star)
+        //{
+        //    _boatForce = Vector2.zero;
+        //    _boatTorque = 0;
+
+        //    Vector3 directionMultiplier = GetPerpendicularForceDirectionVectorFromBoatDirection(star);
+        //    Vector3 targetPosition = directionMultiplier + transform.position;
+
+        //    if (!Physics2D.OverlapCircle(targetPosition, .2f, _verticalMovementMask))
+        //    {
+        //        float timer = 0;
+        //        while (timer < _rowboatPhysicsParametersProvider.WaitBeforeSwitchLaneTime)
+        //        {
+        //            timer += Time.fixedDeltaTime;
+        //            yield return new WaitForFixedUpdate();
+        //        }
+
+        //        timer = 0;
+        //        while (Math.Abs(transform.position.y - targetPosition.y) > 0f && timer < _rowboatPhysicsParametersProvider.MaxSwitchLaneTime)
+        //        {
+        //            timer += Time.fixedDeltaTime;
+        //            Vector3 newYPos = new Vector3(transform.position.x, targetPosition.y, transform.position.z);
+        //            transform.position = Vector3.MoveTowards(
+        //                transform.position,
+        //                newYPos,
+        //                _rowboatPhysicsParametersProvider.SwitchLaneSpeed * Time.fixedDeltaTime
+        //            );
+        //            yield return new WaitForFixedUpdate();
+        //        }
+        //    }
+
+        //    OnSwitchLaneFinished?.Invoke();
+        //}
 
         private bool IsAtFinish(bool forwards)
         {

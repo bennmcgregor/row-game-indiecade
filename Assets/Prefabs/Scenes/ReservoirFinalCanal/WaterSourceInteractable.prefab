@@ -184,11 +184,13 @@ GameObject:
   m_Component:
   - component: {fileID: 7774495617323561209}
   - component: {fileID: 5326857838396504980}
-  - component: {fileID: 3832860974876865342}
+  - component: {fileID: 7058624633589575331}
   - component: {fileID: 7774495617323561206}
   - component: {fileID: 7774495617323561205}
   - component: {fileID: 7774495617323561204}
   - component: {fileID: 7774495617323561203}
+  - component: {fileID: 2585473321006595980}
+  - component: {fileID: 1167838440984102812}
   m_Layer: 0
   m_Name: WaterSourceInteractable
   m_TagString: Untagged
@@ -224,10 +226,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e63cc93e7973d4bf6a81d5b1c4749725, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _validators: []
   _fillRateSeconds: 0.05
-  _colliderInteractionValidator: {fileID: 7774495617323561205}
-  _rowboatStoppedInteractionValidator: {fileID: 7774495617323561206}
---- !u!114 &3832860974876865342
+  _animation: {fileID: 0}
+--- !u!114 &7058624633589575331
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -236,13 +238,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 7774495617323561202}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0c303d4a887d34e19bf95e6cebfa0fdb, type: 3}
+  m_Script: {fileID: 11500000, guid: 8b4180d029f27476e856286da4b78941, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _popup: {fileID: 7774495617323561204}
   _interactable: {fileID: 5326857838396504980}
-  _rangeInteractionValidator: {fileID: 7774495617323561205}
-  _rowboatStoppedInteractionValidator: {fileID: 7774495617323561206}
+  _displayValidators:
+  - {fileID: 7774495617323561205}
+  _enableValidators:
+  - {fileID: 7774495617323561206}
 --- !u!114 &7774495617323561206
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -296,6 +300,33 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 3
+--- !u!114 &2585473321006595980
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7774495617323561202}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 274ec35546da34d328bd439c121e7b06, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _waterSource: {fileID: 5326857838396504980}
+  _soundEffect: {fileID: 1167838440984102812}
+--- !u!114 &1167838440984102812
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7774495617323561202}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 161b0c6c6facd4ac483031301d3cdb1d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _soundEffectKey: water-filling
 --- !u!1 &7774495617546415646
 GameObject:
   m_ObjectHideFlags: 0

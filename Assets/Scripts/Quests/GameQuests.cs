@@ -116,10 +116,10 @@ namespace IndieCade
             teaserTutorial.StartChallengeWithDialogue("Tutorial1", PlayerControlInputState.ROWING);
 
             ChallengeInitializationData teaserStealWaterData = new ChallengeInitializationData(ChallengeConsts.TeaserStealWater);
-            teaserStealWaterData.HasStealthGameplay = true;
+            teaserStealWaterData.SetStealthGameplay(true, false);
 
             ChallengeInitializationData teaserEscapeCanalData = new ChallengeInitializationData(ChallengeConsts.TeaserEscapeCanal);
-            teaserEscapeCanalData.HasStealthGameplay = true;
+            teaserEscapeCanalData.SetStealthGameplay(true, true, true);
             teaserEscapeCanalData.BackgroundMusicFilename = "westlake-night-chase";
             teaserEscapeCanalData.ChangeSceneOnChallengeFailure(GameSceneName.INTERROGATION_ROOM);
             teaserEscapeCanalData.StartChallengeWithDialogue("EscapeCanalChallenge1", PlayerControlInputState.ROWING);

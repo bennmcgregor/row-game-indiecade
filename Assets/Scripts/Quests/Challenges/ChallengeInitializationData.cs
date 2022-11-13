@@ -31,7 +31,20 @@ namespace IndieCade
 
         public string BackgroundMusicFilename;
 
-        public bool HasStealthGameplay = false;
+        private bool _hasStealthGameplay = false;
+        private bool _isChase = false;
+        private bool _followLightsOn = false;
+
+        public bool HasStealthGameplay => _hasStealthGameplay;
+        public bool IsChase => _isChase;
+        public bool FollowLightsOn => _followLightsOn;
+
+        public void SetStealthGameplay(bool hasStealthGameplay, bool isChase, bool followLightsOn = false)
+        {
+            _hasStealthGameplay = hasStealthGameplay;
+            _isChase = isChase;
+            _followLightsOn = followLightsOn;
+        }
 
         public bool RestartSceneOnFailure = false;
 

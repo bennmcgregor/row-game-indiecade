@@ -24,4 +24,5 @@ MonoBehaviour:
   BoatStopForce: 1
   MinRecoverySpeed: 0.01
   SwitchLaneSpeed: 5
-  SpinAnimationTimeSeconds: 1
+  SpinAnimationTimeSeconds: 4
+  InputSpamTimeoutSeconds: 0.7

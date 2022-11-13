@@ -11,11 +11,15 @@ namespace IndieCade
         [SerializeField] private Transform _rotatable;
         [SerializeField] private Transform _startPoint;
         [SerializeField] private Transform _endPoint;
-        [SerializeField] private float _angularSpeedMultiplier = 0.5f;
+        [SerializeField] private float _normalAngularSpeedMultiplier = 0.25f;
+        [SerializeField] private float _chaseAngularSpeedMultiplier = 0.5f;
 
         private bool _forwards = true;
         private float _timeCount = 0.0f;
         private Coroutine _rotationCoroutine;
+        private bool _chasing = false;
+
+        private float AngularSpeedMultiplier => _chasing ? _chaseAngularSpeedMultiplier : _normalAngularSpeedMultiplier;
 
         private void Awake()
         {
@@ -25,6 +29,11 @@ namespace IndieCade
         private void Start()
         {
             StartRotation();
+        }
+
+        public override void SetChase(bool isChasing)
+        {
+            _chasing = isChasing;
         }
 
         public override void Pause()
@@ -64,7 +73,7 @@ namespace IndieCade
             while (_timeCount < 1)
             {
                 _rotatable.rotation = Quaternion.Slerp(startPoint.rotation, endPoint.rotation, _timeCount);
-                _timeCount += (Time.fixedDeltaTime * _angularSpeedMultiplier);
+                _timeCount += (Time.fixedDeltaTime * AngularSpeedMultiplier);
                 yield return new WaitForFixedUpdate();
             }
 

@@ -6,7 +6,7 @@ namespace IndieCade
 {
     public class StartStealWaterEffector : MonoBehaviour
     {
-        [SerializeField] private Gate _gate;
+        [SerializeField] private ObjVerticalTranslator _gate;
         [SerializeField] private CanalGateInteractable _canalGateInteractable;
 
         private QuestRunner _questRunner;
@@ -19,7 +19,7 @@ namespace IndieCade
 
         private void Awake()
         {
-            _gate.OnOpenGate += OnOpenGate;
+            _gate.OnStartForwardTranslation += OnOpenGate;
         }
 
         private void OnOpenGate()

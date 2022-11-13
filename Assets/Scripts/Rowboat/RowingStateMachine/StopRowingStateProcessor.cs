@@ -35,7 +35,8 @@ namespace IndieCade
                 _rowboatPhysics.EndStopBoat();
                 _rowboatPhysics.StartRecovery(false);
             }
-            else if (_context.CurrentTransition == RowingStateMachineTransition.SHIFT_DOWN)
+            else if (_context.CurrentTransition == RowingStateMachineTransition.SHIFT_DOWN &&
+                _rowboatPhysics.CanTransitionFromStopped())
             {
                 SetCurrentState(RowingState.SPIN);
 

@@ -8,24 +8,18 @@ namespace IndieCade
     {
         [SerializeField] private Popup _popup;
         [SerializeField] private ObjectInteractable _interactable;
+        [SerializeField] protected InteractionValidator[] _displayValidators = default;
+        [SerializeField] protected InteractionValidator[] _enableValidators = default;
 
-        protected List<IInteractionValidator> _displayValidators;
-        protected List<IInteractionValidator> _enableValidators;
         private bool _interacting = false;
 
         private void Start()
         {
-            _displayValidators = new List<IInteractionValidator>();
-            _enableValidators = new List<IInteractionValidator>();
-            InitializeValidators();
-
             _interactable.OnStartInteracting += () => _interacting = true;
             _interactable.OnEndInteracting += () => _interacting = false;
         }
 
-        protected virtual void InitializeValidators() { }
-
-        private bool ValidateInteraction(List<IInteractionValidator> validators)
+        private bool ValidateInteraction(InteractionValidator[] validators)
         {
             foreach (var validator in validators)
             {

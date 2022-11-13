@@ -1,16 +1,22 @@
 ﻿title: Tutorial1
 tags:
 ---
+<<enable_input>>
 Odette: saying some things about moving and stopping the boat.
+-> Option 1
+-> option 2
+-> option 3
 ===
 title: Tutorial2
 tags:
 ---
+<<enable_input>>
 Odette: saying some things about moving the boat up and down.
 ===
 title: Tutorial3
 tags:
 ---
+<<enable_input>>
 Odette: saying some things about spinning the boat.
 ===
 title: Tutorial4
