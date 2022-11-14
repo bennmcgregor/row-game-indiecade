@@ -380,7 +380,6 @@ GameObject:
   m_Component:
   - component: {fileID: 536392373}
   - component: {fileID: 536392374}
-  - component: {fileID: 536392375}
   m_Layer: 0
   m_Name: c
   m_TagString: Untagged
@@ -460,19 +459,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &536392375
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 536392372}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7a83b9f8714c540cbbbf474799bcf111, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _nodeName: TeaserCutsceneChallenge2
 --- !u!1001 &577008487
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -552,6 +538,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1187716924}
   - component: {fileID: 1187716925}
+  - component: {fileID: 1187716926}
   m_Layer: 0
   m_Name: d
   m_TagString: Untagged
@@ -631,6 +618,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1187716926
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1187716923}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a83b9f8714c540cbbbf474799bcf111, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _nodeName: TeaserCutsceneChallenge4
 --- !u!1 &1571453545
 GameObject:
   m_ObjectHideFlags: 0
@@ -685,6 +685,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1767353799}
   - component: {fileID: 1767353800}
+  - component: {fileID: 1767353801}
   m_Layer: 0
   m_Name: b
   m_TagString: Untagged
@@ -764,6 +765,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1767353801
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1767353798}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a83b9f8714c540cbbbf474799bcf111, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _nodeName: TeaserCutsceneChallenge2
 --- !u!1 &1818970061
 GameObject:
   m_ObjectHideFlags: 0
@@ -842,6 +856,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _dialogueControl: {fileID: 814933779211629299}
+  _speechBubbleProvider: {fileID: 0}
 --- !u!1 &1832150866
 GameObject:
   m_ObjectHideFlags: 0
@@ -1152,6 +1167,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01614664b831546d2ae94a42149d80ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_SendPointerHoverToParent: 1
   m_MoveRepeatDelay: 0.5
   m_MoveRepeatRate: 0.1
   m_XRTrackingOrigin: {fileID: 0}
@@ -1179,6 +1195,7 @@ MonoBehaviour:
     type: 3}
   m_DeselectOnBackgroundClick: 1
   m_PointerBehavior: 0
+  m_CursorLockBehavior: 0
 --- !u!114 &814933779211629299
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1192,7 +1209,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _dialogueRunner: {fileID: 3679829594595169372}
-  _lineView: {fileID: 6574482590368172928}
+  _dialogueLineView: {fileID: 0}
 --- !u!114 &2273051991951622882
 MonoBehaviour:
   m_ObjectHideFlags: 0

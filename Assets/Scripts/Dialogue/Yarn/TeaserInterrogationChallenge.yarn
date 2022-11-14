@@ -1,8 +1,151 @@
 ﻿title: InterrogationChallenge1
 tags:
 ---
-Nico: Interrogates Mio and Odette
-Mio: Responds
-\[Knock on the door\]
-<< complete_challenge >>
+Nico: You THIEVES! Think you can just cut corners in life.
+-> You inherited this role from your father if I’m not mistaken.
+Nico: Don't go there.
+-> You’ll never live up to his image. You’re a pathetic mini-me.
+Nico: SHUT- don’t you dare even SUGGEST... my father was a great man.
+-> Sure. But you aren’t.
+Nico: ARGHWGHHHH!!!!!!
+<<jump InterrogationChallenge2>>
+===
+
+title: InterrogationChallenge2
+tags:
+---
+Nico: *Sigh*
+Nico: Tell me your name.
+-> Mio.
+    Nico: And what has you rowing out here?
+    Nico: Don’t you know these are forbidden waters, especially for Mirites?
+-> If you ask nicely.
+    Nico: TELL ME YOUR NAME.
+    -> Ok so that wasn’t “nicely.”
+    Nico: I DON'T ANSWER TO YOU!
+    -> Well I don’t answer to YOU so where does that leave us?
+    Nico: YOUR NAME. NOW.
+    -> No. Move on.
+    Nico: Don't you know these waters are forbidden? Especially for MIRITES?
+<<jump InterrogationChallenge3>>
+===
+
+title: InterrogationChallenge3
+tags:
+---
+-> These waters were never yours. They should be forbidden to no one.
+    Nico: Don’t give me that “water for all” crap. You and I both know that’s a fantasy.
+    -> Well maybe they should be forbidden to YOU given how horribly you’ve mismanaged-
+    Nico: I’ve done everything in my power to make Westlakers comfortable-
+    -> Comfortable? The fact that you use that word just shows how out of touch-
+    Nico: Maybe the people who drink mud as a morning beverage shouldn’t be calling me out of touch.
+    -> Oh and you with your showering “as a spa treatment.” Telling your people “there’s plenty of water to go around!” I’ve seen those dams, and let me tell you, the day they go to turn on those faucets and nothing comes out-
+    Nico: That won't happen.
+    -> COWARD.
+    Odette: Mio.
+    -> You lie to yourself.
+    Nico: SHUT IT!!
+-> She was just showing me around. It was dark and we got lost.
+    Odette: We didn't mean to come here.
+    Nico: I highly doubt that. Especially knowing that you lied through your teeth the last time we talked.
+    -> I haven't even been in a boat before.
+    Nico: LIARS!
+<<jump InterrogationChallenge4>>
+===
+
+title: InterrogationChallenge4
+tags:
+---
+Nico: I recognize you from somewhere.
+-> Me?
+Nico: Yes. There’s something in your face. Something quintessentially Mirite.
+-> Well... I’m from the Mire Republic I don’t see how that comes as a-
+Nico: Something distinctly “rower”...
+Odette: You must be imagining things.
+Nico: Vu Fujita.
+Odette: Now you're just making sounds.
+Nico: VU FUJITA.
+-> What?
+Nico: Does that name RING A BELL?
+-> Huh?
+Nico: He’s your GRANDPA. I can see it in your face.
+-> I’ve never even heard that name.
+    Nico: The ROWER. VU FUJITA.
+    -> Please talk at an agreeable tone.
+    Nico: How could you not know Vu. Six time world champion Vu.
+    -> I guess I must’ve forgotten.
+    Nico: If only you knew what really happened to him.
+-> Oh. Yes. But I never knew much-how is this relevant?
+    Nico: So you don’t know what really happened?
+    -> The disappearance?
+    Nico: Whatever you want to call it.
+<<jump InterrogationChallenge5>>
+===
+
+title: InterrogationChallenge5
+tags:
+---
+-> What happened?
+    Nico: So you really don’t know...
+    Odette: *ahem*
+    Nico: He was a great champion. I can admit that. Even garnered some support from people over here.
+    Nico: How could someone from the slums be so inspired? Row with such intensity?
+    Nico: Almost mythical.
+    Nico: People say he disappeared but... well let’s just say something else happened.
+    -> And what was that?
+    Nico: Hah. If only you knew.
+-> Yes. If only.
+    Nico: So you don’t know?
+    -> Whether I know or don’t know, life’s gonna go on regardless.
+    Nico: He was a great champion. I can admit that. Even garnered some support from people over here.
+    Nico: How could someone from the slums be so inspired? Row with such intensity?
+    Nico: Almost mythical.
+    Nico: I think you knowing what happened would probably change a few things.
+<<jump InterrogationChallenge6>>
+===
+
+title: InterrogationChallenge6
+tags:
+---
+Nico: 300 years. 300 years of this thievery.
+-> THIEVERY??? YOU built a dam on what was supposed to be a NATURAL RESOURCE.
+    Nico: Is that so?
+    -> You may give a dam but I don’t give a damn. That’s OUR WATER you stole.
+    Nico: Don’t get smart with me. After what your people did, pillaging and burning down--
+    -> THAT WAS THREE CENTURIES AGO.
+    Nico: Yes, but the legacy-
+    -> The legacy has been a series of responses disproportionate to the actual-
+    Nico: Nothing will ever make up for the anguish your people caused.
+    -> They were right about you.
+    Nico: That I hope all of you Mirites die? Because then yes, they WERE right.
+    -> What goes around comes around.
+    Nico: Were there any others with you that we didn’t catch?
+    Odette: I was really just showing her around the waters. It was dark and we got lost.
+    Nico: I highly doubt that. Especially knowing that you lied through your teeth the last time we talked.
+    -> She really was just showing me around. I haven’t even been in a boat before.
+    Nico: So then how can you explain this hand-sewn basket?
+    Nico: The guards found it inspecting the boat.
+    -> That's mine.
+        Nico: And why did you have it?
+        -> Thought it looked cool. I dunno.
+        Nico: Well how do you like it NOW??
+    -> It must have just been left over in the boat by someone else.
+    Nico: \[Slams the bucket on the table. It breaks in half.\]
+    -> ASSHOLE! You’re killing my people. Just know... what goes around comes around.
+        Nico: Was that a threat?
+        -> IT FUCKING WAS so you better watch your back.
+-> That really wasn’t necessary.
+    Nico: WELL YOUR THIEVERY ISN’T NECESSARY.
+    -> Like I said, we weren't taking anything.
+    Nico: 300 years. 300 years of you bandits just taking and taking.
+    -> YOU built a dam on what was supposed to be a NATURAL RESOURCE.
+    Nico: Is that so?
+    -> You may give a dam but I don't give a damn. That's OUR WATER you stole.
+    Nico: Don’t get smart with me. After what your people did, pillaging and burning down-
+    -> THAT WAS THREE CENTURIES AGO.
+    Nico: -they deserve to suffer.
+    -> They were right about you.
+    Nico: That I hope all of you Mirites die? Because then yes, they were right.
+WestlakeGuard: BANG! BANG! BANG!
+<<complete_challenge>>
 ===

@@ -527,7 +527,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7071596534357567245}
   - component: {fileID: 7071596534357567234}
-  - component: {fileID: 7071596534357567235}
+  - component: {fileID: 1713419450046125896}
   - component: {fileID: 7071596534357567233}
   - component: {fileID: 7071596534357567232}
   - component: {fileID: 7071596534357567239}
@@ -568,7 +568,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _colliderInteractionValidator: {fileID: 7071596534357567233}
   _gate: {fileID: 0}
---- !u!114 &7071596534357567235
+--- !u!114 &1713419450046125896
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -577,12 +577,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 7071596534357567238}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4b1afd46bb96e4629a6fb1cd565a245e, type: 3}
+  m_Script: {fileID: 11500000, guid: 8b4180d029f27476e856286da4b78941, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _popup: {fileID: 7071596534357567232}
   _interactable: {fileID: 7071596534357567234}
-  _rangeInteractionValidator: {fileID: 7071596534357567233}
+  _displayValidators:
+  - {fileID: 7071596534357567233}
+  _enableValidators: []
 --- !u!114 &7071596534357567233
 MonoBehaviour:
   m_ObjectHideFlags: 0

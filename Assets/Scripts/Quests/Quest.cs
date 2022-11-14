@@ -26,6 +26,7 @@ namespace IndieCade
 
         public void CompleteCurrentChallenge()
         {
+            UnityEngine.Debug.Log("CompleteCurrentChallenge");
             OnChallengeCompleted?.Invoke();
             _challengeStateMachine.Transition(ChallengeStateMachineTransition.COMPLETED);
         }

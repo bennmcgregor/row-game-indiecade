@@ -1,5 +1,6 @@
 ﻿using System;
 using UnityEngine;
+using Zenject;
 
 namespace IndieCade
 {
@@ -7,5 +8,6 @@ namespace IndieCade
     {
         public abstract void Pause();
         public abstract void Resume();
+        public abstract void SetChase(bool isChasing);
     }
 }

@@ -9,7 +9,9 @@ namespace IndieCade
         {
             Dictionary<GameSceneName, SceneInitializationData> data = new Dictionary<GameSceneName, SceneInitializationData>();
 
-            // TODO: change to appropriate soundtrack
+            SceneInitializationData mainMenuData = new SceneInitializationData(GameSceneName.MAIN_MENU);
+            mainMenuData.BackgroundMusicFilename = "quiet-rain";
+
             SceneInitializationData reservoirFinalCanalData = new SceneInitializationData(GameSceneName.RESERVOIR_FINAL_CANAL);
             reservoirFinalCanalData.BackgroundMusicFilename = "westlake-night";
 
@@ -24,6 +26,7 @@ namespace IndieCade
 
             List<SceneInitializationData> sceneData = new List<SceneInitializationData>
             {
+                mainMenuData,
                 reservoirFinalCanalData,
                 interrogationRoomData,
                 teaserCutsceneData,

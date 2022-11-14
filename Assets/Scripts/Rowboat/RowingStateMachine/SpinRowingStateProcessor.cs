@@ -3,12 +3,12 @@ using Zenject;
 
 namespace IndieCade
 {
-    public class SpinRowingStateProcessor : RowingStateProcessor
+    public class SpinRowingStateProcessor : RowingStateProcessor<RowingState, RowingStateMachineTransition>
     {
         private RowboatAnimator _rowboatAnimator;
         private GlobalDirectionStateMachine _globalDirectionStateMachine;
 
-        public SpinRowingStateProcessor(RowingStateMachineContext context, RowboatPlayerInputs rowboatPlayerInputs, RowboatAnimator rowboatAnimator, GlobalDirectionStateMachine globalDirectionStateMachine)
+        public SpinRowingStateProcessor(RowingStateMachineContext<RowingState, RowingStateMachineTransition> context, RowboatPlayerInputs rowboatPlayerInputs, RowboatAnimator rowboatAnimator, GlobalDirectionStateMachine globalDirectionStateMachine)
             : base(context, rowboatPlayerInputs)
         {
             _rowboatAnimator = rowboatAnimator;

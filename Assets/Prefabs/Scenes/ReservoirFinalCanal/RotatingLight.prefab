@@ -43,6 +43,7 @@ GameObject:
   - component: {fileID: 3104375885428092203}
   - component: {fileID: 3104375885428092214}
   - component: {fileID: 3104375885428092213}
+  - component: {fileID: 1973063819192420340}
   m_Layer: 0
   m_Name: RotatingLight
   m_TagString: Untagged
@@ -84,7 +85,8 @@ MonoBehaviour:
   _rotatable: {fileID: 3104375886077265365}
   _startPoint: {fileID: 3104375885288795596}
   _endPoint: {fileID: 3104375886370303857}
-  _angularSpeedMultiplier: 0.25
+  _normalAngularSpeedMultiplier: 0.25
+  _chaseAngularSpeedMultiplier: 0.5
 --- !u!114 &3104375885428092214
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -119,6 +121,20 @@ MonoBehaviour:
   - {fileID: 3104375886077265367}
   _lightStateController: {fileID: 3104375885428092214}
   _lightMotionController: {fileID: 3104375885428092203}
+  _alarmSoundEffect: {fileID: 1973063819192420340}
+--- !u!114 &1973063819192420340
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3104375885428092202}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 40cda6678b5584f82816114dfafc64f5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _soundEffectKey: searchlight-catch-alarm
 --- !u!1 &3104375886077265355
 GameObject:
   m_ObjectHideFlags: 0
@@ -177,6 +193,7 @@ MonoBehaviour:
   m_LightCookieSprite: {fileID: 0}
   m_DeprecatedPointLightCookieSprite: {fileID: 0}
   m_LightOrder: 0
+  m_AlphaBlendOnOverlap: 0
   m_OverlapOperation: 0
   m_NormalMapDistance: 3
   m_NormalMapQuality: 2
@@ -359,6 +376,7 @@ MonoBehaviour:
   m_LightCookieSprite: {fileID: 0}
   m_DeprecatedPointLightCookieSprite: {fileID: 0}
   m_LightOrder: 0
+  m_AlphaBlendOnOverlap: 0
   m_OverlapOperation: 1
   m_NormalMapDistance: 3
   m_NormalMapQuality: 2

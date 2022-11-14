@@ -4,7 +4,7 @@ using Zenject;
 
 namespace IndieCade
 {
-    public class ColliderInteractionValidator : MonoBehaviour, IInteractionValidator
+    public class ColliderInteractionValidator : InteractionValidator
     {
         public Action OnInRange;
         public Action OnOutOfRange;
@@ -37,7 +37,7 @@ namespace IndieCade
         }
 
 
-        public bool Validate()
+        public override bool Validate()
         {
             return _isInRange;
         }

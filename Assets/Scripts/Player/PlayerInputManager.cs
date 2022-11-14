@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -5,6 +6,8 @@ namespace IndieCade
 {
     public class PlayerInputManager : MonoBehaviour
     {
+        public Action<PlayerControlInputState> OnInputStateUpdated;
+
         [SerializeField] private CharacterControl _characterControl;
         [SerializeField] private RowingControl _rowingControl;
         [SerializeField] private ObjectInteractionControl _objectInteractionControl;
@@ -12,8 +15,6 @@ namespace IndieCade
         [SerializeField] private PlayerControlInputState _inputState = PlayerControlInputState.WALKING;
 
         private PlayerControlInputState _prevInputState;
-
-        // TODO: add actions to handle DialogueControl (for keyboard input on dialogue)
 
         private void Awake()
         {
@@ -129,6 +130,8 @@ namespace IndieCade
                     _rowingControl.Disable();
                 }
             }
+
+            OnInputStateUpdated?.Invoke(_inputState);
         }
 
         public void RevertToPrevInputState()

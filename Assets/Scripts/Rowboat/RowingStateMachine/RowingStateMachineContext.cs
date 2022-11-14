@@ -2,16 +2,18 @@
 using UnityEngine;
 namespace IndieCade
 {
-    public class RowingStateMachineContext
+    public class RowingStateMachineContext<TStateEnum, TTransitionEnum>
+        where TStateEnum : Enum
+        where TTransitionEnum : Enum
     {
-        private RowingState _currentState;
+        private TStateEnum _currentState;
 
-        public RowingStateMachineContext(RowingState currentState)
+        public RowingStateMachineContext(TStateEnum currentState)
         {
             _currentState = currentState;
         }
 
-        public RowingState CurrentState
+        public TStateEnum CurrentState
         {
             get
             {
@@ -23,7 +25,7 @@ namespace IndieCade
                 _currentState = value;
             }
         }
-        public RowingStateMachineTransition CurrentTransition;
-        public RowingState PreviousState { get; private set; }
+        public TTransitionEnum CurrentTransition;
+        public TStateEnum PreviousState { get; private set; }
     }
 }

@@ -15,7 +15,7 @@ namespace IndieCade
             _dialogueControl = dialogueControl;
         }
 
-        protected void StartDialogueAndDestroyTrigger()
+        public void StartDialogueAndDestroyTrigger()
         {
             StartDialogue();
             Destroy(gameObject);

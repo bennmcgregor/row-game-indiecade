@@ -2,11 +2,11 @@
 
 namespace IndieCade
 {
-    public class EntryRowingStateProcessor : RowingStateProcessor
+    public class EntryRowingStateProcessor : RowingStateProcessor<RowingState, RowingStateMachineTransition>
     {
         private RowboatPhysicsController _rowboatPhysics;
 
-        public EntryRowingStateProcessor(RowingStateMachineContext context, RowboatPlayerInputs rowboatPlayerInputs, RowboatPhysicsController rowboatPhysics) : base(context, rowboatPlayerInputs)
+        public EntryRowingStateProcessor(RowingStateMachineContext<RowingState, RowingStateMachineTransition> context, RowboatPlayerInputs rowboatPlayerInputs, RowboatPhysicsController rowboatPhysics) : base(context, rowboatPlayerInputs)
         {
             _rowboatPhysics = rowboatPhysics;
             _notifyInputStateMachine = false;

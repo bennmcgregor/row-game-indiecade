@@ -28,7 +28,7 @@ namespace IndieCade
             set
             {
                 _soundFXVolume = value;
-                _soundFXPlayer.volume = _masterVolume * _soundFXVolume;
+                _soundFXPlayer.SetVolume(_masterVolume * _soundFXVolume);
             }
         }
 
@@ -38,35 +38,37 @@ namespace IndieCade
             set
             {
                 _masterVolume = value;
-                _soundFXPlayer.volume = _masterVolume * _soundFXVolume;
+                _soundFXPlayer.SetVolume(_masterVolume * _soundFXVolume);
                 _backgroundMusicPlayer.volume = _masterVolume * _backgroundMusicVolume;
             }
         }
 
+        [SerializeField] private AudioClip[] _backgroundMusicClips;
+        [SerializeField] private SoundFXPlayer _soundFXPlayer;
+
         // Sound assets
         private Dictionary<string, AudioClip> _backgroundMusics;
-        private Dictionary<string, AudioClip> _soundFX;
 
         // Audio players
         private BackgroundMusicPlayer _backgroundMusicPlayer;
-        private AudioSource _soundFXPlayer;
 
         // Save data
         private string _currentBackgroundMusic;
 
         public string CurrentBackgroundMusic => _currentBackgroundMusic;
+        public SoundFXPlayer SoundFXPlayer => _soundFXPlayer;
 
         // Start is called before the first frame update
         void Start()
         {
             _backgroundMusics = new Dictionary<string, AudioClip>();
+            foreach (var clip in _backgroundMusicClips)
+            {
+                _backgroundMusics[clip.name] = clip;
+            }
+
             _backgroundMusicPlayer = gameObject.AddComponent<BackgroundMusicPlayer>();
 
-            _soundFX = new Dictionary<string, AudioClip>();
-            _soundFXPlayer = gameObject.AddComponent<AudioSource>();
-
-            LoadSounds(PathnamesScriptableObject.backgroundMusicPath, _backgroundMusics);
-            LoadSounds(PathnamesScriptableObject.soundFXPath, _soundFX);
             InitVolumes();
         }
 
@@ -77,24 +79,7 @@ namespace IndieCade
             _backgroundMusicPlayer.newSoundtrack(_backgroundMusics[musicKey]);
         }
 
-        public void PlaySoundEffect(string soundFXKey)
-        {
-            /// Play a sound effect with filename "soundFXKey" (without file extension)
-            _soundFXPlayer.PlayOneShot(_soundFX[soundFXKey]);
-        }
-
         // Private methods
-
-        private void LoadSounds(string fpath, Dictionary<string, AudioClip> soundDict)
-        {
-            DirectoryInfo dir = new DirectoryInfo(PathnamesScriptableObject.resourcesPath + fpath);
-            FileInfo[] info = dir.GetFiles("*.mp3");
-            foreach (FileInfo f in info)
-            {
-                string baseName = f.Name.Split(".")[0];
-                soundDict.Add(baseName, Resources.Load<AudioClip>(fpath + baseName));
-            }
-        }
 
         private void InitVolumes()
         {

@@ -14,7 +14,7 @@ namespace IndieCade
         {
             if (_context.CurrentTransition == GlobalDirectionStateMachineTransition.ENTRY)
             {
-                _context.CurrentState = GlobalDirectionState.EAST;
+                _context.CurrentState = GlobalDirectionState.WEST;
             }
         }
     }
