@@ -3,14 +3,14 @@ using Zenject;
 
 namespace IndieCade
 {
-    public class StopRowingStateProcessor : RowingStateProcessor
+    public class StopRowingStateProcessor : RowingStateProcessor<RowingState, RowingStateMachineTransition>
     {
         private RowboatPhysicsController _rowboatPhysics;
         private RowboatMaps _rowboatMaps;
         private GlobalDirectionStateMachine _globalDirectionStateMachine;
         private RowboatAnimator _rowboatAnimator;
 
-        public StopRowingStateProcessor(RowingStateMachineContext context, RowboatPlayerInputs rowboatPlayerInputs, RowboatPhysicsController rowboatPhysics, RowboatMaps rowboatMaps, GlobalDirectionStateMachine globalDirectionStateMachine, RowboatAnimator rowboatAnimator)
+        public StopRowingStateProcessor(RowingStateMachineContext<RowingState, RowingStateMachineTransition> context, RowboatPlayerInputs rowboatPlayerInputs, RowboatPhysicsController rowboatPhysics, RowboatMaps rowboatMaps, GlobalDirectionStateMachine globalDirectionStateMachine, RowboatAnimator rowboatAnimator)
             : base(context, rowboatPlayerInputs)
         {
             _rowboatPhysics = rowboatPhysics;

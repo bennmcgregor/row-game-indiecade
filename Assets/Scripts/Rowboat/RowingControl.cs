@@ -9,16 +9,18 @@ namespace IndieCade
     {
         private GlobalDirectionStateMachine _globalDirectionStateMachine;
         private RowboatPlayerInputs _rowboatPlayerInputs;
-        private RowingStateMachine _rowingStateMachine;
+        private RowingStateMachine<RowingState, RowingStateMachineTransition> _rowingStateMachine;
+        private RowingStateMachine<RudderState, RudderStateMachineTransition> _rudderStateMachine;
         private RowboatMaps _rowboatMaps;
 
         private bool _enabled = true;
 
         [Inject]
-        public void Initialize(RowboatMaps rowboatMaps, RowingStateMachine rowingStateMachine, GlobalDirectionStateMachine globalDirectionStateMachine, RowboatPlayerInputs rowboatPlayerInputs)
+        public void Initialize(RowboatMaps rowboatMaps, RowingStateMachine<RowingState, RowingStateMachineTransition> rowingStateMachine, RowingStateMachine<RudderState, RudderStateMachineTransition> rudderStateMachine, GlobalDirectionStateMachine globalDirectionStateMachine, RowboatPlayerInputs rowboatPlayerInputs)
         {
             _rowboatMaps = rowboatMaps;
             _rowingStateMachine = rowingStateMachine;
+            _rudderStateMachine = rudderStateMachine;
             _globalDirectionStateMachine = globalDirectionStateMachine;
             _rowboatPlayerInputs = rowboatPlayerInputs;
         }
@@ -66,7 +68,6 @@ namespace IndieCade
 
         public void RowShift()
         {
-            // TODO: re-enable when we have the animations
             OnRowInput(InputKey.SHIFT);
         }
 
@@ -86,18 +87,26 @@ namespace IndieCade
                 _rowboatPlayerInputs.GetInputStateMachine(inputKey).Transition(inputStateMachineTransition);
                 InputState inputState = _rowboatPlayerInputs.GetInputStateMachine(inputKey).CurrentState;
 
-                RowingStateMachineTransition transition;
-                if (inputKey == InputKey.SHIFT)
+                if (inputKey == InputKey.UP || inputKey == InputKey.DOWN)
                 {
-                    transition = GetRowingStateMachineTransitionFromInput(inputKey, inputState);
+                    BoatDirection boatDirection = _rowboatMaps.GetBoatDirectionStateFromGlobal(_globalDirectionStateMachine.CurrentState, inputKey);
+                    _rudderStateMachine.Transition(_rowboatMaps.GetRudderStateMachineTransitionFromInput(boatDirection, inputState));
                 }
                 else
                 {
-                    BoatDirection boatDirection = _rowboatMaps.GetBoatDirectionStateFromGlobal(_globalDirectionStateMachine.CurrentState, inputKey);
-                    transition = _rowboatMaps.GetRowingStateMachineTransitionFromInput(boatDirection, inputState);
-                }
+                    RowingStateMachineTransition transition;
+                    if (inputKey == InputKey.SHIFT)
+                    {
+                        transition = GetRowingStateMachineTransitionFromInput(inputKey, inputState);
+                    }
+                    else
+                    {
+                        BoatDirection boatDirection = _rowboatMaps.GetBoatDirectionStateFromGlobal(_globalDirectionStateMachine.CurrentState, inputKey);
+                        transition = _rowboatMaps.GetRowingStateMachineTransitionFromInput(boatDirection, inputState);
+                    }
 
-                _rowingStateMachine.Transition(transition);
+                    _rowingStateMachine.Transition(transition);
+                }
             }
         }
 

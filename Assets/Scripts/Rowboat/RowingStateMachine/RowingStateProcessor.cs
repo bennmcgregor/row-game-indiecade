@@ -1,15 +1,17 @@
 ﻿using System;
 namespace IndieCade
 {
-    public abstract class RowingStateProcessor : IStateProcessor
+    public abstract class RowingStateProcessor<TStateEnum, TTransitionEnum> : IStateProcessor
+        where TStateEnum : Enum
+        where TTransitionEnum : Enum
     {
         public Action OnStateUpdated;
 
-        protected RowingStateMachineContext _context;
+        protected RowingStateMachineContext<TStateEnum, TTransitionEnum> _context;
         protected RowboatPlayerInputs _rowboatPlayerInputs;
         protected bool _notifyInputStateMachine = true;
 
-        public RowingStateProcessor(RowingStateMachineContext context, RowboatPlayerInputs rowboatPlayerInputs)
+        public RowingStateProcessor(RowingStateMachineContext<TStateEnum, TTransitionEnum> context, RowboatPlayerInputs rowboatPlayerInputs)
         {
             _context = context;
             _rowboatPlayerInputs = rowboatPlayerInputs;
@@ -31,7 +33,7 @@ namespace IndieCade
 
         public virtual void ProcessHold() {}
 
-        protected void SetCurrentState(RowingState newState)
+        protected void SetCurrentState(TStateEnum newState)
         {
             _context.CurrentState = newState;
             OnStateUpdated?.Invoke();

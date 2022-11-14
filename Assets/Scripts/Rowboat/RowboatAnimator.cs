@@ -22,13 +22,13 @@ namespace IndieCade
         [SerializeField] private SpriteRenderer _spriteRenderer;
 
         private RowboatSlideState _slideState;
-        private RowingStateMachine _rowingStateMachine;
+        private RowingStateMachine<RowingState, RowingStateMachineTransition> _rowingStateMachine;
         private GlobalDirectionStateMachine _directionStateMachine;
         private RowboatPhysicsParametersProvider _rowboatPhysicsParametersProvider;
         private Coroutine _spinCoroutine;
 
         [Inject]
-        public void Initialize(RowboatSlideState slideState, RowingStateMachine rowingStateMachine, GlobalDirectionStateMachine globalDirectionStateMachine, RowboatPhysicsParametersProvider rowboatPhysicsParametersProvider)
+        public void Initialize(RowboatSlideState slideState, RowingStateMachine<RowingState, RowingStateMachineTransition> rowingStateMachine, GlobalDirectionStateMachine globalDirectionStateMachine, RowboatPhysicsParametersProvider rowboatPhysicsParametersProvider)
         {
             _slideState = slideState;
             _rowingStateMachine = rowingStateMachine;

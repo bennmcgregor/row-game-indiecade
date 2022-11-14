@@ -11,19 +11,17 @@ namespace IndieCade
         public float CanTransitionFromStopSpeedThreshold = 1f;
         public float SliderDriveSpeed = 0.05f;
         public float MaxVelClamp = 20f;
-        // TODO(rudder): remove MaxSwitchLaneTime and WaitBeforeSwitchLaneTime
-        public float WaitBeforeSwitchLaneTime = 0.1f;
-        public float MaxSwitchLaneTime = 0.9f;
         public float DragVelocityScalingFactor = 0.05f;
-        public float BaseSwitchLaneSpeedDragFactor = 0.05f;
+        public float BaseDriveRudderTurnSpeedDragFactor = 0.1f;
+        public float BaseRecoveryRudderTurnSpeedDragFactor = 0.35f;
 
         public float BoatForwardsDriveForce = 5f;
         public float BoatBackwardsDriveForce = 2f;
         public float BoatStopForce = 1f;
         public float MinRecoverySpeed = 0.01f;
-        // TODO(rudder): remove SwitchLaneSpeed
-        public float SwitchLaneSpeed = 5f;
-        public float SwitchLaneSpeedMultiplier = 0.2f;
+        public float MinRudderTurnSpeed = 0.1f;
+        public float RudderTurnDriveSpeedMultiplier = 0.7f;
+        public float RudderTurnRecoverySpeedMultiplier = 0.2f;
         public float SpinAnimationTimeSeconds = 1f;
         public float BaseDragFactor = 0.25f;
 

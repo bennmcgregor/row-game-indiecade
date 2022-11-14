@@ -6,6 +6,7 @@ namespace IndieCade
     {
         private Dictionary<GlobalDirectionState, Dictionary<InputKey, BoatDirection>> _kGlobalToBoatInputDirectionMap;
         private Dictionary<(BoatDirection, InputState), RowingStateMachineTransition> _kDirectionInputToRowingStateTransitionMap;
+        private Dictionary<(BoatDirection, InputState), RudderStateMachineTransition> _kDirectionInputToRudderStateTransitionMap;
 
         public RowboatMaps()
         {
@@ -40,15 +41,19 @@ namespace IndieCade
                 { (BoatDirection.STERN, InputState.DOWN), RowingStateMachineTransition.STERN_DOWN },
                 { (BoatDirection.STERN, InputState.HOLD), RowingStateMachineTransition.STERN_HOLD },
                 { (BoatDirection.STERN, InputState.UP), RowingStateMachineTransition.STERN_UP },
-                { (BoatDirection.STERN, InputState.NONE), RowingStateMachineTransition.STERN_NONE },
-                { (BoatDirection.PORT, InputState.DOWN), RowingStateMachineTransition.PORT_DOWN },
-                { (BoatDirection.PORT, InputState.HOLD), RowingStateMachineTransition.PORT_HOLD },
-                { (BoatDirection.PORT, InputState.UP), RowingStateMachineTransition.PORT_UP },
-                { (BoatDirection.PORT, InputState.NONE), RowingStateMachineTransition.PORT_NONE },
-                { (BoatDirection.STARBOARD, InputState.DOWN), RowingStateMachineTransition.STAR_DOWN },
-                { (BoatDirection.STARBOARD, InputState.HOLD), RowingStateMachineTransition.STAR_HOLD },
-                { (BoatDirection.STARBOARD, InputState.UP), RowingStateMachineTransition.STAR_UP },
-                { (BoatDirection.STARBOARD, InputState.NONE), RowingStateMachineTransition.STAR_NONE }
+                { (BoatDirection.STERN, InputState.NONE), RowingStateMachineTransition.STERN_NONE }
+            };
+
+            _kDirectionInputToRudderStateTransitionMap = new Dictionary<(BoatDirection, InputState), RudderStateMachineTransition>
+            {
+                { (BoatDirection.PORT, InputState.DOWN), RudderStateMachineTransition.PORT_DOWN },
+                { (BoatDirection.PORT, InputState.HOLD), RudderStateMachineTransition.PORT_HOLD },
+                { (BoatDirection.PORT, InputState.UP), RudderStateMachineTransition.PORT_UP },
+                { (BoatDirection.PORT, InputState.NONE), RudderStateMachineTransition.PORT_NONE },
+                { (BoatDirection.STARBOARD, InputState.DOWN), RudderStateMachineTransition.STAR_DOWN },
+                { (BoatDirection.STARBOARD, InputState.HOLD), RudderStateMachineTransition.STAR_HOLD },
+                { (BoatDirection.STARBOARD, InputState.UP), RudderStateMachineTransition.STAR_UP },
+                { (BoatDirection.STARBOARD, InputState.NONE), RudderStateMachineTransition.STAR_NONE }
             };
         }
 
@@ -60,6 +65,11 @@ namespace IndieCade
         public RowingStateMachineTransition GetRowingStateMachineTransitionFromInput(BoatDirection boatDirection, InputState inputState)
         {
             return _kDirectionInputToRowingStateTransitionMap[(boatDirection, inputState)];
+        }
+
+        public RudderStateMachineTransition GetRudderStateMachineTransitionFromInput(BoatDirection boatDirection, InputState inputState)
+        {
+            return _kDirectionInputToRudderStateTransitionMap[(boatDirection, inputState)];
         }
 
         public InputKey GetInputKeyFromBoatAndGlobalDirection(BoatDirection boatDirection, GlobalDirectionState globalDirectionState)

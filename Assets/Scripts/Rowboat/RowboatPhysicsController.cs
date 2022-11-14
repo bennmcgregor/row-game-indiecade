@@ -23,11 +23,14 @@ namespace IndieCade
         private Coroutine _driveCoroutine;
         private Coroutine _recoveryCoroutine;
         private Coroutine _stopCoroutine;
+        private Coroutine _portRudderCoroutine;
+        private Coroutine _starRudderCoroutine;
         private float _directionMultiplier;
         private Vector2 _boatForce = Vector2.zero;
-        private float _boatTorque = 0f;
         private float _rudderDrag = 0f;
+        private float _boatYVelocity = 0f;
         private bool _isSwitchingLanes = false;
+        private bool _isDrive = false;
 
         [Inject]
         public void Initialize(RowboatSlideState slideState, GlobalDirectionStateMachine globalDirectionStateMachine, RowboatPhysicsParametersProvider rowboatPhysicsParametersProvider)
@@ -41,14 +44,17 @@ namespace IndieCade
         {
             // apply a force to the boat
             _boatRigidbody.AddForce(_boatForce);
-            _boatRigidbody.AddTorque(_boatTorque);
 
             _boatRigidbody.drag = _rowboatPhysicsParametersProvider.BaseDragFactor + _rudderDrag +
                 _rowboatPhysicsParametersProvider.DragVelocityScalingFactor *
                 Mathf.Abs(_boatRigidbody.velocity.x);
 
+            Debug.Log($"yvel: {_boatYVelocity}");
+            _boatRigidbody.velocity = new Vector2(_boatRigidbody.velocity.x, _boatYVelocity);
+
             // reset the _rudderDrag after it has been applied
             _rudderDrag = 0f;
+            _boatYVelocity = 0f;
         }
 
         public void StartDrive(bool forwards)
@@ -69,6 +75,7 @@ namespace IndieCade
 
         private IEnumerator DriveCoroutine(bool forwards)
         {
+            _isDrive = true;
             PlayCatchSoundEffect?.Invoke();
 
             while (!IsAtFinish(forwards))
@@ -76,13 +83,12 @@ namespace IndieCade
                 _slideState.AddValue(-1 * _rowboatPhysicsParametersProvider.SliderDriveSpeed * _directionMultiplier);
                 float driveForce = forwards ? _rowboatPhysicsParametersProvider.BoatForwardsDriveForce : _rowboatPhysicsParametersProvider.BoatBackwardsDriveForce;
                 _boatForce = GetForceDirectionVectorFromBoatDirection() * _directionMultiplier * driveForce;
-                _boatTorque = 0;
                 yield return new WaitForFixedUpdate();
             }
 
             _boatForce = Vector2.zero;
-            _boatTorque = 0;
 
+            _isDrive = false;
             OnDriveFinished?.Invoke();
         }
 
@@ -113,14 +119,12 @@ namespace IndieCade
                 _slideState.AddValue((slideVal > _rowboatPhysicsParametersProvider.MinRecoverySpeed ? slideVal : _rowboatPhysicsParametersProvider.MinRecoverySpeed) * _directionMultiplier);
 
                 _boatForce = Vector2.zero;
-                _boatTorque = 0;
                 yield return new WaitForFixedUpdate();
             }
 
             while (true)
             {
                 _boatForce = Vector2.zero;
-                _boatTorque = 0;
                 yield return new WaitForFixedUpdate();
             }
         }
@@ -136,7 +140,6 @@ namespace IndieCade
             {
                 StopCoroutine(_stopCoroutine);
                 _boatForce = Vector2.zero;
-                _boatTorque = 0f;
             }
         }
 
@@ -151,88 +154,69 @@ namespace IndieCade
                 _slideState.AddValue(slideVal * _directionMultiplier);
 
                 _boatForce = -(_boatRigidbody.mass * _boatRigidbody.velocity) * _rowboatPhysicsParametersProvider.BoatStopForce;
-                _boatTorque = 0;
                 yield return new WaitForFixedUpdate();
             }
 
             while (true)
             {
                 _boatForce = Vector2.zero;
-                _boatTorque = 0;
                 yield return new WaitForFixedUpdate();
             }
         }
 
-        public void StartSwitchLane(bool star)
+        public void StartTurnRudder(bool star)
         {
-            if (!_isSwitchingLanes)
+            Debug.Log($"StartTurnRudder star: {star}");
+            if (star)
             {
-                StartCoroutine(SwitchLaneCoroutine(star));
+                _starRudderCoroutine = StartCoroutine(TurnRudderCoroutine(star));
+            }
+            else
+            {
+                _portRudderCoroutine = StartCoroutine(TurnRudderCoroutine(star));
             }
         }
 
-        public IEnumerator SwitchLaneCoroutine(bool star)
+        public void EndTurnRudder(bool star)
         {
-            _isSwitchingLanes = true;
-            _boatForce = Vector2.zero;
-            _boatTorque = 0;
-
-            // only move if exactly one key is being pressed
-            Vector3 directionMultiplier = GetPerpendicularForceDirectionVectorFromBoatDirection(star);
-            Vector3 targetPosition = directionMultiplier + transform.position;
-            float speed = _rowboatPhysicsParametersProvider.SwitchLaneSpeedMultiplier * Math.Abs(_boatRigidbody.velocity.x) * Time.fixedDeltaTime;
-
-            if (!Physics2D.OverlapCircle(targetPosition, .2f, _verticalMovementMask) &&
-                Math.Abs(transform.position.y - targetPosition.y) > 0f)
+            Debug.Log($"EndTurnRudder star: {star}");
+            if (star)
             {
-                Vector3 newYPos = new Vector3(transform.position.x, targetPosition.y, transform.position.z);
-                transform.position = Vector3.MoveTowards(
-                    transform.position,
-                    newYPos,
-                    speed
-                );
+                if (_starRudderCoroutine != null)
+                {
+                    StopCoroutine(_starRudderCoroutine);
+                }
+            }
+            else
+            {
+                if (_portRudderCoroutine != null)
+                {
+                    StopCoroutine(_portRudderCoroutine);
+                }
+            }
+        }
 
-                _rudderDrag = _rowboatPhysicsParametersProvider.BaseSwitchLaneSpeedDragFactor;
+        private IEnumerator TurnRudderCoroutine(bool star)
+        {
+            while (true)
+            {
+                Vector3 directionMultiplier = GetPerpendicularForceDirectionVectorFromBoatDirection(star);
+                float speed = _rowboatPhysicsParametersProvider.RudderTurnDriveSpeedMultiplier * Math.Abs(_boatRigidbody.velocity.x);
+                if (!_isDrive)
+                {
+                    speed *= _rowboatPhysicsParametersProvider.RudderTurnRecoverySpeedMultiplier;
+                    _rudderDrag = _rowboatPhysicsParametersProvider.BaseRecoveryRudderTurnSpeedDragFactor;
+                }
+                else
+                {
+                    speed = speed < _rowboatPhysicsParametersProvider.MinRudderTurnSpeed ? _rowboatPhysicsParametersProvider.MinRudderTurnSpeed : speed;
+                    _rudderDrag = _rowboatPhysicsParametersProvider.BaseDriveRudderTurnSpeedDragFactor;
+                }
+                _boatYVelocity = speed * directionMultiplier.y;
+                
                 yield return new WaitForFixedUpdate();
             }
-
-            _isSwitchingLanes = false;
         }
-
-        // TODO(rudder): delete this
-        //private IEnumerator SwitchLaneCoroutine(bool star)
-        //{
-        //    _boatForce = Vector2.zero;
-        //    _boatTorque = 0;
-
-        //    Vector3 directionMultiplier = GetPerpendicularForceDirectionVectorFromBoatDirection(star);
-        //    Vector3 targetPosition = directionMultiplier + transform.position;
-
-        //    if (!Physics2D.OverlapCircle(targetPosition, .2f, _verticalMovementMask))
-        //    {
-        //        float timer = 0;
-        //        while (timer < _rowboatPhysicsParametersProvider.WaitBeforeSwitchLaneTime)
-        //        {
-        //            timer += Time.fixedDeltaTime;
-        //            yield return new WaitForFixedUpdate();
-        //        }
-
-        //        timer = 0;
-        //        while (Math.Abs(transform.position.y - targetPosition.y) > 0f && timer < _rowboatPhysicsParametersProvider.MaxSwitchLaneTime)
-        //        {
-        //            timer += Time.fixedDeltaTime;
-        //            Vector3 newYPos = new Vector3(transform.position.x, targetPosition.y, transform.position.z);
-        //            transform.position = Vector3.MoveTowards(
-        //                transform.position,
-        //                newYPos,
-        //                _rowboatPhysicsParametersProvider.SwitchLaneSpeed * Time.fixedDeltaTime
-        //            );
-        //            yield return new WaitForFixedUpdate();
-        //        }
-        //    }
-
-        //    OnSwitchLaneFinished?.Invoke();
-        //}
 
         private bool IsAtFinish(bool forwards)
         {

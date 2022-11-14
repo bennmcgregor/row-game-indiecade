@@ -2,26 +2,26 @@
 tags:
 ---
 <<enable_input>>
-Odette: saying some things about moving and stopping the boat.
--> Option 1
--> option 2
--> option 3
+Odette: Welcome to the rowboat! Tap left and right to take strokes. (Press Enter)
+Odette: Hold up and down to move the boat up and down.
 ===
 title: Tutorial2
 tags:
 ---
 <<enable_input>>
-Odette: saying some things about moving the boat up and down.
+Odette: Hold down the opposite key to stop the boat.
 ===
 title: Tutorial3
 tags:
 ---
 <<enable_input>>
-Odette: saying some things about spinning the boat.
+Odette: You always go faster in the opposite direction of where you're looking.
+Odette: To spin the boat around, stop it, and then tap Shift.
 ===
 title: Tutorial4
 tags:
 ---
-Odette: saying some things about getting to the end of the canal, avoiding the spotlights, and collecting water.
-Odette: saying some things about using spacebar to interact with items, telling mio to open the gate.
+Odette: We need to get to the end of the canal to steal the water.
+Odette: But we need to make sure we don't get caught in the spotlights!
+Odette: Press Spacebar to interact with items, such as opening this gate.
 ===
