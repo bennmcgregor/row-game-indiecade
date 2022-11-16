@@ -166,7 +166,6 @@ namespace IndieCade
 
         public void StartTurnRudder(bool star)
         {
-            Debug.Log($"StartTurnRudder star: {star}");
             if (star)
             {
                 _starRudderCoroutine = StartCoroutine(TurnRudderCoroutine(star));

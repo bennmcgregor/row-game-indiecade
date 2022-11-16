@@ -1,7 +1,7 @@
 ﻿using System;
 namespace IndieCade
 {
-    public enum RowingStateMachineTransition
+    public enum RowingMotionStateMachineTransition
     {
         ENTRY,
         BOW_NONE,

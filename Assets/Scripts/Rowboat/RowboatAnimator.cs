@@ -22,13 +22,13 @@ namespace IndieCade
         [SerializeField] private SpriteRenderer _spriteRenderer;
 
         private RowboatSlideState _slideState;
-        private RowingStateMachine<RowingState, RowingStateMachineTransition> _rowingStateMachine;
+        private RowingStateMachine<RowingMotionState, RowingMotionStateMachineTransition> _rowingStateMachine;
         private GlobalDirectionStateMachine _directionStateMachine;
         private RowboatPhysicsParametersProvider _rowboatPhysicsParametersProvider;
         private Coroutine _spinCoroutine;
 
         [Inject]
-        public void Initialize(RowboatSlideState slideState, RowingStateMachine<RowingState, RowingStateMachineTransition> rowingStateMachine, GlobalDirectionStateMachine globalDirectionStateMachine, RowboatPhysicsParametersProvider rowboatPhysicsParametersProvider)
+        public void Initialize(RowboatSlideState slideState, RowingStateMachine<RowingMotionState, RowingMotionStateMachineTransition> rowingStateMachine, GlobalDirectionStateMachine globalDirectionStateMachine, RowboatPhysicsParametersProvider rowboatPhysicsParametersProvider)
         {
             _slideState = slideState;
             _rowingStateMachine = rowingStateMachine;
@@ -40,29 +40,29 @@ namespace IndieCade
         {
             Sprite sprite = null; // placeholder
 
-            if (_rowingStateMachine.CurrentState == RowingState.FORWARDS_RECOV)
+            if (_rowingStateMachine.CurrentState == RowingMotionState.FORWARDS_RECOV)
             {
                 sprite = GetRecoverySprite(_eastForwardsRecoverySequence, _westForwardsRecoverySequence);
-            } else if (_rowingStateMachine.CurrentState == RowingState.BACKWARDS_RECOV)
+            } else if (_rowingStateMachine.CurrentState == RowingMotionState.BACKWARDS_RECOV)
             {
                 sprite = GetRecoverySprite(_eastBackwardsRecoverySequence, _westBackwardsRecoverySequence);
-            } else if (_rowingStateMachine.CurrentState == RowingState.FORWARDS_DRIVE)
+            } else if (_rowingStateMachine.CurrentState == RowingMotionState.FORWARDS_DRIVE)
             {
                 sprite = GetDriveSprite(_eastForwardsDriveSequence, _westForwardsDriveSequence);
-            } else if (_rowingStateMachine.CurrentState == RowingState.BACKWARDS_DRIVE)
+            } else if (_rowingStateMachine.CurrentState == RowingMotionState.BACKWARDS_DRIVE)
             {
                 sprite = GetDriveSprite(_eastBackwardsDriveSequence, _westBackwardsDriveSequence);
-            } else if (_rowingStateMachine.CurrentState == RowingState.STOP)
+            } else if (_rowingStateMachine.CurrentState == RowingMotionState.STOP)
             {
-                if (_rowingStateMachine.PreviousState == RowingState.FORWARDS_DRIVE ||
-                    _rowingStateMachine.PreviousState == RowingState.FORWARDS_RECOV)
+                if (_rowingStateMachine.PreviousState == RowingMotionState.FORWARDS_DRIVE ||
+                    _rowingStateMachine.PreviousState == RowingMotionState.FORWARDS_RECOV)
                 {
                     sprite = GetDriveSprite(_eastBackwardsDriveSequence, _westBackwardsDriveSequence);
-                } else if (_rowingStateMachine.PreviousState == RowingState.BACKWARDS_DRIVE ||
-                    _rowingStateMachine.PreviousState == RowingState.BACKWARDS_RECOV)
+                } else if (_rowingStateMachine.PreviousState == RowingMotionState.BACKWARDS_DRIVE ||
+                    _rowingStateMachine.PreviousState == RowingMotionState.BACKWARDS_RECOV)
                 {
                     sprite = GetDriveSprite(_eastForwardsDriveSequence, _westForwardsDriveSequence);
-                } else if (_rowingStateMachine.PreviousState == RowingState.SPIN)
+                } else if (_rowingStateMachine.PreviousState == RowingMotionState.SPIN)
                 {
                     sprite = GetDriveSprite(_eastForwardsDriveSequence, _westForwardsDriveSequence);
                 }

@@ -1,7 +1,7 @@
 ﻿using System;
 namespace IndieCade
 {
-    public enum RowingState
+    public enum RowingMotionState
     {
         ENTRY,
         SPIN,
