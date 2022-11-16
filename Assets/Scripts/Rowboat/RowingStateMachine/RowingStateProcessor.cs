@@ -1,25 +1,24 @@
 ﻿using System;
+using System.Collections.Generic;
+
 namespace IndieCade
 {
-    public abstract class RowingStateProcessor<TStateEnum, TTransitionEnum> : IStateProcessor
+    public class RowingStateProcessor<TStateEnum, TTransitionEnum> : StateProcessor<TStateEnum, TTransitionEnum, RowingStateMachineContext<TStateEnum, TTransitionEnum>>
         where TStateEnum : Enum
         where TTransitionEnum : Enum
     {
-        public Action OnStateUpdated;
+        private RowboatPlayerInputs _rowboatPlayerInputs;
+        private bool _notifyInputStateMachine;
 
-        protected RowingStateMachineContext<TStateEnum, TTransitionEnum> _context;
-        protected RowboatPlayerInputs _rowboatPlayerInputs;
-        protected bool _notifyInputStateMachine = true;
-
-        public RowingStateProcessor(RowingStateMachineContext<TStateEnum, TTransitionEnum> context, RowboatPlayerInputs rowboatPlayerInputs)
+        public RowingStateProcessor(RowingStateMachineContext<TStateEnum, TTransitionEnum> context, TStateEnum stateName, List<Predicate<TTransitionEnum>> transitionFunctionList, List<TStateEnum> transitionStateList, Dictionary<TStateEnum, Action> newStateActionMap, RowboatPlayerInputs rowboatPlayerInputs, bool notifyInputStateMachine = true)
+            : base(context, stateName, transitionFunctionList, transitionStateList, newStateActionMap)
         {
-            _context = context;
             _rowboatPlayerInputs = rowboatPlayerInputs;
+            _notifyInputStateMachine = notifyInputStateMachine;
         }
 
-        public void Process()
+        protected override void PostProcess()
         {
-            ProcessInternal();
             if (_notifyInputStateMachine)
             {
                 foreach (var stateMachine in _rowboatPlayerInputs.InputStateMachines.Values)
@@ -29,14 +28,7 @@ namespace IndieCade
             }
         }
 
-        protected abstract void ProcessInternal();
-
+        // TODO(sm): add a way to run processhold logic to factory
         public virtual void ProcessHold() {}
-
-        protected void SetCurrentState(TStateEnum newState)
-        {
-            _context.CurrentState = newState;
-            OnStateUpdated?.Invoke();
-        }
     }
 }

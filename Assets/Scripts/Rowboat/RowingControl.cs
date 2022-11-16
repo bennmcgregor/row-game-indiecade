@@ -9,14 +9,14 @@ namespace IndieCade
     {
         private GlobalDirectionStateMachine _globalDirectionStateMachine;
         private RowboatPlayerInputs _rowboatPlayerInputs;
-        private RowingStateMachine<RowingState, RowingStateMachineTransition> _rowingStateMachine;
+        private RowingStateMachine<RowingMotionState, RowingMotionStateMachineTransition> _rowingStateMachine;
         private RowingStateMachine<RudderState, RudderStateMachineTransition> _rudderStateMachine;
         private RowboatMaps _rowboatMaps;
 
         private bool _enabled = true;
 
         [Inject]
-        public void Initialize(RowboatMaps rowboatMaps, RowingStateMachine<RowingState, RowingStateMachineTransition> rowingStateMachine, RowingStateMachine<RudderState, RudderStateMachineTransition> rudderStateMachine, GlobalDirectionStateMachine globalDirectionStateMachine, RowboatPlayerInputs rowboatPlayerInputs)
+        public void Initialize(RowboatMaps rowboatMaps, RowingStateMachine<RowingMotionState, RowingMotionStateMachineTransition> rowingStateMachine, RowingStateMachine<RudderState, RudderStateMachineTransition> rudderStateMachine, GlobalDirectionStateMachine globalDirectionStateMachine, RowboatPlayerInputs rowboatPlayerInputs)
         {
             _rowboatMaps = rowboatMaps;
             _rowingStateMachine = rowingStateMachine;
@@ -29,7 +29,7 @@ namespace IndieCade
         {
             // the direction state machine has to transition before the rowing state machine
             _globalDirectionStateMachine.Transition(GlobalDirectionStateMachineTransition.ENTRY);
-            _rowingStateMachine.Transition(RowingStateMachineTransition.ENTRY);
+            _rowingStateMachine.Transition(RowingMotionStateMachineTransition.ENTRY);
             foreach (var stateMachine in _rowboatPlayerInputs.InputStateMachines.Values)
             {
                 stateMachine.Transition(InputStateMachineTransition.ENTRY);
@@ -94,7 +94,7 @@ namespace IndieCade
                 }
                 else
                 {
-                    RowingStateMachineTransition transition;
+                    RowingMotionStateMachineTransition transition;
                     if (inputKey == InputKey.SHIFT)
                     {
                         transition = GetRowingStateMachineTransitionFromInput(inputKey, inputState);
@@ -110,20 +110,20 @@ namespace IndieCade
             }
         }
 
-        private RowingStateMachineTransition GetRowingStateMachineTransitionFromInput(InputKey inputKey, InputState inputState)
+        private RowingMotionStateMachineTransition GetRowingStateMachineTransitionFromInput(InputKey inputKey, InputState inputState)
         {
             if (inputKey == InputKey.SHIFT)
             {
                 switch (inputState)
                 {
                     case InputState.DOWN:
-                        return RowingStateMachineTransition.SHIFT_DOWN;
+                        return RowingMotionStateMachineTransition.SHIFT_DOWN;
                     case InputState.HOLD:
-                        return RowingStateMachineTransition.SHIFT_HOLD;
+                        return RowingMotionStateMachineTransition.SHIFT_HOLD;
                     case InputState.UP:
-                        return RowingStateMachineTransition.SHIFT_UP;
+                        return RowingMotionStateMachineTransition.SHIFT_UP;
                     case InputState.NONE:
-                        return RowingStateMachineTransition.SHIFT_NONE;
+                        return RowingMotionStateMachineTransition.SHIFT_NONE;
                 }
             }
 

@@ -5,7 +5,7 @@ namespace IndieCade
     public class RowboatMaps
     {
         private Dictionary<GlobalDirectionState, Dictionary<InputKey, BoatDirection>> _kGlobalToBoatInputDirectionMap;
-        private Dictionary<(BoatDirection, InputState), RowingStateMachineTransition> _kDirectionInputToRowingStateTransitionMap;
+        private Dictionary<(BoatDirection, InputState), RowingMotionStateMachineTransition> _kDirectionInputToRowingStateTransitionMap;
         private Dictionary<(BoatDirection, InputState), RudderStateMachineTransition> _kDirectionInputToRudderStateTransitionMap;
 
         public RowboatMaps()
@@ -32,16 +32,16 @@ namespace IndieCade
                 }
             };
 
-            _kDirectionInputToRowingStateTransitionMap = new Dictionary<(BoatDirection, InputState), RowingStateMachineTransition>
+            _kDirectionInputToRowingStateTransitionMap = new Dictionary<(BoatDirection, InputState), RowingMotionStateMachineTransition>
             {
-                { (BoatDirection.BOW, InputState.DOWN), RowingStateMachineTransition.BOW_DOWN },
-                { (BoatDirection.BOW, InputState.HOLD), RowingStateMachineTransition.BOW_HOLD },
-                { (BoatDirection.BOW, InputState.UP), RowingStateMachineTransition.BOW_UP },
-                { (BoatDirection.BOW, InputState.NONE), RowingStateMachineTransition.BOW_NONE },
-                { (BoatDirection.STERN, InputState.DOWN), RowingStateMachineTransition.STERN_DOWN },
-                { (BoatDirection.STERN, InputState.HOLD), RowingStateMachineTransition.STERN_HOLD },
-                { (BoatDirection.STERN, InputState.UP), RowingStateMachineTransition.STERN_UP },
-                { (BoatDirection.STERN, InputState.NONE), RowingStateMachineTransition.STERN_NONE }
+                { (BoatDirection.BOW, InputState.DOWN), RowingMotionStateMachineTransition.BOW_DOWN },
+                { (BoatDirection.BOW, InputState.HOLD), RowingMotionStateMachineTransition.BOW_HOLD },
+                { (BoatDirection.BOW, InputState.UP), RowingMotionStateMachineTransition.BOW_UP },
+                { (BoatDirection.BOW, InputState.NONE), RowingMotionStateMachineTransition.BOW_NONE },
+                { (BoatDirection.STERN, InputState.DOWN), RowingMotionStateMachineTransition.STERN_DOWN },
+                { (BoatDirection.STERN, InputState.HOLD), RowingMotionStateMachineTransition.STERN_HOLD },
+                { (BoatDirection.STERN, InputState.UP), RowingMotionStateMachineTransition.STERN_UP },
+                { (BoatDirection.STERN, InputState.NONE), RowingMotionStateMachineTransition.STERN_NONE }
             };
 
             _kDirectionInputToRudderStateTransitionMap = new Dictionary<(BoatDirection, InputState), RudderStateMachineTransition>
@@ -62,7 +62,7 @@ namespace IndieCade
             return _kGlobalToBoatInputDirectionMap[globalState][inputKey];
         }
 
-        public RowingStateMachineTransition GetRowingStateMachineTransitionFromInput(BoatDirection boatDirection, InputState inputState)
+        public RowingMotionStateMachineTransition GetRowingStateMachineTransitionFromInput(BoatDirection boatDirection, InputState inputState)
         {
             return _kDirectionInputToRowingStateTransitionMap[(boatDirection, inputState)];
         }
