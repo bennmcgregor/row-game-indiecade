@@ -64,7 +64,7 @@ namespace IndieCade
 
         public void SetBoatForwardsDriveForce(float force)
         {
-            _boatForwardsDriveForce = _boatStoppingForce;
+            _boatForwardsDriveForce = force;
         }
 
         public void SetRudderTurnDriveSpeed(float speed)

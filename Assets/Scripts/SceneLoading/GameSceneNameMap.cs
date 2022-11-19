@@ -19,6 +19,7 @@ namespace IndieCade
                 GameSceneName.INTERROGATION_ROOM => "InterrogationRoom",
                 GameSceneName.TEASER_CUTSCENE => "TeaserCutscene",
                 GameSceneName.DOWNSTREAM_SETTLEMENT => "DownstreamSettlement",
+                GameSceneName.BOAT_DEMO => "BoatDemo",
                 _ => throw new NotImplementedException()
             };
         }
