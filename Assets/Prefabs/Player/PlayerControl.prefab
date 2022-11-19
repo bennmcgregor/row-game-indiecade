@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 6986955186894464977}
   - component: {fileID: 6986955186894464978}
   - component: {fileID: 1387848009401672197}
+  - component: {fileID: 1284062264399571821}
   m_Layer: 0
   m_Name: PlayerControl
   m_TagString: Untagged
@@ -50,6 +51,7 @@ MonoBehaviour:
   _rowingControl: {fileID: 0}
   _objectInteractionControl: {fileID: 0}
   _dialogueControl: {fileID: 0}
+  _quitApplication: {fileID: 1284062264399571821}
   _inputState: 1
 --- !u!114 &6986955186894464978
 MonoBehaviour:
@@ -92,5 +94,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d2a60ca1954f34a88bacba38abab783d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1284062264399571821
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6986955186894464979}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 692981bc11ae44b3c8f71eb2fa95364c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

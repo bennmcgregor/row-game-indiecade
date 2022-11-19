@@ -12,6 +12,7 @@ namespace IndieCade
         [SerializeField] private RowingControl _rowingControl;
         [SerializeField] private ObjectInteractionControl _objectInteractionControl;
         [SerializeField] private DialogueControl _dialogueControl;
+        [SerializeField] private QuitApplication _quitApplication;
         [SerializeField] private PlayerControlInputState _inputState = PlayerControlInputState.WALKING;
 
         private PlayerControlInputState _prevInputState;
@@ -111,6 +112,11 @@ namespace IndieCade
             {
                 _objectInteractionControl.Interact();
             }
+        }
+
+        public void OnEscape()
+        {
+            _quitApplication.Quit();
         }
 
         public void SetInputState(PlayerControlInputState inputState)

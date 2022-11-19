@@ -20,13 +20,13 @@ MonoBehaviour:
   DragVelocityScalingFactor: 0.05
   BaseDriveRudderTurnSpeedDragFactor: 0.1
   BaseRecoveryRudderTurnSpeedDragFactor: 0.35
-  BoatForwardsDriveForce: 6
-  BoatBackwardsDriveForce: 2
+  BoatForwardsDriveForce: 7
+  BoatBackwardsDriveForce: 3
   BoatStopForce: 1
   MinRecoverySpeed: 0.015
-  MinRudderTurnSpeed: 0.1
-  RudderTurnDriveSpeedMultiplier: 0.7
+  MinRudderTurnSpeed: 1
+  RudderTurnDriveSpeedMultiplier: 0.8
   RudderTurnRecoverySpeedMultiplier: 0.2
   SpinAnimationTimeSeconds: 3
-  BaseDragFactor: 0.25
+  BaseDragFactor: 0.3
   InputSpamTimeoutSeconds: 0.7

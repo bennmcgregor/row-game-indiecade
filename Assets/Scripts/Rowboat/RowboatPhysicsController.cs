@@ -49,7 +49,6 @@ namespace IndieCade
                 _rowboatPhysicsParametersProvider.DragVelocityScalingFactor *
                 Mathf.Abs(_boatRigidbody.velocity.x);
 
-            Debug.Log($"yvel: {_boatYVelocity}");
             _boatRigidbody.velocity = new Vector2(_boatRigidbody.velocity.x, _boatYVelocity);
 
             // reset the _rudderDrag after it has been applied

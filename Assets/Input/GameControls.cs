@@ -368,6 +368,15 @@ public partial class @GameControls : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": ""Press(behavior=2)"",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Escape"",
+                    ""type"": ""Button"",
+                    ""id"": ""043a282f-41c6-4bf2-800b-82fd6861fe77"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -568,6 +577,17 @@ public partial class @GameControls : IInputActionCollection2, IDisposable
                     ""action"": ""RowingShift"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""7297167b-789d-41c9-bf08-ec63c67f2291"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Escape"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -598,6 +618,7 @@ public partial class @GameControls : IInputActionCollection2, IDisposable
         m_IndieCade_RowingRight = m_IndieCade.FindAction("RowingRight", throwIfNotFound: true);
         m_IndieCade_RowingLeft = m_IndieCade.FindAction("RowingLeft", throwIfNotFound: true);
         m_IndieCade_RowingShift = m_IndieCade.FindAction("RowingShift", throwIfNotFound: true);
+        m_IndieCade_Escape = m_IndieCade.FindAction("Escape", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -772,6 +793,7 @@ public partial class @GameControls : IInputActionCollection2, IDisposable
     private readonly InputAction m_IndieCade_RowingRight;
     private readonly InputAction m_IndieCade_RowingLeft;
     private readonly InputAction m_IndieCade_RowingShift;
+    private readonly InputAction m_IndieCade_Escape;
     public struct IndieCadeActions
     {
         private @GameControls m_Wrapper;
@@ -786,6 +808,7 @@ public partial class @GameControls : IInputActionCollection2, IDisposable
         public InputAction @RowingRight => m_Wrapper.m_IndieCade_RowingRight;
         public InputAction @RowingLeft => m_Wrapper.m_IndieCade_RowingLeft;
         public InputAction @RowingShift => m_Wrapper.m_IndieCade_RowingShift;
+        public InputAction @Escape => m_Wrapper.m_IndieCade_Escape;
         public InputActionMap Get() { return m_Wrapper.m_IndieCade; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -825,6 +848,9 @@ public partial class @GameControls : IInputActionCollection2, IDisposable
                 @RowingShift.started -= m_Wrapper.m_IndieCadeActionsCallbackInterface.OnRowingShift;
                 @RowingShift.performed -= m_Wrapper.m_IndieCadeActionsCallbackInterface.OnRowingShift;
                 @RowingShift.canceled -= m_Wrapper.m_IndieCadeActionsCallbackInterface.OnRowingShift;
+                @Escape.started -= m_Wrapper.m_IndieCadeActionsCallbackInterface.OnEscape;
+                @Escape.performed -= m_Wrapper.m_IndieCadeActionsCallbackInterface.OnEscape;
+                @Escape.canceled -= m_Wrapper.m_IndieCadeActionsCallbackInterface.OnEscape;
             }
             m_Wrapper.m_IndieCadeActionsCallbackInterface = instance;
             if (instance != null)
@@ -859,6 +885,9 @@ public partial class @GameControls : IInputActionCollection2, IDisposable
                 @RowingShift.started += instance.OnRowingShift;
                 @RowingShift.performed += instance.OnRowingShift;
                 @RowingShift.canceled += instance.OnRowingShift;
+                @Escape.started += instance.OnEscape;
+                @Escape.performed += instance.OnEscape;
+                @Escape.canceled += instance.OnEscape;
             }
         }
     }
@@ -888,5 +917,6 @@ public partial class @GameControls : IInputActionCollection2, IDisposable
         void OnRowingRight(InputAction.CallbackContext context);
         void OnRowingLeft(InputAction.CallbackContext context);
         void OnRowingShift(InputAction.CallbackContext context);
+        void OnEscape(InputAction.CallbackContext context);
     }
 }
