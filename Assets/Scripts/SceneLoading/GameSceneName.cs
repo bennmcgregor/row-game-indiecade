@@ -11,6 +11,7 @@ namespace IndieCade
         RESERVOIR_FINAL_CANAL,
         INTERROGATION_ROOM,
         TEASER_CUTSCENE,
-        DOWNSTREAM_SETTLEMENT
+        DOWNSTREAM_SETTLEMENT,
+        BOAT_DEMO
     }
 }
