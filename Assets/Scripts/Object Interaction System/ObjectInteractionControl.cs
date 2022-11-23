@@ -17,7 +17,7 @@ namespace IndieCade
 
         private void Start()
         {
-            _pressReleaseStateMachine = new PressReleaseStateMachine();
+            _pressReleaseStateMachine = PressReleaseStateMachine.Make();
         }
 
         public void Interact()

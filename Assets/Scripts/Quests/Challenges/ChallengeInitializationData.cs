@@ -3,16 +3,11 @@ using Yarn.Unity;
 
 namespace IndieCade
 {
-    public class ChallengeInitializationData
+    public class ChallengeInitializationData<TChallengeState> : StateData<TChallengeState>
+        where TChallengeState : Enum
     {
-        private string _stateName;
-
-        public string StateName => _stateName;
-
-        public ChallengeInitializationData(string stateName)
-        {
-            _stateName = stateName;
-        }
+        public ChallengeInitializationData(TChallengeState stateName)
+            : base(stateName) {}
 
         private bool _beginWithDialogue = false;
         private string _beginningDialogueNodeName;

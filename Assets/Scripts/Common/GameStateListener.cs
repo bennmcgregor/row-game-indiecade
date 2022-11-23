@@ -24,8 +24,8 @@ namespace IndieCade
         {
             _questRunner.OnQuestUpdate += OnQuestUpdate;
             _questRunner.CurrentQuest.OnChallengeUpdated += OnChallengeUpdated;
-            _questRunner.CurrentQuest.OnChallengeFailed += OnChallengeFailed;
-            _questRunner.CurrentQuest.OnChallengeCompleted += OnChallengeCompleted;
+            _questRunner.CurrentQuest.OnChallengeRestart += OnChallengeFailed;
+            _questRunner.CurrentQuest.OnChallengeProgress += OnChallengeCompleted;
 
             _playedQuests = new List<QuestState>();
             _playedChallenges = new List<string>();
@@ -50,12 +50,12 @@ namespace IndieCade
 
         private void OnQuestUpdate(Quest newQuest)
         {
-            if (_playedQuests.Contains(newQuest.QuestState))
+            if (_playedQuests.Contains(newQuest.StateName))
             {
                 InitializeScene(_sceneInitializationDataIndex.GetDataFromCurrentScene());
             } else
             {
-                _playedQuests.Add(newQuest.QuestState);
+                _playedQuests.Add(newQuest.StateName);
             }
 
             SaveSceneOnQuestUpdated(_sceneInitializationDataIndex.GetDataFromCurrentScene());

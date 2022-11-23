@@ -27,20 +27,20 @@ namespace IndieCade
         {
             _pressReleaseStateMachines = new Dictionary<InputKey, PressReleaseStateMachine>
             {
-                { InputKey.RIGHT, new PressReleaseStateMachine() },
-                { InputKey.LEFT, new PressReleaseStateMachine() },
-                { InputKey.UP, new PressReleaseStateMachine() },
-                { InputKey.DOWN, new PressReleaseStateMachine() },
-                { InputKey.SHIFT, new PressReleaseStateMachine() },
+                { InputKey.RIGHT, PressReleaseStateMachine.Make() },
+                { InputKey.LEFT, PressReleaseStateMachine.Make() },
+                { InputKey.UP, PressReleaseStateMachine.Make() },
+                { InputKey.DOWN, PressReleaseStateMachine.Make() },
+                { InputKey.SHIFT, PressReleaseStateMachine.Make() },
             };
 
             _inputStateMachines = new Dictionary<InputKey, InputStateMachine>
             {
-                { InputKey.RIGHT, new InputStateMachine() },
-                { InputKey.LEFT, new InputStateMachine() },
-                { InputKey.UP, new InputStateMachine() },
-                { InputKey.DOWN, new InputStateMachine() },
-                { InputKey.SHIFT, new InputStateMachine() }
+                { InputKey.RIGHT, InputStateMachine.Make() },
+                { InputKey.LEFT, InputStateMachine.Make() },
+                { InputKey.UP, InputStateMachine.Make() },
+                { InputKey.DOWN, InputStateMachine.Make() },
+                { InputKey.SHIFT, InputStateMachine.Make() }
             };
 
             _spamTimers = new Dictionary<InputKey, SpamTimer>

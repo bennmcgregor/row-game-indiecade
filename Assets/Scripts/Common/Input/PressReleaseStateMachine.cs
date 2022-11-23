@@ -4,38 +4,53 @@ using Zenject;
 
 namespace IndieCade
 {
-    public class PressReleaseStateMachine
+    public class PressReleaseStateMachine : StateMachine<PressReleaseState, PressReleaseStateMachineTransition, StateMachineContext<PressReleaseState, PressReleaseStateMachineTransition>, StateProcessor<PressReleaseState, PressReleaseStateMachineTransition, StateMachineContext<PressReleaseState, PressReleaseStateMachineTransition>>>
     {
-        private PressReleaseStateMachineContext _context;
-        private Dictionary<PressReleaseState, PressReleaseStateProcessor> _stateProcessors;
-
-        public PressReleaseState CurrentState => _context.CurrentState;
-
-        public PressReleaseStateMachine()
+        private class PressReleaseStateMachineProcessorFactory : StateProcessorFactory<PressReleaseState, PressReleaseStateMachineTransition, StateMachineContext<PressReleaseState, PressReleaseStateMachineTransition>, StateProcessor<PressReleaseState, PressReleaseStateMachineTransition, StateMachineContext<PressReleaseState, PressReleaseStateMachineTransition>>>
         {
-            _context = new PressReleaseStateMachineContext(PressReleaseState.NONE);
-            _stateProcessors = new Dictionary<PressReleaseState, PressReleaseStateProcessor>
+            public PressReleaseStateMachineProcessorFactory(PressReleaseState stateName, StateMachineContext<PressReleaseState, PressReleaseStateMachineTransition> context)
+                : base(stateName, context) { }
+
+            public override StateProcessor<PressReleaseState, PressReleaseStateMachineTransition, StateMachineContext<PressReleaseState, PressReleaseStateMachineTransition>> Make()
             {
-                {
-                    PressReleaseState.NONE, new PressReleaseStateProcessor(_context, PressReleaseState.NONE,
-                    new Dictionary<PressReleaseStateMachineTransition, PressReleaseState> { { PressReleaseStateMachineTransition.ON_KEY, PressReleaseState.HOLD } })
-                },
-                {
-                    PressReleaseState.HOLD, new PressReleaseStateProcessor(_context, PressReleaseState.HOLD,
-                    new Dictionary<PressReleaseStateMachineTransition, PressReleaseState> { { PressReleaseStateMachineTransition.ON_KEY, PressReleaseState.NONE } })
-                }
-            };
+                return new StateProcessor<PressReleaseState, PressReleaseStateMachineTransition, StateMachineContext<PressReleaseState, PressReleaseStateMachineTransition>>(
+                    _context,
+                    _stateName,
+                    _transitionFunctionList,
+                    _transitionNewStateList,
+                    _newStateActionMap
+                );
+            }
         }
 
-        public void Transition(PressReleaseStateMachineTransition transition)
+        private class PressReleaseStateMachineFactory : StateMachineFactory<PressReleaseState, PressReleaseStateMachineTransition, StateMachineContext<PressReleaseState, PressReleaseStateMachineTransition>, StateProcessor<PressReleaseState, PressReleaseStateMachineTransition, StateMachineContext<PressReleaseState, PressReleaseStateMachineTransition>>, PressReleaseStateMachine>
         {
-            _context.CurrentTransition = transition;
-            ProcessState();
+            public PressReleaseStateMachineFactory(StateMachineContext<PressReleaseState, PressReleaseStateMachineTransition> context) : base(context) { }
+
+            public override PressReleaseStateMachine Make()
+            {
+                return new PressReleaseStateMachine(_context, _stateProcessors);
+            }
         }
 
-        private void ProcessState()
+        public PressReleaseStateMachine(StateMachineContext<PressReleaseState, PressReleaseStateMachineTransition> context, Dictionary<PressReleaseState, StateProcessor<PressReleaseState, PressReleaseStateMachineTransition, StateMachineContext<PressReleaseState, PressReleaseStateMachineTransition>>> stateProcessors)
+            : base(context, stateProcessors) { }
+
+        public static PressReleaseStateMachine Make()
         {
-            _stateProcessors[_context.CurrentState].Process();
+            StateMachineContext<PressReleaseState, PressReleaseStateMachineTransition> context = new StateMachineContext<PressReleaseState, PressReleaseStateMachineTransition>(PressReleaseState.NONE);
+
+            PressReleaseStateMachineProcessorFactory noneFactory = new PressReleaseStateMachineProcessorFactory(PressReleaseState.NONE, context);
+            noneFactory.RegisterTransition(PressReleaseStateMachineTransition.ON_KEY, PressReleaseState.HOLD);
+
+            PressReleaseStateMachineProcessorFactory holdFactory = new PressReleaseStateMachineProcessorFactory(PressReleaseState.HOLD, context);
+            holdFactory.RegisterTransition(PressReleaseStateMachineTransition.ON_KEY, PressReleaseState.NONE);
+
+            PressReleaseStateMachineFactory factory = new PressReleaseStateMachineFactory(context);
+            factory.RegisterNewState(noneFactory.Make());
+            factory.RegisterNewState(holdFactory.Make());
+
+            return factory.Make();
         }
     }
 }
