@@ -92,18 +92,21 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/Testing/RowingTest.unity
     guid: 7c233922e25e04421816eb21a34e500b
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Teaser/ReservoirFinalCanal.unity
     guid: 1f4616521c79b4f7f969eb0f1c73ac06
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Teaser/InterrogationRoom.unity
     guid: 32422d0f38ef74f668892fbf3222c27f
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Teaser/TeaserCutscene.unity
     guid: d68de18af0c784002a7d546cb6a3fc64
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Teaser/DownstreamSettlement.unity
     guid: 86a7d6792294b488da09998cdbc31cde
+  - enabled: 1
+    path: Assets/Scenes/Testing/BoatDemo.unity
+    guid: da14d947b6ad662c3ac567bc20081b0c
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: de05a8ebf954d4b55870ef2878c6d424,
       type: 2}
