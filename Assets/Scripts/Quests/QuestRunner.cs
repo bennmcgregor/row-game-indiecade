@@ -6,11 +6,11 @@ namespace IndieCade
 {
     public class QuestRunner : MonoBehaviour
     {
-        public Action<Quest> OnQuestUpdate;
+        public Action OnQuestUpdate;
 
         private QuestStateMachine _questStateMachine;
 
-        public Quest CurrentQuest => _questStateMachine.CurrentQuest;
+        public QuestData CurrentQuest => (QuestData) _questStateMachine.CurrentData;
 
         [Inject]
         public void Initialize(QuestStateMachine questStateMachine)
@@ -20,7 +20,7 @@ namespace IndieCade
 
         private void Start()
         {
-            _questStateMachine.Context.OnQuestUpdated += UpdateQuestState;
+            _questStateMachine.OnStateUpdated += UpdateQuestState;
         }
 
         public void CompleteCurrentQuest()
@@ -30,7 +30,7 @@ namespace IndieCade
 
         private void UpdateQuestState()
         {
-            OnQuestUpdate?.Invoke(CurrentQuest);
+            OnQuestUpdate?.Invoke();
         }
     }
 }

@@ -12,7 +12,7 @@ namespace IndieCade
     {
         protected Dictionary<TStateEnum, TData> _stateDatas;
 
-        public Dictionary<TStateEnum, TData> StateDatas => _stateDatas;
+        public TData CurrentData => _stateDatas[CurrentState];
 
         public StateMachineWithData(TContext context, Dictionary<TStateEnum, TProcessor> stateProcessors, Dictionary<TStateEnum, TData> stateDatas)
             : base(context, stateProcessors)

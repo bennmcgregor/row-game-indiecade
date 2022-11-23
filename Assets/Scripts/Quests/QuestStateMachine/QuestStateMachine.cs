@@ -4,11 +4,9 @@ using Zenject;
 
 namespace IndieCade
 {
-    public class QuestStateMachine : StateMachineWithData<QuestState, QuestStateMachineTransition, StateMachineContext<QuestState, QuestStateMachineTransition>, StateProcessor<QuestState, QuestStateMachineTransition, StateMachineContext<QuestState, QuestStateMachineTransition>>, Quest>
+    public class QuestStateMachine : StateMachineWithData<QuestState, QuestStateMachineTransition, StateMachineContext<QuestState, QuestStateMachineTransition>, StateProcessor<QuestState, QuestStateMachineTransition, StateMachineContext<QuestState, QuestStateMachineTransition>>, StateData<QuestState>>
     {
-        public Quest CurrentQuest => _stateDatas[_context.CurrentState];
-
-        public QuestStateMachine(StateMachineContext<QuestState, QuestStateMachineTransition> context, Dictionary<QuestState, StateProcessor<QuestState, QuestStateMachineTransition, StateMachineContext<QuestState, QuestStateMachineTransition>>> stateProcessors, Dictionary<QuestState, Quest> stateDatas)
+        public QuestStateMachine(StateMachineContext<QuestState, QuestStateMachineTransition> context, Dictionary<QuestState, StateProcessor<QuestState, QuestStateMachineTransition, StateMachineContext<QuestState, QuestStateMachineTransition>>> stateProcessors, Dictionary<QuestState, StateData<QuestState>> stateDatas)
             : base(context, stateProcessors, stateDatas) { }
 
         private class QuestStateMachineProcessorFactory : StateProcessorFactory<QuestState, QuestStateMachineTransition, StateMachineContext<QuestState, QuestStateMachineTransition>, StateProcessor<QuestState, QuestStateMachineTransition, StateMachineContext<QuestState, QuestStateMachineTransition>>>
@@ -28,7 +26,7 @@ namespace IndieCade
             }
         }
 
-        private class QuestStateMachineFactory : StateMachineWithDataFactory<QuestState, QuestStateMachineTransition, StateMachineContext<QuestState, QuestStateMachineTransition>, StateProcessor<QuestState, QuestStateMachineTransition, StateMachineContext<QuestState, QuestStateMachineTransition>>, Quest, QuestStateMachine>
+        private class QuestStateMachineFactory : StateMachineWithDataFactory<QuestState, QuestStateMachineTransition, StateMachineContext<QuestState, QuestStateMachineTransition>, StateProcessor<QuestState, QuestStateMachineTransition, StateMachineContext<QuestState, QuestStateMachineTransition>>, StateData<QuestState>, QuestStateMachine>
         {
             public QuestStateMachineFactory(StateMachineContext<QuestState, QuestStateMachineTransition> context) : base(context) { }
 
@@ -40,15 +38,14 @@ namespace IndieCade
 
         // Pass it a list of quests in order of size > 0
         // Will automatically assemble quests in sequential order
-        public static QuestStateMachine Make(List<Quest> quests)
+        public static QuestStateMachine Make(List<StateData<QuestState>> quests)
         {
-            StateMachineContext<QuestState, QuestStateMachineTransition> context =
-                new StateMachineContext<QuestState, QuestStateMachineTransition>(quests[0].StateName);
+            StateMachineContext<QuestState, QuestStateMachineTransition> context = new StateMachineContext<QuestState, QuestStateMachineTransition>(quests[0].StateName);
             QuestStateMachineFactory factory = new QuestStateMachineFactory(context);
 
             for (int i = 0; i < quests.Count; i++)
             {
-                Quest quest = quests[i];
+                StateData<QuestState> quest = quests[i];
                 // TODO: register the stateQuestMap with the state machine
                 QuestStateMachineProcessorFactory processorFactory = new QuestStateMachineProcessorFactory(quest.StateName, context);
                 if (i < quests.Count - 1)
@@ -61,33 +58,4 @@ namespace IndieCade
             return factory.Make();
         }
     }
-
-    //public class QuestStateMachine
-    //{
-    //    private QuestStateMachineContext _context;
-    //    private Dictionary<QuestState, QuestStateProcessor> _stateProcessors;
-    //    private Dictionary<QuestState, Quest> _stateQuestMap;
-
-    //    public QuestStateMachineContext Context => _context;
-    //    public Quest CurrentQuest => _stateQuestMap[_context.CurrentState];
-
-    //    [Inject]
-    //    public QuestStateMachine(GameQuests gameQuests)
-    //    {
-    //        _context = gameQuests.GetTeaserQuestStateMachineContext();
-    //        _stateProcessors = gameQuests.GetTeaserQuestStateProcessors(_context);
-    //        _stateQuestMap = gameQuests.GetTeaserQuests();
-    //    }
-
-    //    public void Transition(QuestStateMachineTransition transition)
-    //    {
-    //        _context.CurrentTransition = transition;
-    //        ProcessState();
-    //    }
-
-    //    private void ProcessState()
-    //    {
-    //        _stateProcessors[_context.CurrentState].Process();
-    //    }
-    //}
 }

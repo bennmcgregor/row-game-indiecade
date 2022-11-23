@@ -3,7 +3,7 @@ using Yarn.Unity;
 
 namespace IndieCade
 {
-    public class ChallengeInitializationData<TChallengeState> : StateData<TChallengeState>
+    public class ChallengeInitializationData<TChallengeState> : StateData<TChallengeState>, IChallengeData
         where TChallengeState : Enum
     {
         public ChallengeInitializationData(TChallengeState stateName)
@@ -24,7 +24,18 @@ namespace IndieCade
             _onDialogueCompleteInputState = onDialogueCompleteInputState;
         }
 
-        public string BackgroundMusicFilename;
+        private string _backgroundMusicFilename;
+        public string BackgroundMusicFilename
+        {
+            get
+            {
+                return _backgroundMusicFilename;
+            }
+            set
+            {
+                _backgroundMusicFilename = value;
+            }
+        }
 
         private bool _hasStealthGameplay = false;
         private bool _isChase = false;
@@ -41,7 +52,18 @@ namespace IndieCade
             _followLightsOn = followLightsOn;
         }
 
-        public bool RestartSceneOnFailure = false;
+        private bool _restartSceneOnFailure = false;
+        public bool RestartSceneOnFailure
+        {
+            get
+            {
+                return _restartSceneOnFailure;
+            }
+            set
+            {
+                _restartSceneOnFailure = value;
+            }
+        }
 
         private bool _shouldChangeSceneOnFailure = false;
         private bool _shouldChangeSceneOnComplete = false;

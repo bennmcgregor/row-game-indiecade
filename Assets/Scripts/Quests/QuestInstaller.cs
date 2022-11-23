@@ -1,6 +1,7 @@
 ﻿using System;
 using Zenject;
 using UnityEngine;
+using System.Collections.Generic;
 
 namespace IndieCade
 {
@@ -8,104 +9,65 @@ namespace IndieCade
     {
         public override void InstallBindings()
         {
-            Container.Bind<GameQuests>().FromNew().AsSingle();
             Container.Bind<QuestRunner>().FromNewComponentOnNewGameObject().AsSingle();
-            Container.Bind<QuestStateMachine>().FromNew().AsSingle();
+            Container.BindInstance(MakeTeaserQuest()).AsSingle();
         }
-    }
 
-    public QuestStateMachine MakeTeaserQuest()
-    {
-        StateMachineContext<TeaserChallenges, ChallengeStateMachineTransition> context = new StateMachineContext<TeaserChallenges, ChallengeStateMachineTransition>(TeaserChallenges.TUTORIAL);
+        private QuestStateMachine MakeTeaserQuest()
+        {
+            StateMachineContext<TeaserChallenges, ChallengeStateMachineTransition> context = new StateMachineContext<TeaserChallenges, ChallengeStateMachineTransition>(TeaserChallenges.TUTORIAL);
 
-        ChallengeStateProcessorFactory<TeaserChallenges> tutorialFactory = new ChallengeStateProcessorFactory<TeaserChallenges>(TeaserChallenges.TUTORIAL, context);
-        tutorialFactory.RegisterTransition(ChallengeStateMachineTransition.COMPLETED, TeaserChallenges.STEAL_WATER);
+            ChallengeStateProcessorFactory<TeaserChallenges> tutorialFactory = new ChallengeStateProcessorFactory<TeaserChallenges>(TeaserChallenges.TUTORIAL, context);
+            tutorialFactory.RegisterTransition(ChallengeStateMachineTransition.COMPLETED, TeaserChallenges.STEAL_WATER);
 
-        ChallengeStateProcessorFactory<TeaserChallenges> stealWaterFactory = new ChallengeStateProcessorFactory<TeaserChallenges>(TeaserChallenges.TUTORIAL, context);
-        tutorialFactory.RegisterTransition(ChallengeStateMachineTransition.COMPLETED, TeaserChallenges.STEAL_WATER);
+            ChallengeStateProcessorFactory<TeaserChallenges> stealWaterFactory = new ChallengeStateProcessorFactory<TeaserChallenges>(TeaserChallenges.STEAL_WATER, context);
+            stealWaterFactory.RegisterTransition(ChallengeStateMachineTransition.COMPLETED, TeaserChallenges.ESCAPE_CANAL);
+            stealWaterFactory.RegisterTransition(ChallengeStateMachineTransition.FAILED, TeaserChallenges.STEAL_WATER);
 
+            ChallengeStateProcessorFactory<TeaserChallenges> escapeCanalFactory = new ChallengeStateProcessorFactory<TeaserChallenges>(TeaserChallenges.ESCAPE_CANAL, context);
+            escapeCanalFactory.RegisterTransition(ChallengeStateMachineTransition.FAILED, TeaserChallenges.INTERROGATION);
 
+            ChallengeStateProcessorFactory<TeaserChallenges> interrogationFactory = new ChallengeStateProcessorFactory<TeaserChallenges>(TeaserChallenges.INTERROGATION, context);
+            interrogationFactory.RegisterTransition(ChallengeStateMachineTransition.COMPLETED, TeaserChallenges.CUTSCENE);
 
-        ChallengeStateMachineFactory<TeaserChallenges> teaserFactory = new ChallengeStateMachineFactory<TeaserChallenges>(context);
+            ChallengeStateProcessorFactory<TeaserChallenges> cutsceneFactory = new ChallengeStateProcessorFactory<TeaserChallenges>(TeaserChallenges.CUTSCENE, context);
+            cutsceneFactory.RegisterTransition(ChallengeStateMachineTransition.COMPLETED, TeaserChallenges.STRANDED_ON_ISLAND);
 
-        teaserFactory.RegisterNewState()
+            ChallengeStateProcessorFactory<TeaserChallenges> strandedOnIslandFactory = new ChallengeStateProcessorFactory<TeaserChallenges>(TeaserChallenges.STRANDED_ON_ISLAND, context);
 
+            ChallengeInitializationData<TeaserChallenges> tutorialData = new ChallengeInitializationData<TeaserChallenges>(TeaserChallenges.TUTORIAL);
+            tutorialData.StartChallengeWithDialogue("Tutorial1", PlayerControlInputState.ROWING);
 
-        //// Teaser
-        //ChallengeStateMachineFactory teaserFactory = new ChallengeStateMachineFactory();
-        //teaserFactory.RegisterNewState(ChallengeConsts.TeaserTutorial,
-        //    new Dictionary<ChallengeStateMachineTransition, string>
-        //    {
-        //            { ChallengeStateMachineTransition.COMPLETED, ChallengeConsts.TeaserStealWater }
-        //    });
-        //teaserFactory.RegisterNewState(ChallengeConsts.TeaserStealWater,
-        //    new Dictionary<ChallengeStateMachineTransition, string>
-        //    {
-        //            { ChallengeStateMachineTransition.COMPLETED, ChallengeConsts.TeaserEscapeCanal },
-        //            { ChallengeStateMachineTransition.FAILED, ChallengeConsts.TeaserStealWater }
-        //    }
-        //);
-        //teaserFactory.RegisterNewState(ChallengeConsts.TeaserEscapeCanal,
-        //    new Dictionary<ChallengeStateMachineTransition, string>
-        //    {
-        //            { ChallengeStateMachineTransition.FAILED, ChallengeConsts.TeaserInterrogation }
-        //    }
-        //);
-        //teaserFactory.RegisterNewState(ChallengeConsts.TeaserInterrogation,
-        //    new Dictionary<ChallengeStateMachineTransition, string>
-        //    {
-        //            { ChallengeStateMachineTransition.COMPLETED, ChallengeConsts.TeaserCutscene }
-        //    }
-        //);
-        //teaserFactory.RegisterNewState(ChallengeConsts.TeaserCutscene,
-        //    new Dictionary<ChallengeStateMachineTransition, string>
-        //    {
-        //            { ChallengeStateMachineTransition.COMPLETED, ChallengeConsts.TeaserStrandedOnIsland }
-        //    }
-        //);
-        //teaserFactory.RegisterNewState(ChallengeConsts.TeaserStrandedOnIsland,
-        //    new Dictionary<ChallengeStateMachineTransition, string> { }
-        //);
+            ChallengeInitializationData<TeaserChallenges> stealWaterData = new ChallengeInitializationData<TeaserChallenges>(TeaserChallenges.STEAL_WATER);
+            stealWaterData.SetStealthGameplay(true, false);
 
-        //ChallengeInitializationData teaserTutorial = new ChallengeInitializationData(ChallengeConsts.TeaserTutorial);
-        //teaserTutorial.StartChallengeWithDialogue("Tutorial1", PlayerControlInputState.ROWING);
+            ChallengeInitializationData<TeaserChallenges> escapeCanalData = new ChallengeInitializationData<TeaserChallenges>(TeaserChallenges.ESCAPE_CANAL);
+            escapeCanalData.SetStealthGameplay(true, true, true);
+            escapeCanalData.BackgroundMusicFilename = "westlake-night-chase";
+            escapeCanalData.ChangeSceneOnChallengeFailure(GameSceneName.INTERROGATION_ROOM);
+            escapeCanalData.StartChallengeWithDialogue("EscapeCanalChallenge1", PlayerControlInputState.ROWING);
 
-        //ChallengeInitializationData teaserStealWaterData = new ChallengeInitializationData(ChallengeConsts.TeaserStealWater);
-        //teaserStealWaterData.SetStealthGameplay(true, false);
+            ChallengeInitializationData<TeaserChallenges> interrogationData = new ChallengeInitializationData<TeaserChallenges>(TeaserChallenges.INTERROGATION);
+            interrogationData.ChangeSceneOnChallengeComplete(GameSceneName.TEASER_CUTSCENE);
+            interrogationData.StartChallengeWithDialogue("InterrogationChallenge1", PlayerControlInputState.ROWING);
 
-        //ChallengeInitializationData teaserEscapeCanalData = new ChallengeInitializationData(ChallengeConsts.TeaserEscapeCanal);
-        //teaserEscapeCanalData.SetStealthGameplay(true, true, true);
-        //teaserEscapeCanalData.BackgroundMusicFilename = "westlake-night-chase";
-        //teaserEscapeCanalData.ChangeSceneOnChallengeFailure(GameSceneName.INTERROGATION_ROOM);
-        //teaserEscapeCanalData.StartChallengeWithDialogue("EscapeCanalChallenge1", PlayerControlInputState.ROWING);
+            ChallengeInitializationData<TeaserChallenges> cutsceneData = new ChallengeInitializationData<TeaserChallenges>(TeaserChallenges.CUTSCENE);
+            cutsceneData.ChangeSceneOnChallengeComplete(GameSceneName.DOWNSTREAM_SETTLEMENT);
 
-        //ChallengeInitializationData teaserInterrogationData = new ChallengeInitializationData(ChallengeConsts.TeaserInterrogation);
-        //teaserInterrogationData.ChangeSceneOnChallengeComplete(GameSceneName.TEASER_CUTSCENE);
-        //teaserInterrogationData.StartChallengeWithDialogue("InterrogationChallenge1", PlayerControlInputState.ROWING);
+            ChallengeInitializationData<TeaserChallenges> strandedOnIslandData = new ChallengeInitializationData<TeaserChallenges>(TeaserChallenges.STRANDED_ON_ISLAND);
 
-        //ChallengeInitializationData teaserCutsceneData = new ChallengeInitializationData(ChallengeConsts.TeaserCutscene);
-        //teaserCutsceneData.ChangeSceneOnChallengeComplete(GameSceneName.DOWNSTREAM_SETTLEMENT);
+            ChallengeStateMachineFactory<TeaserChallenges> teaserFactory = new ChallengeStateMachineFactory<TeaserChallenges>(context);
+            teaserFactory.RegisterNewState(tutorialFactory.Make(), tutorialData);
+            teaserFactory.RegisterNewState(stealWaterFactory.Make(), stealWaterData);
+            teaserFactory.RegisterNewState(escapeCanalFactory.Make(), escapeCanalData);
+            teaserFactory.RegisterNewState(interrogationFactory.Make(), interrogationData);
+            teaserFactory.RegisterNewState(cutsceneFactory.Make(), cutsceneData);
+            teaserFactory.RegisterNewState(strandedOnIslandFactory.Make(), strandedOnIslandData);
 
-        //ChallengeInitializationData teaserStrandedOnIslandData = new ChallengeInitializationData(ChallengeConsts.TeaserStrandedOnIsland);
+            ChallengeStateMachine<TeaserChallenges> teaserStateMachine = teaserFactory.Make();
+            QuestData<TeaserChallenges> teaser = new QuestData<TeaserChallenges>(QuestState.TEASER, teaserStateMachine, new QuestInitializationData(QuestState.TEASER));
 
-        //List<ChallengeInitializationData> teaserChallenges = new List<ChallengeInitializationData>
-        //    {
-        //        teaserTutorial,
-        //        teaserStealWaterData,
-        //        teaserEscapeCanalData,
-        //        teaserInterrogationData,
-        //        teaserCutsceneData,
-        //        teaserStrandedOnIslandData
-        //    };
-
-        //ChallengeStateMachine teaserSM = teaserFactory.Make(ChallengeConsts.TeaserTutorial, teaserChallenges);
-
-        //QuestInitializationData teaserInitData = new QuestInitializationData(QuestState.TEASER);
-        //Quest teaser = new Quest(QuestState.TEASER, teaserSM, teaserInitData);
-
-        //return new Dictionary<QuestState, Quest>
-        //    {
-        //        { QuestState.TEASER, teaser }
-        //    };
+            return QuestStateMachine.Make(new List<StateData<QuestState>> { teaser });
+        }
     }
 }

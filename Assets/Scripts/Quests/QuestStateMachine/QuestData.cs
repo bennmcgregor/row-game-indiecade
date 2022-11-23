@@ -1,25 +1,26 @@
 ﻿using System;
 namespace IndieCade
 {
-    public class Quest : StateData<QuestState>
+    public class QuestData<TChallengeState> : StateData<QuestState>, IQuestData
+        where TChallengeState : Enum
     {
-        public Action<ChallengeInitializationData> OnChallengeUpdated;
+        public Action OnChallengeUpdated;
         public Action OnChallengeFailed;
         public Action OnChallengeCompleted;
 
-        private ChallengeStateMachine _challengeStateMachine;
+        private ChallengeStateMachine<TChallengeState> _challengeStateMachine;
         private QuestInitializationData _questInitializationData;
 
-        public ChallengeInitializationData CurrentChallenge => _challengeStateMachine.CurrentChallenge;
+        public ChallengeInitializationData<TChallengeState> CurrentChallenge => (ChallengeInitializationData<TChallengeState>) _challengeStateMachine.CurrentData;
         public QuestInitializationData QuestInitializationData => _questInitializationData;
 
-        public Quest(QuestState questState, ChallengeStateMachine challengeStateMachine, QuestInitializationData questInitializationData)
+        public QuestData(QuestState questState, ChallengeStateMachine<TChallengeState> challengeStateMachine, QuestInitializationData questInitializationData)
             : base(questState)
         {
             _challengeStateMachine = challengeStateMachine;
             _questInitializationData = questInitializationData;
 
-            _challengeStateMachine.Context.OnChallengeUpdated += UpdateChallengeState;
+            _challengeStateMachine.OnStateUpdated += UpdateChallengeState;
         }
 
         public void CompleteCurrentChallenge()
@@ -37,8 +38,8 @@ namespace IndieCade
 
         public void UpdateChallengeState()
         {
-            UnityEngine.Debug.Log($"Updated Challenge to {CurrentChallenge.StateName}");
-            OnChallengeUpdated?.Invoke(CurrentChallenge);
+            UnityEngine.Debug.Log($"Updated Challenge to {_challengeStateMachine.CurrentData.StateName}");
+            OnChallengeUpdated?.Invoke();
         }
     }
 }

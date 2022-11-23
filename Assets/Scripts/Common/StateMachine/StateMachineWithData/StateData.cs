@@ -1,7 +1,9 @@
 ﻿using System;
 namespace IndieCade
 {
-    public class StateData<TStateEnum>
+    public class StateDataBase {}
+
+    public class StateData<TStateEnum> : StateDataBase
         where TStateEnum : Enum
     {
         private TStateEnum _stateName;

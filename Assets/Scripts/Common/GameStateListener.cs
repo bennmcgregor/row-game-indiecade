@@ -48,8 +48,9 @@ namespace IndieCade
             InitializeChallenge(_questRunner.CurrentQuest.CurrentChallenge);
         }
 
-        private void OnQuestUpdate(Quest newQuest)
+        private void OnQuestUpdate()
         {
+            QuestData newQuest = _questRunner.CurrentQuest;
             if (_playedQuests.Contains(newQuest.StateName))
             {
                 InitializeScene(_sceneInitializationDataIndex.GetDataFromCurrentScene());
@@ -61,12 +62,14 @@ namespace IndieCade
             SaveSceneOnQuestUpdated(_sceneInitializationDataIndex.GetDataFromCurrentScene());
             InitializeQuest(newQuest.QuestInitializationData);
             InitializeChallenge(newQuest.CurrentChallenge);
+            // TODO: reinitialize _playedChallenges
 
             newQuest.OnChallengeUpdated += OnChallengeUpdated;
         }
 
-        private void OnChallengeUpdated(ChallengeInitializationData newChallengeData)
+        private void OnChallengeUpdated()
         {
+            ChallengeInitializationData newChallengeData = _questRunner.CurrentQuest.CurrentChallenge;
             if (_playedChallenges.Contains(newChallengeData.StateName))
             {
                 InitializeScene(_sceneInitializationDataIndex.GetDataFromCurrentScene());
