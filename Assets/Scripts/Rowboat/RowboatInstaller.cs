@@ -358,17 +358,6 @@ namespace IndieCade
                     _physicsController.StartRecovery(false);
                 }
             );
-            //stopFactory.RegisterTransition(
-            //    delegate (RowingMotionStateMachineTransition transition)
-            //    {
-            //        return transition == RowingMotionStateMachineTransition.SHIFT_DOWN;
-            //    },
-            //    RowingMotionState.SPIN,
-            //    delegate {
-            //        _physicsController.EndStopBoat();
-            //        _rowboatAnimator.StartSpin();
-            //    }
-            //);
             stopFactory.RegisterHoldTransition(
                 delegate (RowingMotionStateMachineTransition transition)
                 {
@@ -380,7 +369,6 @@ namespace IndieCade
                     _rowboatAnimator.StartSpin();
                 }
             );
-            // TODO: once the shift changes are done, revert CanTransitionFromStopped value back to original (well maybe like half of the current value)
 
             RowingStateProcessorFactory<RowingMotionState, RowingMotionStateMachineTransition> spinFactory = new RowingStateProcessorFactory<RowingMotionState, RowingMotionStateMachineTransition>(RowingMotionState.SPIN, context, _rowboatPlayerInputs);
             spinFactory.RegisterTransition(RowingMotionStateMachineTransition.FINISH_SPIN, RowingMotionState.STOP, delegate
