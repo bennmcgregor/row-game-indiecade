@@ -10,11 +10,19 @@ namespace IndieCade
         private RowboatPlayerInputs _rowboatPlayerInputs;
         private bool _notifyInputStateMachine;
 
-        public RowingStateProcessor(RowingStateMachineContext<TStateEnum, TTransitionEnum> context, TStateEnum stateName, List<Predicate<TTransitionEnum>> transitionFunctionList, List<TStateEnum> transitionStateList, Dictionary<TStateEnum, Action> newStateActionMap, RowboatPlayerInputs rowboatPlayerInputs, bool notifyInputStateMachine = true)
+        private List<Predicate<TTransitionEnum>> _holdTransitionFunctionList;
+        private List<TStateEnum> _holdTransitionNewStateList;
+        private Dictionary<TStateEnum, Action> _holdNewStateActionMap;
+
+        public RowingStateProcessor(RowingStateMachineContext<TStateEnum, TTransitionEnum> context, TStateEnum stateName, List<Predicate<TTransitionEnum>> transitionFunctionList, List<TStateEnum> transitionStateList, Dictionary<TStateEnum, Action> newStateActionMap, List<Predicate<TTransitionEnum>> holdTransitionFunctionList, List<TStateEnum> holdTransitionNewStateList, Dictionary<TStateEnum, Action> holdNewStateActionMap, RowboatPlayerInputs rowboatPlayerInputs, bool notifyInputStateMachine = true)
             : base(context, stateName, transitionFunctionList, transitionStateList, newStateActionMap)
         {
             _rowboatPlayerInputs = rowboatPlayerInputs;
             _notifyInputStateMachine = notifyInputStateMachine;
+
+            _holdTransitionFunctionList = holdTransitionFunctionList;
+            _holdTransitionNewStateList = holdTransitionNewStateList;
+            _holdNewStateActionMap = holdNewStateActionMap;
         }
 
         protected override void PostProcess()
@@ -28,7 +36,24 @@ namespace IndieCade
             }
         }
 
-        // TODO(sm): add a way to run processhold logic to factory
-        public virtual void ProcessHold() {}
+        public void ProcessHold()
+        {
+            UnityEngine.Debug.Log($"Called ProcessHold {_context.CurrentTransition}");
+            for (int i = 0; i < _holdTransitionFunctionList.Count; i++)
+            {
+                if (_holdTransitionFunctionList[i](_context.CurrentTransition))
+                {
+                    TStateEnum newState = _holdTransitionNewStateList[i];
+                    SetCurrentState(newState);
+
+                    if (_holdNewStateActionMap.ContainsKey(newState))
+                    {
+                        _holdNewStateActionMap[newState]?.Invoke();
+                    }
+
+                    break;
+                }
+            }
+        }
     }
 }

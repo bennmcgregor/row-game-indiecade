@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SlideEndThreshold: 0.05
   StopSpeedThreshold: 0.05
-  CanTransitionFromStopSpeedThreshold: 20
+  CanTransitionFromStopSpeedThreshold: 10
   SliderDriveSpeed: 0.03
   MaxVelClamp: 40
   DragVelocityScalingFactor: 0.06
