@@ -16,7 +16,7 @@ namespace IndieCade
 
         public void FailChallenge()
         {
-            _questRunner.CurrentQuest.RestartCurrentChallenge();
+            _questRunner.CurrentQuest.FailCurrentChallenge();
         }
 
         public void CompleteChallenge()

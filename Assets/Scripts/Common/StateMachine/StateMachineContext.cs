@@ -19,12 +19,14 @@ namespace IndieCade
 
         public void SetCurrentState(TStateEnum val)
         {
+            SetPostCurrentStateInternal(val);
             _currentState = val;
-            SetCurrentStateInternal(val);
+            SetPostCurrentStateInternal(val);
             OnStateUpdated?.Invoke();
         }
 
-        protected virtual void SetCurrentStateInternal(TStateEnum val) { }
+        protected virtual void SetPreCurrentStateInternal(TStateEnum val) { }
+        protected virtual void SetPostCurrentStateInternal(TStateEnum val) { }
 
         public TTransitionEnum CurrentTransition;
     }

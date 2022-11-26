@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 namespace IndieCade
 {
-    public class ChallengeStateMachineFactory<TChallengeState> : StateMachineWithDataFactory<TChallengeState, ChallengeStateMachineTransition, StateMachineContext<TChallengeState, ChallengeStateMachineTransition>, StateProcessor<TChallengeState, ChallengeStateMachineTransition, StateMachineContext<TChallengeState, ChallengeStateMachineTransition>>, ChallengeInitializationData<TChallengeState>, ChallengeStateMachine<TChallengeState>>
+    public class ChallengeStateMachineFactory<TChallengeState> : StateMachineWithDataFactory<TChallengeState, ChallengeStateMachineTransition, StateMachineContext<TChallengeState, ChallengeStateMachineTransition>, StateProcessor<TChallengeState, ChallengeStateMachineTransition, StateMachineContext<TChallengeState, ChallengeStateMachineTransition>>, StateData<TChallengeState>, ChallengeStateMachine<TChallengeState>>
         where TChallengeState : Enum
     {
         public ChallengeStateMachineFactory(StateMachineContext<TChallengeState, ChallengeStateMachineTransition> context) : base(context) { }

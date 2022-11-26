@@ -11,7 +11,7 @@ namespace IndieCade
         protected QuestRunner _questRunner;
 
         private List<QuestState> _playedQuests;
-        private List<string> _playedChallenges;
+        private List<TeaserChallenges> _playedChallenges;
 
         [Inject]
         public void Initialize(SceneInitializationDataIndex initializationDataIndex, QuestRunner questRunner)
@@ -24,12 +24,12 @@ namespace IndieCade
         {
             _questRunner.OnQuestUpdate += OnQuestUpdate;
             _questRunner.CurrentQuest.OnChallengeUpdated += OnChallengeUpdated;
-            _questRunner.CurrentQuest.OnChallengeRestart += OnChallengeFailed;
-            _questRunner.CurrentQuest.OnChallengeProgress += OnChallengeCompleted;
+            _questRunner.CurrentQuest.OnChallengeFailed += OnChallengeFailed;
+            _questRunner.CurrentQuest.OnChallengeCompleted += OnChallengeCompleted;
 
             _playedQuests = new List<QuestState>();
-            _playedChallenges = new List<string>();
-            _playedQuests.Add(_questRunner.CurrentQuest.QuestState);
+            _playedChallenges = new List<TeaserChallenges>();
+            _playedQuests.Add(_questRunner.CurrentQuest.StateName);
             _playedChallenges.Add(_questRunner.CurrentQuest.CurrentChallenge.StateName);
         }
 
@@ -62,7 +62,6 @@ namespace IndieCade
             SaveSceneOnQuestUpdated(_sceneInitializationDataIndex.GetDataFromCurrentScene());
             InitializeQuest(newQuest.QuestInitializationData);
             InitializeChallenge(newQuest.CurrentChallenge);
-            // TODO: reinitialize _playedChallenges
 
             newQuest.OnChallengeUpdated += OnChallengeUpdated;
         }
