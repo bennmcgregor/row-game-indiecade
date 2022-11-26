@@ -4,36 +4,57 @@ using System.Collections.Generic;
 
 namespace IndieCade
 {
-    public class GlobalDirectionStateMachine
+    public class GlobalDirectionStateMachine : StateMachine<GlobalDirectionState, GlobalDirectionStateMachineTransition, StateMachineContext<GlobalDirectionState, GlobalDirectionStateMachineTransition>, StateProcessor<GlobalDirectionState, GlobalDirectionStateMachineTransition, StateMachineContext<GlobalDirectionState, GlobalDirectionStateMachineTransition>>>
     {
-        private GlobalDirectionStateMachineContext _context;
-        private Dictionary<GlobalDirectionState, IStateProcessor> _stateProcessors;
-
-        // current state
-        public GlobalDirectionState CurrentState => _context.CurrentState;
-
-        public GlobalDirectionStateMachine()
+        private class GlobalStateMachineProcessorFactory : StateProcessorFactory<GlobalDirectionState, GlobalDirectionStateMachineTransition, StateMachineContext<GlobalDirectionState, GlobalDirectionStateMachineTransition>, StateProcessor<GlobalDirectionState, GlobalDirectionStateMachineTransition, StateMachineContext<GlobalDirectionState, GlobalDirectionStateMachineTransition>>>
         {
-            _context = new GlobalDirectionStateMachineContext(GlobalDirectionState.ENTRY);
-            _stateProcessors = new Dictionary<GlobalDirectionState, IStateProcessor>
+            public GlobalStateMachineProcessorFactory(GlobalDirectionState stateName, StateMachineContext<GlobalDirectionState, GlobalDirectionStateMachineTransition> context)
+                : base(stateName, context) { }
+
+            public override StateProcessor<GlobalDirectionState, GlobalDirectionStateMachineTransition, StateMachineContext<GlobalDirectionState, GlobalDirectionStateMachineTransition>> Make()
             {
-                { GlobalDirectionState.ENTRY, new EntryGlobalDirectionStateProcessor(_context) },
-                { GlobalDirectionState.EAST, new EastGlobalDirectionStateProcessor(_context) },
-                { GlobalDirectionState.WEST, new WestGlobalDirectionStateProcessor(_context) }
-            };
+                return new StateProcessor<GlobalDirectionState, GlobalDirectionStateMachineTransition, StateMachineContext<GlobalDirectionState, GlobalDirectionStateMachineTransition>>(
+                    _context,
+                    _stateName,
+                    _transitionFunctionList,
+                    _transitionNewStateList,
+                    _newStateActionMap
+                );
+            }
         }
 
-        public void Transition(GlobalDirectionStateMachineTransition transition)
+        private class GlobalStateMachineFactory : StateMachineFactory<GlobalDirectionState, GlobalDirectionStateMachineTransition, StateMachineContext<GlobalDirectionState, GlobalDirectionStateMachineTransition>, StateProcessor<GlobalDirectionState, GlobalDirectionStateMachineTransition, StateMachineContext<GlobalDirectionState, GlobalDirectionStateMachineTransition>>, GlobalDirectionStateMachine>
         {
-            // TODO: pass transition to relevant stateprocessor
-            // in the state processor, do any transition logic
-            _context.CurrentTransition = transition;
-            ProcessState();
+            public GlobalStateMachineFactory(StateMachineContext<GlobalDirectionState, GlobalDirectionStateMachineTransition> context) : base(context) { }
+
+            public override GlobalDirectionStateMachine Make()
+            {
+                return new GlobalDirectionStateMachine(_context, _stateProcessors);
+            }
         }
 
-        private void ProcessState()
+        public GlobalDirectionStateMachine(StateMachineContext<GlobalDirectionState, GlobalDirectionStateMachineTransition> context, Dictionary<GlobalDirectionState, StateProcessor<GlobalDirectionState, GlobalDirectionStateMachineTransition, StateMachineContext<GlobalDirectionState, GlobalDirectionStateMachineTransition>>> stateProcessors)
+            : base(context, stateProcessors) { }
+
+        public static GlobalDirectionStateMachine Make()
         {
-            _stateProcessors[_context.CurrentState].Process();
+            StateMachineContext<GlobalDirectionState, GlobalDirectionStateMachineTransition> context = new StateMachineContext<GlobalDirectionState, GlobalDirectionStateMachineTransition>(GlobalDirectionState.ENTRY);
+
+            GlobalStateMachineProcessorFactory entryFactory = new GlobalStateMachineProcessorFactory(GlobalDirectionState.ENTRY, context);
+            entryFactory.RegisterTransition(GlobalDirectionStateMachineTransition.ENTRY, GlobalDirectionState.WEST);
+
+            GlobalStateMachineProcessorFactory westFactory = new GlobalStateMachineProcessorFactory(GlobalDirectionState.WEST, context);
+            westFactory.RegisterTransition(GlobalDirectionStateMachineTransition.SPIN, GlobalDirectionState.EAST);
+
+            GlobalStateMachineProcessorFactory eastFactory = new GlobalStateMachineProcessorFactory(GlobalDirectionState.EAST, context);
+            eastFactory.RegisterTransition(GlobalDirectionStateMachineTransition.SPIN, GlobalDirectionState.WEST);
+
+            GlobalStateMachineFactory factory = new GlobalStateMachineFactory(context);
+            factory.RegisterNewState(entryFactory.Make());
+            factory.RegisterNewState(westFactory.Make());
+            factory.RegisterNewState(eastFactory.Make());
+
+            return factory.Make();
         }
     }
 }

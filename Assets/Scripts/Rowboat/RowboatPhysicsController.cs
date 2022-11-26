@@ -9,12 +9,10 @@ namespace IndieCade
     public class RowboatPhysicsController : MonoBehaviour
     {
         public Action OnDriveFinished;
-        private Action OnSwitchLaneFinished;
         public Action PlayCatchSoundEffect;
         public Action PlayFinishSoundEffect;
 
         [SerializeField] private Rigidbody2D _boatRigidbody;
-        [SerializeField] private LayerMask _verticalMovementMask;
 
         private RowboatSlideState _slideState;
         private GlobalDirectionStateMachine _globalDirectionStateMachine;
@@ -177,7 +175,6 @@ namespace IndieCade
 
         public void EndTurnRudder(bool star)
         {
-            Debug.Log($"EndTurnRudder star: {star}");
             if (star)
             {
                 if (_starRudderCoroutine != null)

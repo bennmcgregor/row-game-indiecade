@@ -4,8 +4,8 @@ namespace IndieCade
     public static class ChallengeConsts
     {
         // Challenge state names
-        public static string Act1PreQuest1SpeakWithParents = "SpeakWithParents";
-        public static string Act1PreQuest1SpeakWithOdette = "SpeakWithOdette";
+        //public static string Act1PreQuest1SpeakWithParents = "SpeakWithParents";
+        //public static string Act1PreQuest1SpeakWithOdette = "SpeakWithOdette";
 
         // TODO: include tutorial?
         public static string TeaserTutorial = "Tutorial";

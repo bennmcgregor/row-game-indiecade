@@ -19,7 +19,7 @@ namespace IndieCade
             _context = context;
         }
 
-        public void RegisterNewState(TProcessor stateProcessor)
+        public virtual void RegisterNewState(TProcessor stateProcessor)
         {
             _stateProcessors[stateProcessor.StateName] = stateProcessor;
         }

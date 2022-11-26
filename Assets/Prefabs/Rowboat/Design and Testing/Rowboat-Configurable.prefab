@@ -1,0 +1,98 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &8202005194567891315
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 5248149826980725465, guid: 2651f9d7949a84d80b61ba215ac4fff4,
+        type: 3}
+      propertyPath: m_Name
+      value: Rowboat-Configurable
+      objectReference: {fileID: 0}
+    - target: {fileID: 5248149826980725478, guid: 2651f9d7949a84d80b61ba215ac4fff4,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5248149826980725478, guid: 2651f9d7949a84d80b61ba215ac4fff4,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5248149826980725478, guid: 2651f9d7949a84d80b61ba215ac4fff4,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5248149826980725478, guid: 2651f9d7949a84d80b61ba215ac4fff4,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5248149826980725478, guid: 2651f9d7949a84d80b61ba215ac4fff4,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5248149826980725478, guid: 2651f9d7949a84d80b61ba215ac4fff4,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5248149826980725478, guid: 2651f9d7949a84d80b61ba215ac4fff4,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5248149826980725478, guid: 2651f9d7949a84d80b61ba215ac4fff4,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5248149826980725478, guid: 2651f9d7949a84d80b61ba215ac4fff4,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5248149826980725478, guid: 2651f9d7949a84d80b61ba215ac4fff4,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5248149826980725478, guid: 2651f9d7949a84d80b61ba215ac4fff4,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 761396265184205561, guid: 2651f9d7949a84d80b61ba215ac4fff4, type: 3}
+  m_SourcePrefab: {fileID: 100100000, guid: 2651f9d7949a84d80b61ba215ac4fff4, type: 3}
+--- !u!1 &4109055489819966378 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5248149826980725465, guid: 2651f9d7949a84d80b61ba215ac4fff4,
+    type: 3}
+  m_PrefabInstance: {fileID: 8202005194567891315}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &8612948252345450110
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4109055489819966378}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09aec497f96b34c1ba310373e52e01fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _rowboatPhysicsParameters: {fileID: 11400000, guid: 2a5a7bb1254d34d75a74e7260b5b58e7,
+    type: 2}
+  _boatStoppingForceSlider: {fileID: 0}
+  _boatForwardsDriveForceSlider: {fileID: 0}
+  _turnSpeedMultiplierSlider: {fileID: 0}
+  _turnSpeedDragFactorSlider: {fileID: 0}
+  _stopSpeedThresholdSlider: {fileID: 0}
+  _maxVelocityFactorSlider: {fileID: 0}

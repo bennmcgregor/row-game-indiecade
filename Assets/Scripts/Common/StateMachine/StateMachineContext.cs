@@ -6,6 +6,8 @@ namespace IndieCade
         where TStateEnum : Enum
         where TTransitionEnum : Enum
     {
+        public Action OnStateUpdated;
+
         protected TStateEnum _currentState;
 
         public StateMachineContext(TStateEnum initialState)
@@ -13,17 +15,17 @@ namespace IndieCade
             _currentState = initialState;
         }
 
-        public virtual TStateEnum CurrentState
+        public TStateEnum CurrentState => _currentState;
+
+        public void SetCurrentState(TStateEnum val)
         {
-            get
-            {
-                return _currentState;
-            }
-            set
-            {
-                _currentState = value;
-            }
+            _currentState = val;
+            SetCurrentStateInternal(val);
+            OnStateUpdated?.Invoke();
         }
+
+        protected virtual void SetCurrentStateInternal(TStateEnum val) { }
+
         public TTransitionEnum CurrentTransition;
     }
 }

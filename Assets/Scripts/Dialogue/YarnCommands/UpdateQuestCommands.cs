@@ -33,7 +33,7 @@ namespace IndieCade
 
         private void FailChallenge()
         {
-            _questRunner.CurrentQuest.FailCurrentChallenge();
+            _questRunner.CurrentQuest.RestartCurrentChallenge();
         }
     }
 }
