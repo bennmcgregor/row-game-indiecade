@@ -45,7 +45,7 @@ namespace IndieCade
         private void FailChallenge()
         {
             // TODO: freeze rowboat inputs for a time duration (before failing the quest)
-            _questRunner.CurrentQuest.RestartCurrentChallenge();
+            _questRunner.CurrentQuest.FailCurrentChallenge();
             UpdateCatchCount(_catchesBeforeFailure);
         }
 

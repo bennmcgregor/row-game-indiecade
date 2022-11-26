@@ -35,26 +35,26 @@ namespace IndieCade
 
             ChallengeStateProcessorFactory<TeaserChallenges> strandedOnIslandFactory = new ChallengeStateProcessorFactory<TeaserChallenges>(TeaserChallenges.STRANDED_ON_ISLAND, context);
 
-            ChallengeInitializationData<TeaserChallenges> tutorialData = new ChallengeInitializationData<TeaserChallenges>(TeaserChallenges.TUTORIAL);
+            ChallengeInitializationData tutorialData = new ChallengeInitializationData(TeaserChallenges.TUTORIAL);
             tutorialData.StartChallengeWithDialogue("Tutorial1", PlayerControlInputState.ROWING);
 
-            ChallengeInitializationData<TeaserChallenges> stealWaterData = new ChallengeInitializationData<TeaserChallenges>(TeaserChallenges.STEAL_WATER);
+            ChallengeInitializationData stealWaterData = new ChallengeInitializationData(TeaserChallenges.STEAL_WATER);
             stealWaterData.SetStealthGameplay(true, false);
 
-            ChallengeInitializationData<TeaserChallenges> escapeCanalData = new ChallengeInitializationData<TeaserChallenges>(TeaserChallenges.ESCAPE_CANAL);
+            ChallengeInitializationData escapeCanalData = new ChallengeInitializationData(TeaserChallenges.ESCAPE_CANAL);
             escapeCanalData.SetStealthGameplay(true, true, true);
             escapeCanalData.BackgroundMusicFilename = "westlake-night-chase";
             escapeCanalData.ChangeSceneOnChallengeFailure(GameSceneName.INTERROGATION_ROOM);
             escapeCanalData.StartChallengeWithDialogue("EscapeCanalChallenge1", PlayerControlInputState.ROWING);
 
-            ChallengeInitializationData<TeaserChallenges> interrogationData = new ChallengeInitializationData<TeaserChallenges>(TeaserChallenges.INTERROGATION);
+            ChallengeInitializationData interrogationData = new ChallengeInitializationData(TeaserChallenges.INTERROGATION);
             interrogationData.ChangeSceneOnChallengeComplete(GameSceneName.TEASER_CUTSCENE);
             interrogationData.StartChallengeWithDialogue("InterrogationChallenge1", PlayerControlInputState.ROWING);
 
-            ChallengeInitializationData<TeaserChallenges> cutsceneData = new ChallengeInitializationData<TeaserChallenges>(TeaserChallenges.CUTSCENE);
+            ChallengeInitializationData cutsceneData = new ChallengeInitializationData(TeaserChallenges.CUTSCENE);
             cutsceneData.ChangeSceneOnChallengeComplete(GameSceneName.DOWNSTREAM_SETTLEMENT);
 
-            ChallengeInitializationData<TeaserChallenges> strandedOnIslandData = new ChallengeInitializationData<TeaserChallenges>(TeaserChallenges.STRANDED_ON_ISLAND);
+            ChallengeInitializationData strandedOnIslandData = new ChallengeInitializationData(TeaserChallenges.STRANDED_ON_ISLAND);
 
             ChallengeStateMachineFactory<TeaserChallenges> teaserFactory = new ChallengeStateMachineFactory<TeaserChallenges>(context);
             teaserFactory.RegisterNewState(tutorialFactory.Make(), tutorialData);
@@ -65,7 +65,7 @@ namespace IndieCade
             teaserFactory.RegisterNewState(strandedOnIslandFactory.Make(), strandedOnIslandData);
 
             ChallengeStateMachine<TeaserChallenges> teaserStateMachine = teaserFactory.Make();
-            QuestData<TeaserChallenges> teaser = new QuestData<TeaserChallenges>(QuestState.TEASER, teaserStateMachine, new QuestInitializationData(QuestState.TEASER));
+            QuestData teaser = new QuestData(QuestState.TEASER, teaserStateMachine, new QuestInitializationData(QuestState.TEASER));
 
             return QuestStateMachine.Make(new List<StateData<QuestState>> { teaser });
         }

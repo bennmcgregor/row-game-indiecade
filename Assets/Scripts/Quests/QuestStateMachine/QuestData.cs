@@ -1,20 +1,19 @@
 ﻿using System;
 namespace IndieCade
 {
-    public class QuestData<TChallengeState> : StateData<QuestState>, IQuestData
-        where TChallengeState : Enum
+    public class QuestData : StateData<QuestState>
     {
         public Action OnChallengeUpdated;
         public Action OnChallengeFailed;
         public Action OnChallengeCompleted;
 
-        private ChallengeStateMachine<TChallengeState> _challengeStateMachine;
+        private ChallengeStateMachine<TeaserChallenges> _challengeStateMachine;
         private QuestInitializationData _questInitializationData;
 
-        public ChallengeInitializationData<TChallengeState> CurrentChallenge => (ChallengeInitializationData<TChallengeState>) _challengeStateMachine.CurrentData;
+        public ChallengeInitializationData CurrentChallenge => (ChallengeInitializationData) _challengeStateMachine.CurrentData;
         public QuestInitializationData QuestInitializationData => _questInitializationData;
 
-        public QuestData(QuestState questState, ChallengeStateMachine<TChallengeState> challengeStateMachine, QuestInitializationData questInitializationData)
+        public QuestData(QuestState questState, ChallengeStateMachine<TeaserChallenges> challengeStateMachine, QuestInitializationData questInitializationData)
             : base(questState)
         {
             _challengeStateMachine = challengeStateMachine;

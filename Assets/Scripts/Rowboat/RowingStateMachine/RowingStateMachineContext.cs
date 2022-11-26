@@ -8,17 +8,22 @@ namespace IndieCade
     {
         public RowingStateMachineContext(TStateEnum initialState) : base(initialState) { }
 
-        public override TStateEnum CurrentState
+        //public override TStateEnum CurrentState
+        //{
+        //    get
+        //    {
+        //        return _currentState;
+        //    }
+        //    set
+        //    {
+        //        PreviousState = _currentState;
+        //        _currentState = value;
+        //    }
+        //}
+
+        protected override void SetPreCurrentStateInternal(TStateEnum val)
         {
-            get
-            {
-                return _currentState;
-            }
-            set
-            {
-                PreviousState = _currentState;
-                _currentState = value;
-            }
+            PreviousState = _currentState;
         }
 
         public TStateEnum PreviousState { get; private set; }
