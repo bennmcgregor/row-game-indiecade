@@ -1,10 +1,15 @@
 ﻿using System;
 namespace IndieCade
 {
-    public class MotionTypeLightStateAttribute : LightStateAttribute
+    public abstract class ShapeLightStateAttribute : LightStateAttribute
     {
-        public MotionTypeLightStateAttribute()
+        private LightShape _shape;
+
+        public LightShape Shape => _shape;
+
+        public ShapeLightStateAttribute(LightShape shape)
         {
+            _shape = shape;
         }
     }
 }

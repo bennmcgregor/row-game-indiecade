@@ -1,10 +1,21 @@
 ﻿using System;
-namespace AssemblyCSharp.Assets.Scripts.StealthGameplay.Lights.StateMachine
+namespace IndieCade
 {
-    public class LightStateProcessorFactory
+    public class LightStateProcessorFactory : StateProcessorFactory<LightState, LightStateMachineTransition, StateMachineContext<LightState, LightStateMachineTransition>, StateProcessor<LightState, LightStateMachineTransition, StateMachineContext<LightState, LightStateMachineTransition>>>
     {
-        public LightStateProcessorFactory()
+        public LightStateProcessorFactory(LightState stateName, StateMachineContext<LightState, LightStateMachineTransition> context)
+            : base(stateName, context) { }
+
+        public override StateProcessor<LightState, LightStateMachineTransition, StateMachineContext<LightState, LightStateMachineTransition>> Make()
         {
+            return new StateProcessor<LightState, LightStateMachineTransition, StateMachineContext<LightState, LightStateMachineTransition>>(
+                _context,
+                _stateName,
+                _transitionFunctionList,
+                _transitionNewStateList,
+                _newStateActionMap
+            );
         }
     }
+
 }

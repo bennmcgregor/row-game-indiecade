@@ -1,7 +1,11 @@
 ﻿using System;
-namespace AssemblyCSharp.Assets.Scripts.StealthGameplay.Lights.StateAttributes.MotionType
+namespace IndieCade
 {
     public enum LightMotionType
     {
+        ROTATING,
+        FLASHING,
+        FOLLOWING,
+        STEADY
     }
 }

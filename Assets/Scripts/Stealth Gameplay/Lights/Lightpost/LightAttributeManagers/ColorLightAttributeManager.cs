@@ -1,16 +1,16 @@
 ﻿using System;
 namespace IndieCade
 {
-    public class ShapeLightAttributeManager : LightAttributeManager
+    public class ColorLightAttributeManager : LightAttributeManager
     {
-        public override void InitializeWithData(LightStateData data)
+        protected override void InitializeWithDataInternal(LightStateData data)
         {
-            throw new NotImplementedException();
+            // TODO: perform any class setup (such as initializing properties), update func signature
         }
 
-        public override void UpdateState(LightStateData data)
+        protected override void UpdateStateInternal(LightStateData data)
         {
-            throw new NotImplementedException();
+            // TODO: Update the light color based on data
         }
     }
 }

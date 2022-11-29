@@ -1,15 +1,16 @@
 ﻿using System;
 namespace IndieCade
 {
-    public abstract class ShapeLightStateAttribute : LightStateAttribute
+    public class CircularShapeLightStateAttribute : ShapeLightStateAttribute
     {
-        private LightShape _shape;
+        private float _radius;
 
-        public LightShape Shape => _shape;
+        public float Radius => _radius;
 
-        public ShapeLightStateAttribute(LightShape shape)
+        public CircularShapeLightStateAttribute(float radius) : base(LightShape.CIRCULAR)
         {
-            _shape = shape;
+            _radius = radius;
         }
     }
+
 }

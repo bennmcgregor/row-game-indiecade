@@ -1,7 +1,10 @@
 ﻿using System;
-namespace AssemblyCSharp.Assets.Scripts.StealthGameplay.Lights.StateMachine
+namespace IndieCade
 {
     public enum LightState
     {
+        DISABLED,
+        ENABLED,
+        COLLISION
     }
 }

@@ -11,6 +11,8 @@ namespace IndieCade
         RESERVOIR_FINAL_CANAL,
         INTERROGATION_ROOM,
         TEASER_CUTSCENE,
-        DOWNSTREAM_SETTLEMENT
+        DOWNSTREAM_SETTLEMENT,
+        // TODO: comment when not in use
+        INITIALIZATION_MAP_TEST
     }
 }

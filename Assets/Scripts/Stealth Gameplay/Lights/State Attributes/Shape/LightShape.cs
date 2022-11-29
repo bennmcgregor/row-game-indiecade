@@ -1,7 +1,10 @@
 ﻿using System;
-namespace AssemblyCSharp.Assets.Scripts.StealthGameplay.Lights.StateAttributes.Shape
+namespace IndieCade
 {
     public enum LightShape
     {
+        CIRCULAR,
+        BEAM,
+        NONE
     }
 }

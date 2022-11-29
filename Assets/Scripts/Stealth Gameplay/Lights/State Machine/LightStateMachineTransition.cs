@@ -1,7 +1,11 @@
 ﻿using System;
-namespace AssemblyCSharp.Assets.Scripts.StealthGameplay.Lights.StateMachine
+namespace IndieCade
 {
     public enum LightStateMachineTransition
     {
+        DISABLE,
+        ENABLE,
+        COLLIDE,
+        FINISH_COLLIDE
     }
 }
