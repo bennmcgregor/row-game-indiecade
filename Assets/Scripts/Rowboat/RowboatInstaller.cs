@@ -358,6 +358,17 @@ namespace IndieCade
                     _physicsController.StartRecovery(false);
                 }
             );
+            stopFactory.RegisterTransition(
+                delegate (RowingMotionStateMachineTransition transition)
+                {
+                    return transition == RowingMotionStateMachineTransition.SHIFT_DOWN;
+                },
+                RowingMotionState.SPIN,
+                delegate {
+                    _physicsController.EndStopBoat();
+                    _rowboatAnimator.StartSpin();
+                }
+            );
             stopFactory.RegisterHoldTransition(
                 delegate (RowingMotionStateMachineTransition transition)
                 {
