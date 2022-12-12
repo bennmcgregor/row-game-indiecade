@@ -1,14 +1,5 @@
 fileFormatVersion: 2
-<<<<<<< HEAD
-<<<<<<< HEAD:Assets/Scripts/Common/StateMachine/IStateProcessor.cs.meta
-guid: f3af96563e1254fcc8a291e32dd8e2ee
-=======
-<<<<<<< HEAD:Assets/Scripts/Common/StateMachine/StateMachineWithData/StateMachineWithDataFactory.cs.meta
-guid: c49b90a9a6ac94ce8b8f4a2290de3a5c
->>>>>>> master
-=======
 guid: bfdd78bb095304f2a9cc48717a7eb563
->>>>>>> master:Assets/Scripts/Common/StateMachine/Interfaces/IStateProcessor.cs.meta
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2

@@ -1,13 +1,5 @@
 fileFormatVersion: 2
-<<<<<<< HEAD
-<<<<<<< HEAD:Assets/Scripts/Quests/Challenges/ChallengeStateProcessorFactory.cs.meta
 guid: 53c3672d9434748d19235c4a574eb91f
-=======
-guid: 580f738c593f44e1f91c623cd22ebd07
->>>>>>> master:Assets/Scripts/Common/StateMachine/Interfaces/IStateMachineTransition.cs.meta
-=======
-guid: 53c3672d9434748d19235c4a574eb91f
->>>>>>> master
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
