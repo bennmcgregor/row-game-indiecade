@@ -1,15 +1,19 @@
 ﻿using System;
 using UnityEngine;
+using Zenject;
 
 namespace IndieCade
 {
     public abstract class LightAttributeManager : MonoBehaviour
     {
+        [SerializeField] protected LightToggler _lightToggler;
+        [SerializeField] private LightInstanceStore _lightInstanceStore;
+
         protected LightInstance _lightInstance;
 
-        public void InitializeWithData(LightStateData data, LightInstance lightInstance)
+        public void InitializeWithData(LightStateData data)
         {
-            _lightInstance = lightInstance;
+            _lightInstance = _lightInstanceStore.GetLightInstance(data.Id);
             InitializeWithDataInternal(data);
         }
 
@@ -18,25 +22,19 @@ namespace IndieCade
         {
             if (data.On)
             {
-                foreach (var light in _lightInstance.Lights)
-                {
-                    light.gameObject.SetActive(true);
-                }
+                _lightToggler.ToggleAllLights(true);
                 _lightInstance.gameObject.SetActive(true);
                 UpdateStateInternal(data);
             }
             else
             {
                 // TODO: may need some preparation logic for disabling?
-                foreach (var light in _lightInstance.Lights)
-                {
-                    light.gameObject.SetActive(false);
-                }
+                _lightToggler.ToggleAllLights(true);
                 _lightInstance.gameObject.SetActive(false);
             }
         }
 
-        protected abstract void InitializeWithDataInternal(LightStateData data);
+        protected virtual void InitializeWithDataInternal(LightStateData data) { }
         protected abstract void UpdateStateInternal(LightStateData data);
     }
 }

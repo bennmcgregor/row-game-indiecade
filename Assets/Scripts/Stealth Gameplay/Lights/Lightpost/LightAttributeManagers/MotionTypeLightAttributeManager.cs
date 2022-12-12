@@ -1,45 +1,44 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace IndieCade
 {
     public class MotionTypeLightAttributeManager : LightAttributeManager
     {
-        private Coroutine _flashCoroutine;
+        [SerializeField] List<LightMotionTypeManager> _motionTypeManagers;
+
+        private Dictionary<LightMotionType, LightMotionTypeManager> _motionTypeManagersMap;
+        private LightMotionTypeManager _currentManager = null;
+
+        private void Awake()
+        {
+            _motionTypeManagersMap = new Dictionary<LightMotionType, LightMotionTypeManager>();
+
+            foreach (var manager in _motionTypeManagers)
+            {
+                _motionTypeManagersMap[manager.Type] = manager;
+            }
+        }
 
         protected override void InitializeWithDataInternal(LightStateData data)
         {
-            // TODO: perform any class setup (such as initializing properties), update func signature
+            foreach (var manager in _motionTypeManagersMap.Values)
+            {
+                manager.InitializeWithData(_lightInstance);
+            }
         }
 
         protected override void UpdateStateInternal(LightStateData data)
         {
-            switch (data.MotionType.Type)
+            if (_currentManager != null)
             {
-                case LightMotionType.STEADY:
-                    break;
-                case LightMotionType.FLASHING:
-                    break;
-                case LightMotionType.ROTATING:
-                    break;
-                case LightMotionType.FOLLOWING:
-                    break;
+                _currentManager.Pause();
             }
 
-            // TODO: implement motion logic for each kind of motion
-            // TODO: ensure that transitions between motions are smooth
+            _currentManager = _motionTypeManagersMap[data.MotionType.Type];
+            _currentManager.Resume(data.MotionType);
         }
-
-        //private IEnumerator Flash()
-        //{
-        //    while (true)
-        //    {
-        //        _lightStateController.Activate();
-        //        yield return new WaitForSeconds(OnTimeSeconds);
-        //        _lightStateController.Deactivate();
-        //        yield return new WaitForSeconds(OffTimeSeconds);
-        //    }
-        //}
     }
 }

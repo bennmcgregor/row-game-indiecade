@@ -5,14 +5,27 @@ namespace IndieCade
 {
     public class CollisionDetectionLightAttributeManager : LightAttributeManager
     {
-        protected override void InitializeWithDataInternal(LightStateData data)
-        {
-            // TODO: perform any class setup (such as initializing properties), update func signature
-        }
-
         protected override void UpdateStateInternal(LightStateData data)
         {
-            // TODO: enable/disable the collider components based on the state
+            CollisionLightStateAttribute collisionData = data.CollisionData;
+
+            if (collisionData.UsingLightCollisions)
+            {
+                foreach (var colliderEffector in _lightInstance.ColliderTransitionEffectors)
+                {
+                    if (collisionData.DetectingCollisions)
+                    {
+                        colliderEffector.Enable();
+                        colliderEffector.SetDelayTimeSeconds(collisionData.InSpotlightDelayTimeSeconds);
+                    }
+                    else
+                    {
+                        colliderEffector.Disable();
+                    }
+                }
+                _lightInstance.FinishCollisionLightTransitionEffector.SetWaitTime(collisionData.CollisionWaitTimeSeconds);
+                _lightInstance.FinishCollisionLightTransitionEffector.BeginWait();
+            }
         }
     }
 }

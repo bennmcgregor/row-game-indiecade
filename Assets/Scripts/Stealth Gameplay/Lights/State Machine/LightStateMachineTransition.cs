@@ -3,6 +3,7 @@ namespace IndieCade
 {
     public enum LightStateMachineTransition
     {
+        ENTRY,
         DISABLE,
         ENABLE,
         COLLIDE,

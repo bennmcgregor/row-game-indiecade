@@ -1,20 +1,18 @@
 ﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace IndieCade
 {
     public class ColorLightStateAttribute : LightStateAttribute
     {
-        private Color _enabledColor;
-        private Color _collisionColor;
+        private Color _color;
 
-        public Color EnabledColor => _enabledColor;
-        public Color CollisionColor => _collisionColor;
+        public Color Color => _color;
 
-        public ColorLightStateAttribute(Color enabledColor, Color collisionColor)
+        public ColorLightStateAttribute(Color color)
         {
-            _enabledColor = enabledColor;
-            _collisionColor = collisionColor;
+            _color = color;
         }
     }
 }

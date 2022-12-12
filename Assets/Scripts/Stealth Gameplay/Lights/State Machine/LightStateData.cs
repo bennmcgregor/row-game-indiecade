@@ -5,18 +5,20 @@ namespace IndieCade
     {
         private string _id;
         private bool _on;
-        private bool _detectingCollisions;
+        private ShapeLightStateAttribute _shape;
+        private CollisionLightStateAttribute _collisionData;
         private MotionTypeLightStateAttribute _motionType;
         private ColorLightStateAttribute _color;
-        private float _brightness;
+        private BrightnessLightStateAttribute _brightness;
         // TODO: find a way to register/play different sound effects based on state transitions
 
         public string Id => _id;
         public bool On => _on;
-        public bool DetectingCollisions => _detectingCollisions;
+        public ShapeLightStateAttribute Shape => _shape;
+        public CollisionLightStateAttribute CollisionData => _collisionData;
         public MotionTypeLightStateAttribute MotionType => _motionType;
         public ColorLightStateAttribute Color => _color;
-        public float Brightness => _brightness;
+        public BrightnessLightStateAttribute Brightness => _brightness;
 
         public LightStateData(LightState stateName) : base(stateName) {}
 
@@ -30,13 +32,18 @@ namespace IndieCade
             _on = false;
         }
 
-        public void RegisterOn(bool detectingCollisions, MotionTypeLightStateAttribute motionType, ColorLightStateAttribute color, float brightness)
+        public void RegisterOn(CollisionLightStateAttribute collisionData, MotionTypeLightStateAttribute motionType, ColorLightStateAttribute color, BrightnessLightStateAttribute brightness)
         {
             _on = true;
-            _detectingCollisions = detectingCollisions;
+            _collisionData = collisionData;
             _motionType = motionType;
             _color = color;
             _brightness = brightness;
+        }
+
+        public void RegisterInitialization(ShapeLightStateAttribute shape)
+        {
+            _shape = shape;
         }
 
         // TODO: probably want a factory for this

@@ -3,20 +3,22 @@ namespace IndieCade
 {
     public class BeamShapeLightStateAttribute : ShapeLightStateAttribute
     {
-        private float _radius;
-        private float _arcAngle;
-        private float _beamAngle;
+        private float _innerRadius;
+        private float _outerRadius;
+        private float _innerArcAngle;
+        private float _outerArcAngle;
 
-        public float Radius => _radius;
-        public float ArcAngle => _arcAngle;
-        public float BeamAngle => _beamAngle;
+        public float InnerRadius => _innerRadius;
+        public float OuterRadius => _outerRadius;
+        public float InnerArcAngle => _innerArcAngle;
+        public float OuterArcAngle => _outerArcAngle;
 
-        public BeamShapeLightStateAttribute(float radius, float arcAngle, float beamAngle) : base(LightShape.BEAM)
+        public BeamShapeLightStateAttribute(float innerRadius, float outerRadius, float innerArcAngle, float outerArcAngle) : base(LightShape.BEAM)
         {
-            _radius = radius;
-            _arcAngle = arcAngle;
-            _beamAngle = beamAngle;
+            _innerRadius = innerRadius;
+            _outerRadius = outerRadius;
+            _innerArcAngle = innerArcAngle;
+            _outerArcAngle = outerArcAngle;
         }
     }
-
 }

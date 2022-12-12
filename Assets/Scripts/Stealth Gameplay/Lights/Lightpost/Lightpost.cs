@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
+using Zenject;
 
 namespace IndieCade
 {
@@ -13,29 +14,36 @@ namespace IndieCade
         [SerializeField] private ColorLightAttributeManager _colorManager;
         [SerializeField] private MotionTypeLightAttributeManager _motionTypeManager;
         [SerializeField] private Light2D _baseLight;
+        [SerializeField] private LightInstanceStore _lightInstanceStore;
 
-        public void Attach(LightStateMachine lightStateMachine)
+        public LightInstance Attach(LightStateMachine lightStateMachine)
         {
             lightStateMachine.OnDataUpdated += OnLightStateUpdated;
-            InitializeLightState(lightStateMachine.InitializationData, lightStateMachine.CurrentData);
+
+            StateData<LightState> data = lightStateMachine.CurrentData;
+            LightInstance newLight = _initializationManager.InitializeLight(data, _baseLight);
+
+            _lightInstanceStore.AttachLightInstance(lightStateMachine.Id, newLight);
+
+            _brightnessManager.InitializeWithData((LightStateData)data);
+            _colorManager.InitializeWithData((LightStateData)data);
+            _collisionDetectionManager.InitializeWithData((LightStateData)data);
+            _motionTypeManager.InitializeWithData((LightStateData)data);
+
+            return newLight;
         }
 
-        private void InitializeLightState(InitializationLightStateData initializationData, StateData<LightState> data)
+        public void Detach(string id)
         {
-            // PROCESS: build the shape initialization.
-            // Then build each manager, for the full flow (initialization then update) and get it working
-            // Build starting with motionTypeManager (because it will require the most complexity and fiddling)
+            _lightInstanceStore.DetachLightInstance(id);
+        }
 
-            LightInstance newLight = _initializationManager.InitializeLight(initializationData);
-
-            newLight.Lights.Add(_baseLight);
-
-            _brightnessManager.InitializeWithData((LightStateData)data, newLight);
-            _colorManager.InitializeWithData((LightStateData)data, newLight);
-            _collisionDetectionManager.InitializeWithData((LightStateData)data, newLight);
-            _motionTypeManager.InitializeWithData((LightStateData)data, newLight);
-
-            OnLightStateUpdated((LightStateData)data);
+        public void DetachAllLights()
+        {
+            foreach (var id in _lightInstanceStore.AttachedLightIds)
+            {
+                Detach(id);
+            }
         }
 
         private void OnLightStateUpdated(StateData<LightState> data)

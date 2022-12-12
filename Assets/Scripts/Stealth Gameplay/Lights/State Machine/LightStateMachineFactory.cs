@@ -5,23 +5,24 @@ namespace IndieCade
 {
     public class LightStateMachineFactory : StateMachineWithDataFactory<LightState, LightStateMachineTransition, StateMachineContext<LightState, LightStateMachineTransition>, StateProcessor<LightState, LightStateMachineTransition, StateMachineContext<LightState, LightStateMachineTransition>>, StateData<LightState>, LightStateMachine>
     {
-        private Lightpost _lightpost;
         private ShapeLightStateAttribute _lightShape;
 
-        public LightStateMachineFactory(StateMachineContext<LightState, LightStateMachineTransition> context) : base(context) { }
-
-        public void RegisterLightpost(Lightpost lightpost)
-        {
-            _lightpost = lightpost;
-        }
+        public LightStateMachineFactory() : base(new StateMachineContext<LightState, LightStateMachineTransition>(LightState.ENTRY)) { }
 
         public void SetLightShape(ShapeLightStateAttribute shape)
         {
             _lightShape = shape;
+
+            LightStateData entryData = new LightStateData(LightState.ENTRY);
+            entryData.RegisterInitialization(_lightShape);
+            RegisterNewData(entryData);
         }
 
         public override LightStateMachine Make()
         {
+            LightStateProcessorFactory entryFactory = new LightStateProcessorFactory(LightState.ENTRY, _context);
+            entryFactory.RegisterTransition(LightStateMachineTransition.ENTRY, LightState.DISABLED);
+
             LightStateProcessorFactory disabledFactory = new LightStateProcessorFactory(LightState.DISABLED, _context);
             disabledFactory.RegisterTransition(LightStateMachineTransition.ENABLE, LightState.ENABLED);
 
@@ -36,6 +37,7 @@ namespace IndieCade
             // TODO: implement collision timer to trigger FINISH_COLLIDE? - or leave this to the control groups?
 
             _stateProcessors = new Dictionary<LightState, StateProcessor<LightState, LightStateMachineTransition, StateMachineContext<LightState, LightStateMachineTransition>>>();
+            RegisterNewState(entryFactory.Make());
             RegisterNewState(disabledFactory.Make());
             RegisterNewState(enabledFactory.Make());
             RegisterNewState(collisionFactory.Make());
@@ -47,9 +49,7 @@ namespace IndieCade
                 ((LightStateData)stateDataPair.Value).SetId(id);
             }
 
-            InitializationLightStateData initializationData = new InitializationLightStateData(_lightShape, id);
-
-            return new LightStateMachine(_context, _stateProcessors, _stateDatas, initializationData, _lightpost, id);
+            return new LightStateMachine(_context, _stateProcessors, _stateDatas, id);
         }
     }
 }

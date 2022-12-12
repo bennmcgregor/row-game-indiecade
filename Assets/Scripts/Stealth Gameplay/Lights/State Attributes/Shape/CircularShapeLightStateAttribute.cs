@@ -3,13 +3,16 @@ namespace IndieCade
 {
     public class CircularShapeLightStateAttribute : ShapeLightStateAttribute
     {
-        private float _radius;
+        private float _innerRadius;
+        private float _beamHeight;
 
-        public float Radius => _radius;
+        public float InnerRadius => _innerRadius;
+        public float BeamHeight => _beamHeight;
 
-        public CircularShapeLightStateAttribute(float radius) : base(LightShape.CIRCULAR)
+        public CircularShapeLightStateAttribute(float innerRadius, float beamHeight) : base(LightShape.CIRCULAR)
         {
-            _radius = radius;
+            _innerRadius = innerRadius;
+            _beamHeight = beamHeight;
         }
     }
 
