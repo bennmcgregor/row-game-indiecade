@@ -10,6 +10,8 @@ namespace IndieCade
         where TProcessor : StateProcessor<TStateEnum, TTransitionEnum, TContext>
         where TData : StateData<TStateEnum>
     {
+        public Action<TData> OnDataUpdated;
+
         protected Dictionary<TStateEnum, TData> _stateDatas;
 
         public TData CurrentData => _stateDatas[CurrentState];
@@ -18,6 +20,8 @@ namespace IndieCade
             : base(context, stateProcessors)
         {
             _stateDatas = stateDatas;
+
+            _context.OnStateUpdated += () => OnDataUpdated?.Invoke(CurrentData);
         }
     }
 }

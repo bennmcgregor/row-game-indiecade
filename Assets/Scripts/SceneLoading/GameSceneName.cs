@@ -12,6 +12,8 @@ namespace IndieCade
         INTERROGATION_ROOM,
         TEASER_CUTSCENE,
         DOWNSTREAM_SETTLEMENT,
-        BOAT_DEMO
+        // TODO: comment when not in use
+        INITIALIZATION_MAP_TEST,
+        FINAL_CANAL_LIGHT_CUSTOMIZATION
     }
 }

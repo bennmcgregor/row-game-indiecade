@@ -22,6 +22,11 @@ namespace IndieCade
         public void RegisterNewState(TProcessor stateProcessor, TData stateData)
         {
             RegisterNewState(stateProcessor);
+            RegisterNewData(stateData);
+        }
+
+        public void RegisterNewData(TData stateData)
+        {
             _stateDatas[stateData.StateName] = stateData;
         }
 
