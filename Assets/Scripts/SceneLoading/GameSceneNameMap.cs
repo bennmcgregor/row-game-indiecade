@@ -20,6 +20,7 @@ namespace IndieCade
                 GameSceneName.TEASER_CUTSCENE => "TeaserCutscene",
                 GameSceneName.DOWNSTREAM_SETTLEMENT => "DownstreamSettlement",
                 GameSceneName.INITIALIZATION_MAP_TEST => "InitializationMapTest",
+                GameSceneName.FINAL_CANAL_LIGHT_CUSTOMIZATION => "FinalCanalLightCustomization",
                 _ => throw new NotImplementedException()
             };
         }

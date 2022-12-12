@@ -10,7 +10,7 @@ namespace IndieCade
 
         public override void InstallBindings()
         {
-            Container.Bind<ShapeLightAttributeProvider>().FromComponentInNewPrefab(_lightSystemPrefab);
+            Container.Bind<ShapeLightAttributeProvider>().FromComponentInNewPrefab(_lightSystemPrefab).AsSingle();
             Container.BindFactory<LightInstance, LightInstance.Factory>().FromFactory<CustomLightInstanceFactory>();
         }
     }

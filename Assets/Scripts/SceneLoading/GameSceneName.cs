@@ -13,6 +13,7 @@ namespace IndieCade
         TEASER_CUTSCENE,
         DOWNSTREAM_SETTLEMENT,
         // TODO: comment when not in use
-        INITIALIZATION_MAP_TEST
+        INITIALIZATION_MAP_TEST,
+        FINAL_CANAL_LIGHT_CUSTOMIZATION
     }
 }
