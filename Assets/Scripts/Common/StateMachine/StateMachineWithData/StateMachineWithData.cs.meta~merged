@@ -1,9 +1,13 @@
 fileFormatVersion: 2
-<<<<<<< HEAD:Assets/Scripts/Quests/Challenges/IChallengeData.cs.meta
-guid: dbaa3673cf9b74c84bfb6fdb7de91557
+<<<<<<< HEAD
+guid: 39ab7757a608b450ab8c8fece2403288
+=======
+<<<<<<< HEAD:Assets/Scripts/Common/StateMachine/Interfaces/IStateMachineTransition.cs.meta
+guid: 580f738c593f44e1f91c623cd22ebd07
 =======
 guid: 39ab7757a608b450ab8c8fece2403288
 >>>>>>> master:Assets/Scripts/Common/StateMachine/StateMachineWithData/StateMachineWithData.cs.meta
+>>>>>>> master
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
