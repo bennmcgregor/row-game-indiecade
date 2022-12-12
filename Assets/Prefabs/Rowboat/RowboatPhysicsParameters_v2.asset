@@ -10,23 +10,23 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 279928db24f5f41adbdadac3364ef297, type: 3}
-  m_Name: RowboatPhysicsParameters
+  m_Name: RowboatPhysicsParameters_v2
   m_EditorClassIdentifier: 
   SlideEndThreshold: 0.05
-  StopSpeedThreshold: 0.01
-  CanTransitionFromStopSpeedThreshold: 1
-  SliderDriveSpeed: 0.05
-  MaxVelClamp: 20
-  DragVelocityScalingFactor: 0.05
-  BaseDriveRudderTurnSpeedDragFactor: 0.1
-  BaseRecoveryRudderTurnSpeedDragFactor: 0.35
-  BoatForwardsDriveForce: 7
-  BoatBackwardsDriveForce: 3
-  BoatStopForce: 1
+  StopSpeedThreshold: 0.05
+  CanTransitionFromStopSpeedThreshold: 10
+  SliderDriveSpeed: 0.03
+  MaxVelClamp: 40
+  DragVelocityScalingFactor: 0.06
+  BaseDriveRudderTurnSpeedDragFactor: 0.05
+  BaseRecoveryRudderTurnSpeedDragFactor: 0.175
+  BoatForwardsDriveForce: 12
+  BoatBackwardsDriveForce: 5
+  BoatStopForce: 2
   MinRecoverySpeed: 0.015
-  MinRudderTurnSpeed: 1
-  RudderTurnDriveSpeedMultiplier: 0.8
-  RudderTurnRecoverySpeedMultiplier: 0.2
+  MinRudderTurnSpeed: 2
+  RudderTurnDriveSpeedMultiplier: 0.5
+  RudderTurnRecoverySpeedMultiplier: 0.4
   SpinAnimationTimeSeconds: 3
-  BaseDragFactor: 0.3
+  BaseDragFactor: 0.25
   InputSpamTimeoutSeconds: 0.7

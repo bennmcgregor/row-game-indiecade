@@ -328,9 +328,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _boatRigidbody: {fileID: 5248149826980725476}
-  _verticalMovementMask:
-    serializedVersion: 2
-    m_Bits: 8
 --- !u!114 &761396265184205561
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -343,7 +340,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: faedbc95bf9eb47bf8f3383a75c4eb0e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _rowboatPhysicsParameters: {fileID: 11400000, guid: 2a5a7bb1254d34d75a74e7260b5b58e7,
+  _rowboatPhysicsParameters: {fileID: 11400000, guid: 1cc0b3725af1f4f818de3259172e7760,
     type: 2}
 --- !u!114 &3087015465674194927
 MonoBehaviour:
