@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+<<<<<<< HEAD:Assets/Scripts/Quests/Challenges/ChallengeStateMachineContext.cs.meta
+guid: 63817caa0f67f4f958ae767d8dd70e8e
+=======
+guid: beb7a34d3316d43d19a404cddaf3325e
+>>>>>>> master:Assets/Scripts/Common/StateMachine/StateMachineWithData/StateData.cs.meta
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

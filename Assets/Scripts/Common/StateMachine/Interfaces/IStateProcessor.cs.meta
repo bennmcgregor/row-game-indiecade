@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+<<<<<<< HEAD:Assets/Scripts/Common/StateMachine/IStateProcessor.cs.meta
+guid: f3af96563e1254fcc8a291e32dd8e2ee
+=======
+guid: bfdd78bb095304f2a9cc48717a7eb563
+>>>>>>> master:Assets/Scripts/Common/StateMachine/Interfaces/IStateProcessor.cs.meta
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

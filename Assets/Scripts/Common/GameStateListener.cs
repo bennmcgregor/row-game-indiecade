@@ -11,7 +11,7 @@ namespace IndieCade
         protected QuestRunner _questRunner;
 
         private List<QuestState> _playedQuests;
-        private List<string> _playedChallenges;
+        private List<TeaserChallenges> _playedChallenges;
 
         [Inject]
         public void Initialize(SceneInitializationDataIndex initializationDataIndex, QuestRunner questRunner)
@@ -28,8 +28,8 @@ namespace IndieCade
             _questRunner.CurrentQuest.OnChallengeCompleted += OnChallengeCompleted;
 
             _playedQuests = new List<QuestState>();
-            _playedChallenges = new List<string>();
-            _playedQuests.Add(_questRunner.CurrentQuest.QuestState);
+            _playedChallenges = new List<TeaserChallenges>();
+            _playedQuests.Add(_questRunner.CurrentQuest.StateName);
             _playedChallenges.Add(_questRunner.CurrentQuest.CurrentChallenge.StateName);
         }
 
@@ -48,14 +48,15 @@ namespace IndieCade
             InitializeChallenge(_questRunner.CurrentQuest.CurrentChallenge);
         }
 
-        private void OnQuestUpdate(Quest newQuest)
+        private void OnQuestUpdate()
         {
-            if (_playedQuests.Contains(newQuest.QuestState))
+            QuestData newQuest = _questRunner.CurrentQuest;
+            if (_playedQuests.Contains(newQuest.StateName))
             {
                 InitializeScene(_sceneInitializationDataIndex.GetDataFromCurrentScene());
             } else
             {
-                _playedQuests.Add(newQuest.QuestState);
+                _playedQuests.Add(newQuest.StateName);
             }
 
             SaveSceneOnQuestUpdated(_sceneInitializationDataIndex.GetDataFromCurrentScene());
@@ -65,8 +66,9 @@ namespace IndieCade
             newQuest.OnChallengeUpdated += OnChallengeUpdated;
         }
 
-        private void OnChallengeUpdated(ChallengeInitializationData newChallengeData)
+        private void OnChallengeUpdated()
         {
+            ChallengeInitializationData newChallengeData = _questRunner.CurrentQuest.CurrentChallenge;
             if (_playedChallenges.Contains(newChallengeData.StateName))
             {
                 InitializeScene(_sceneInitializationDataIndex.GetDataFromCurrentScene());

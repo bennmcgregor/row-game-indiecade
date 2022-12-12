@@ -28,17 +28,6 @@ namespace IndieCade
             RegisterTransition(pred, newState, null);
         }
 
-        public void RegisterTransition(TTransitionEnum transition, TStateEnum newState)
-        {
-            RegisterTransition(
-                delegate(TTransitionEnum transitionEnum)
-                {
-                    return transition.Equals(transitionEnum);
-                },
-                newState
-            );
-        }
-
         public void RegisterTransition(TTransitionEnum transition, TStateEnum newState, Action transitionLogic)
         {
             RegisterTransition(

@@ -26,6 +26,18 @@ namespace IndieCade
             _newStateActionMap = new Dictionary<TStateEnum, Action>();
         }
 
+        public void RegisterTransition(TTransitionEnum transition, TStateEnum newState)
+        {
+            RegisterTransition(
+                delegate (TTransitionEnum transitionEnum)
+                {
+                    return transition.Equals(transitionEnum);
+                },
+                newState,
+                null
+            );
+        }
+
         public void RegisterTransition(Predicate<TTransitionEnum> pred, TStateEnum newState, Action transitionLogic)
         {
             _transitionFunctionList.Add(pred);

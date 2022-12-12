@@ -1,4 +1,5 @@
-﻿using Zenject;
+﻿using System;
+using Zenject;
 using UnityEngine;
 
 namespace IndieCade
@@ -13,7 +14,7 @@ namespace IndieCade
         public override void InstallBindings()
         {
             RowboatSlideState rowboatSlideState = new RowboatSlideState(0f);
-            GlobalDirectionStateMachine globalDirectionStateMachine = new GlobalDirectionStateMachine();
+            GlobalDirectionStateMachine globalDirectionStateMachine = GlobalDirectionStateMachine.Make();
             RowboatMaps rowboatMaps = new RowboatMaps();
 
             Container.BindInstance(MakeRowingMotionStateMachineV2(rowboatMaps, globalDirectionStateMachine)).AsSingle();

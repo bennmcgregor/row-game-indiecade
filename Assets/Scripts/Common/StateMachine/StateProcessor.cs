@@ -52,7 +52,7 @@ namespace IndieCade
 
         protected void SetCurrentState(TStateEnum newState)
         {
-            _context.CurrentState = newState;
+            _context.SetCurrentState(newState);
             OnStateUpdated?.Invoke();
         }
     }
