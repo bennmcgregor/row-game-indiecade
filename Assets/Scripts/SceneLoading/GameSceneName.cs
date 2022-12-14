@@ -7,6 +7,10 @@ namespace IndieCade
         //BOATHOUSE_INSIDE,
         //MIO_HOUSE_INSIDE,
         //TMR_TOWN_OUTSIDE
+
+        // Testing scenes
+        BOAT_DEMO,
+
         MAIN_MENU,
         RESERVOIR_FINAL_CANAL,
         INTERROGATION_ROOM,
