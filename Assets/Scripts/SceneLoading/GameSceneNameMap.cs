@@ -14,6 +14,10 @@ namespace IndieCade
                 //GameSceneName.BOATHOUSE_INSIDE => "BoathouseInside",
                 //GameSceneName.MIO_HOUSE_INSIDE => "MioHouseInside",
                 //GameSceneName.TMR_TOWN_OUTSIDE => "TMRTownOutside",
+
+                // Testing scenes
+                GameSceneName.BOAT_DEMO => "BoatDemo",
+
                 GameSceneName.MAIN_MENU => "TeaserMainMenuScene",
                 GameSceneName.RESERVOIR_FINAL_CANAL => "ReservoirFinalCanal",
                 GameSceneName.INTERROGATION_ROOM => "InterrogationRoom",
